@@ -110,14 +110,14 @@
                             로그인
                           </div>
                           <div class="card-body">
-                            <form id="login-form">
+                            <form id="login-form" method="post" action="login.do">
                               <div class="form-group">
                                 <label for="id">아이디</label>
-                                <input type="id" class="form-control" id="id">
+                                <input type="id" class="form-control" id="id" name = "id" required="required">
                               </div>
                               <div class="form-group">
                                 <label for="pwd">비밀번호</label>
-                                <input type="pwd" class="form-control" id="pwd">
+                                <input type="pwd" class="form-control" id="pwd" name = "pwd" required="required">
                               </div>
                               <button type="submit" class="btn btn-primary">로그인</button>
                               <div class="form-group">
@@ -214,7 +214,26 @@ $(document).ready(function() {
       yearRange: "-100:+0", // 현재 날짜로부터 100년 전까지 선택 가능하도록 설정
     });
   });
+                    
+                    
+     // 로그인 기능              
+	$('#login-form').submit(function(e){
+		var $form = $(this);
+		var id = $form.find('input[name="id"]').val();
+		if( id.length < 8){ alert("아이디는 8글자 이상 입력해 주세요."); return false;  }
+		var pwd = $form.find('input[name="pwd"]').val();
+		if( pwd.length < 8){ alert("비밀번호는 8글자 이상 입력해 주세요."); return false;  }
+		return true;
+	});
+                    
+                    
+                    
+                    
                   </script>
+                  
+                  
+                  
+                  
             </div>
         </div>
     </div>
