@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		<!-- 히카리 -->
+		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value ="com.mysql.cj.jdbc.Driver"/>
+		<property name="jdbcUrl" value="jdbc:mysql://project-db-stu.ddns.net:3307/dmk"/>
+		<property name="username" value="dmk"/>
+		<property name="password" value="dmk"/>
+		</bean>
+	<bean id="DataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig"/>
+	</bean>
+	
+	<!-- mybatis-spring API -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+	<!-- 연결하기위해 setter나 생성자로 연결해야한다 ->API에서 찾아보기 -->
+		<property name="dataSource" ref="DataSource"/>
+	</bean>
+	
+	<!-- 인터페이스와 연결작업 -->
+	<mybatis-spring:scan base-package="kr.smhrd.mapper"/>
+</beans>
