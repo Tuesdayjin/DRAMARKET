@@ -20,7 +20,7 @@ public class BoardController {
 	@RequestMapping("/Main.do")
 	public String boardList(HttpServletRequest request) {
 		List<t_member> list = mapper.boardList();
-		
+		 
 		request.setAttribute("list", list);
 		return "Main";
 	}
