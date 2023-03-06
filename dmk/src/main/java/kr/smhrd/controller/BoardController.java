@@ -17,11 +17,11 @@ public class BoardController {
 	@Autowired
 	private BoardMapper mapper;
 	
-	@RequestMapping("/boardList.do")
+	@RequestMapping("/Main.do")
 	public String boardList(HttpServletRequest request) {
 		List<t_member> list = mapper.boardList();
 		
 		request.setAttribute("list", list);
-		return "boardList";
+		return "Main";
 	}
 }

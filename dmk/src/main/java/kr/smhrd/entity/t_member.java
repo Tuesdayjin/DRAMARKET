@@ -7,8 +7,19 @@ import lombok.Data;
 @Data
 public class t_member {
 
-	private String id;
-	private String pwd;
-	private String gender;
-	private Date birth;
+    // 아이디. 아이디
+    private String id;
+
+    // 비밀번호. 비밀번호
+    private String pwd;
+
+    // 닉네임. 닉네임
+    private String nick;
+
+    // 성별. 성별
+    private String gender;
+
+    // 생년월일. 생년월일
+    private Date birth;
+
 }
