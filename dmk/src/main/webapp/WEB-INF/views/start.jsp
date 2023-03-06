@@ -3,7 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-    <c:set var="cpath" value="${pageContext.request.contextPath}"/>
+    <c:set var="cpath" value="${pageContext.request.contextPath}"/>%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+<!--bootstrap & bootswatch-->
 <!-- Bootstrap 및 Bootswatch 스타일시트 파일 -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.6.0/morph/bootstrap.min.css" integrity="sha384-8QLqx+yb7DgYaFvzV7Ku8Hq3eIYXPHfgvKfZKH4NoJ+dsSdRfR5aIWlFJTG8xV7+" crossorigin="anonymous">
 <!-- Bootstrap 및 Bootswatch 자바스크립트 파일 -->
@@ -20,6 +20,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <!-- 만든 style.css를 불러오기 -->
 <link rel="stylesheet" href="${cpath}/resources/css/style.css">
+
     <script src="js/morph/bootstrap.min.js"></script>
 <!--google font-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,13 +93,10 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">영상분석</a>
+                            <a class="nav-link" href="#">로그인</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">게시판</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">마이페이지</a>
+                            <a class="nav-link" href="#">회원가입</a>
                         </li>
                     </ul>
                 </div>
