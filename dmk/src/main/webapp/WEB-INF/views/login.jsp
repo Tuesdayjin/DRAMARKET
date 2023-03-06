@@ -18,21 +18,28 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-<!-- 만든 style.css를 불러오기 -->
-<link rel="stylesheet" href="${cpath}/resources/css/style.css">
+<!--bootstrap-->
+    <link rel="stylesheet" href="bootstrap.css">
     <script src="js/morph/bootstrap.min.js"></script>
 <!--google font-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-<!--파일 업도르 drag&drop-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+<!--Load the jQuery UI library-->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- jQuery와 jQuery UI 라이브러리 불러오기 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 
 <style>
     .card-body form > * {
       margin-bottom: 15px;
     }
+    .link-unstyled {
+  margin-top: 30px;
+}
   </style>
 </head>
 <body>
@@ -105,31 +112,60 @@
                           <div class="card-body">
                             <form id="login-form">
                               <div class="form-group">
-                                <label for="id">Id</label>
+                                <label for="id">아이디</label>
                                 <input type="id" class="form-control" id="id">
                               </div>
                               <div class="form-group">
-                                <label for="pwd">password</label>
+                                <label for="pwd">비밀번호</label>
                                 <input type="pwd" class="form-control" id="pwd">
                               </div>
                               <button type="submit" class="btn btn-primary">로그인</button>
-                              <button type="button" class="btn btn-link" id="show-signup">Create an account</button>
+                              <div class="form-group">
+                              <a href="#" class="link-unstyled" id="show-signup">회원가입</a>
+                            </div>
                             </form>
                             <form id="signup-form" style="display:none;">
                               <div class="form-group">
-                                <label for="fullname">Full name:</label>
-                                <input type="text" class="form-control" id="fullname">
+                                <label for="id">아이디</label>
+                                <input type="text" class="form-control" id="id">
                               </div>
                               <div class="form-group">
-                                <label for="email">Email address:</label>
-                                <input type="email" class="form-control" id="email">
+                                <label for="pwd">비밀번호</label>
+                                <input type="pwd" class="form-control" id="pwd">
                               </div>
                               <div class="form-group">
-                                <label for="password">Password:</label>
-                                <input type="password" class="form-control" id="password">
+                                <label for="nick">닉네임</label>
+                                <input type="nick" class="form-control" id="nick">
                               </div>
-                              <button type="submit" class="btn btn-primary">Sign up</button>
-                              <button type="button" class="btn btn-link" id="show-login">Back to Login</button>
+                              <div class="form-group">
+                                <label for="gender">성별</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                                          <label class="form-check-label" for="male">
+                                            남자
+                                          </label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                          <label class="form-check-label" for="female">
+                                            여자
+                                          </label>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="birth">생년월일</label>
+                                <input type="text" class="form-control datepicker" id="birth">
+                              </div>
+                              <button type="submit" class="btn btn-primary">계정 생성</button>
+                              <div class="form-group">
+                              <a href="#" class="link-unstyled" id="show-login">로그인으로 돌아가기</a>
+                            </div>
                             </form>
                           </div>
                         </div>
@@ -138,17 +174,46 @@
                   </div>
                   
                   <script>
+$(document).ready(function() {
+  // 초기화
+  $('.card-header').text('로그인');
+  
+  // 로그인 폼 보이기
+  $('#show-login').click(function() {
+    $('#login-form').show();
+    $('#signup-form').hide();
+    $('.card-header').text('로그인');
+  });
+  
+  // 회원가입 폼 보이기
+  $('#show-signup').click(function() {
+    $('#login-form').hide();
+    $('#signup-form').show();
+    $('.card-header').text('회원가입');
+  });
+});
+
                     $(document).ready(function(){
                       // show/hide login and signup forms
-                      $('#show-signup').click(function(){
+                      $('#show-signup').click(function(event){
+                        event.preventDefault(); // 링크 클릭 이벤트 취소
                         $('#login-form').hide();
                         $('#signup-form').show();
                       });
-                      $('#show-login').click(function(){
+                      $('#show-login').click(function(event){
+                        event.preventDefault(); // 링크 클릭 이벤트 취소
                         $('#signup-form').hide();
                         $('#login-form').show();
                       });
                     });
+
+                    $(document).ready(function() {
+    $('.datepicker').datepicker({
+      dateFormat: 'yy-mm-dd', // 년-월-일 형식으로 날짜 출력
+      changeYear: true, // 년도 선택 가능하도록 설정
+      yearRange: "-100:+0", // 현재 날짜로부터 100년 전까지 선택 가능하도록 설정
+    });
+  });
                   </script>
             </div>
         </div>
