@@ -106,10 +106,8 @@
                     <div class="row">
                       <div class="col-md-6 offset-md-3">
                         <div class="card">
-                          <div class="card-header">
-                            로그인
-                          </div>
                           <div class="card-body">
+                            <h2 class="cardTitle">로그인</h2>
                             <form id="login-form">
                               <div class="form-group">
                                 <label for="id">아이디</label>
@@ -176,20 +174,20 @@
                   <script>
 $(document).ready(function() {
   // 초기화
-  $('.card-header').text('로그인');
+  $('.cardTitle').text('로그인');
   
   // 로그인 폼 보이기
   $('#show-login').click(function() {
     $('#login-form').show();
     $('#signup-form').hide();
-    $('.card-header').text('로그인');
+    $('.cardTitle').text('로그인');
   });
   
   // 회원가입 폼 보이기
   $('#show-signup').click(function() {
     $('#login-form').hide();
     $('#signup-form').show();
-    $('.card-header').text('회원가입');
+    $('.cardTitle').text('회원가입');
   });
 });
 
