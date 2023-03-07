@@ -95,7 +95,7 @@
                             <a class="nav-link" href="#">영상분석</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">게시판</a>
+                            <a class="nav-link" href="boardList.do">게시판</a>
                         </li>
                         <li class="nav-item">
 		                    <!-- 글쓰기 회원검증 -->

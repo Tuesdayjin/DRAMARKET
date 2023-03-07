@@ -126,7 +126,7 @@
                               <a href="#" class="link-unstyled" id="show-signup">회원가입</a>
                             </div>
                             </form>
-                            <form id="signup-form" style="display:none;">
+                            <form id="signup-form" style="display:none;" method="post" action="register.do">
                               <div class="form-group">
                                 <label for="id">아이디</label>
                                 <input type="text" class="form-control" id="id">
@@ -144,7 +144,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                                          <input class="form-check-input" type="radio" name="gender" id="gender" value="male">
                                           <label class="form-check-label" for="male">
                                             남자
                                           </label>
@@ -152,7 +152,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                          <input class="form-check-input" type="radio" name="gender" id="gender" value="female">
                                           <label class="form-check-label" for="female">
                                             여자
                                           </label>
@@ -181,14 +181,14 @@ $(document).ready(function() {
   $('.cardTitle').text('로그인');
   
   // 로그인 폼 보이기
-  $('#show-login').click(function() {
+    $('#show-login').click(function() {
     $('#login-form').show();
     $('#signup-form').hide();
     $('.cardTitle').text('로그인');
   });
   
   // 회원가입 폼 보이기
-  $('#show-signup').click(function() {
+    $('#show-signup').click(function() {
     $('#login-form').hide();
     $('#signup-form').show();
     $('.cardTitle').text('회원가입');
@@ -222,9 +222,27 @@ $(document).ready(function() {
 	$('#login-form').submit(function(e){
 		var $form = $(this);
 		var id = $form.find('input[name="id"]').val();
-		if( id.length < 8){ alert("아이디는 8글자 이상 입력해 주세요."); return false;  }
+		//if( id.length < 8){ alert("아이디는 8글자 이상 입력해 주세요."); return false;  }
 		var pwd = $form.find('input[name="pwd"]').val();
-		if( pwd.length < 8){ alert("비밀번호는 8글자 이상 입력해 주세요."); return false;  }
+		//if( pwd.length < 8){ alert("비밀번호는 8글자 이상 입력해 주세요."); return false;  }
+		return true;
+	});
+     
+     // 회원가입 기능              
+	$('#signup-form').submit(function(e){
+		var $form = $(this);
+		
+		// 값 가져오기 (아이디, 비번, 닉네임, 성별, 생년월일)
+		var id = $form.find('input[name="id"]').val();
+		var pwd = $form.find('input[name="pwd"]').val();
+		var nick = $form.find('input[name="nick"]').val();
+		var gender = $form.find("input[name='gender']:checked").val();
+		var birth = $form.find("input[name='birth']").val();
+		
+		//검증
+		//if( id.length < 8){ alert("아이디는 8글자 이상 입력해 주세요."); return false;  }
+		//if( pwd.length < 8){ alert("비밀번호는 8글자 이상 입력해 주세요."); return false;  }
+		
 		return true;
 	});
                     

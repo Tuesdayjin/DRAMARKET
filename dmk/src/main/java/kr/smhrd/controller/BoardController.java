@@ -22,7 +22,7 @@ public class BoardController {
 	private Mapper mapper;
 	
 	@RequestMapping("/Main.do") //Main 페이지
-	public String boardList() {
+	public String Main() {
 		
 		return "Main";
 	}
@@ -32,19 +32,23 @@ public class BoardController {
 		return "login";
 	}
 	
-	@PostMapping("/login.do") //login 페이지로 연결
+	@PostMapping("/login.do") //login 페이지로 연결 
 	public String login(t_member vo, HttpSession session) {
-		
-		
-		t_member mvo = mapper.loginCheck(vo);
+		 t_member mvo = mapper.loginCheck(vo); //(회원인증매퍼)
 		 if(mvo != null) {
-			 // 회원 인증 성공
-			 // 이때, ★★모델에 바인딩하면 안된다..!★★
-			 // 원래 스프링에서 HttpSession session 안쓴다
-			 // 보안에 더 안전한 방법 있는데 그거는 나중에 책보고 해보세요
-			 
 			 session.setAttribute("mvo", mvo);
+			 // 이때, ★★ model 에 바인딩하면 안된다..!★★
+			 // 원래 스프링에서 HttpSession session 안쓰지만 일단 여기까지만 배움
+			 // 보안에 더 안전한 방법 있는데 그거는 나중에 책보고 해보세요
 		 }
 	 return "redirect:/Main.do";
 	}
+	
+	@RequestMapping("/boardList.do") //게시판 페이지
+	public String boardList() {
+		
+		return "boardList";
+	}
+	
+
 }
