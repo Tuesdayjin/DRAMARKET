@@ -18,7 +18,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-<!-- 만든 style.css를 불러오기 -->
+<!--bootstrap-->
 <link rel="stylesheet" href="${cpath}/resources/css/style.css">
     <script src="js/morph/bootstrap.min.js"></script>
 
@@ -26,6 +26,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+    .offcanvas-end2 .form-group label,
+.offcanvas-end2 .form-group input,
+.offcanvas-end2 .form-group textarea {
+  margin-bottom: 1rem;
+}
+</style>
+
 
 </head>
 <body>
@@ -69,13 +80,7 @@
                         <a class="nav-link" href="#">게시판</a>
                     </li>
                     <li class="nav-item">
-	                    <!-- 글쓰기 회원검증 -->
-						<c:if test="${!empty mvo}">
-                            <a class="nav-link" href="#">마이페이지</a>
-						</c:if>	
-						<c:if test="${empty mvo}">
-                            <a class="nav-link" href="login.do">로그인</a>
-						</c:if>	
+                        <a class="nav-link" href="#">마이페이지</a>
                     </li>
                 </ul>
             </div>
@@ -106,43 +111,69 @@
                 <div class="row align-items-center">
                   <div class="col-1">
                   </div>
-                  <div class="col-10">
-                    <div class="cate-row">
-                    <div class="col-2">
-                      <div class="cate-drama">
-                      <div class="dramacircle">
-                        <img class="daramaimg" src="https://search.pstatic.net/common/?src=https%3A%2F%2Fditto-phinf.pstatic.net%2F20230227_198%2F1677489790020SOEit_PNG%2F76ebb952e887731374cdd50942724ef0.png&type=o&size=488x470&ttype=input" alt="이미지 설명">
+                  <div class="container-fluid">
+                    <div class="row justify-content-center">
+                      <div class="col-md-3 col-lg-2 col-xl-2">
+                        <div class="cate-row">
+                          <div class="cate-drama">
+                            <div class="dramacircle">
+                              <img class="daramaimg" src="https://search.pstatic.net/common/?src=https%3A%2F%2Fditto-phinf.pstatic.net%2F20230227_198%2F1677489790020SOEit_PNG%2F76ebb952e887731374cdd50942724ef0.png&type=o&size=488x470&ttype=input" alt="이미지 설명">
+                            </div>
+                            <div class="catetitle">
+                              <p>#대행사<p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="catetitle">
-                        <p>#대행사<p>
+                      <div class="col-md-3 col-lg-2 col-xl-2">
+                        <div class="cate-row">
+                          <div class="cate-drama">
+                            <div class="dramacircle">
+                              <img class="daramaimg" src="/Morph/testcat.jpg" alt="이미지 설명">
+                            </div>
+                            <div class="catetitle">
+                              <p>#카테고리<p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-lg-2 col-xl-2">
+                        <div class="cate-row">
+                          <div class="cate-drama">
+                            <div class="dramacircle">
+                              <img class="daramaimg" src="/Morph/testcat.jpg" alt="이미지 설명">
+                            </div>
+                            <div class="catetitle">
+                              <p>#카테고리<p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-lg-2 col-xl-2">
+                        <div class="cate-row">
+                          <div class="cate-drama">
+                            <div class="dramacircle">
+                              <img class="daramaimg" src="/Morph/testcat.jpg" alt="이미지 설명">
+                            </div>
+                            <div class="catetitle">
+                              <p>#카테고리<p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-lg-2 col-xl-2 ">
+                        <div class="cate-row">
+                          <div class="cate-drama">
+                            <div class="dramacircle">
+                              <img class="daramaimg" src="/Morph/testcat.jpg" alt="이미지 설명">
+                            </div>
+                            <div class="catetitle">
+                              <p>#카테고리<p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    </div>
-                    <div class="col-2">
-                      <div class="dramacircle">
-                        <img class="daramaimg" src="/Morph/testcat.jpg" alt="이미지 설명">
-                      </div>
-                      <div class="catetitle">
-                        <p>#카테고리<p>
-                      </div>
-                    </div>
-                    <div class="col-2">
-                      <div class="dramacircle">
-                        <img class="daramaimg" src="/Morph/testcat.jpg" alt="이미지 설명">
-                      </div>
-                    </div>
-                    <div class="col-2">
-                      <div class="dramacircle">
-                        <img class="daramaimg" src="/Morph/testcat.jpg" alt="이미지 설명">
-                      </div>
-                    </div>
-                    <div class="col-2">
-                      <div class="dramacircle">
-                        <img class="daramaimg" src="/Morph/testcat.jpg" alt="이미지 설명">
-                      </div>
-                    </div>
-                  </div>
-                </div>
                   </div>
                   <div class="col-1">
                   </div>
@@ -157,14 +188,50 @@
     <div class="container px-5 my-5">
         <div class="container">
             <div class="container text-center">
-                <div class="row align-items-end" id="writebtn-row">
-                  <div class="col-10"> </div>
-                  <div class="col-2">
-                    <button type="button" class="btn btn-primary btn-sm" id="writebtn">글쓰기</button>
+                <div class="row" id="writebtn-row">
+                  <div class="col-11"> </div>
+                  <div class="col-1">
+                    <button type="button" class="btn btn-primary btn-sm" id="writebtn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasPost">글쓰기</button>
                   </div>
                 </div>
               </div>
-        
+        <!--글작성 오프캔버스-->
+        <div class="offcanvas offcanvas-end2" tabindex="-1" id="offcanvas-write" aria-labelledby="offcanvas-write-label">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvas-write-label">글쓰기</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            
+              <div class="form-group">
+                <label for="postTitle">게시글 제목</label>
+                <input type="text" class="form-control" id="postTitle" placeholder="제목을 입력하세요">
+              </div>
+              <div class="form-group">
+                <label for="postContent">게시글 내용</label>
+                <textarea class="form-control" id="postContent"  style="height: 200px" rows="5" placeholder="내용을 입력하세요"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="postFile">파일 업로드</label>
+                <input type="file" class="form-control" id="postFile" name="postFile">
+              </div>
+              <div class="row">
+                <div class="col-9">
+                </div>
+                <div class="col-3">
+                  <button type="submit" class="btn btn-primary btn-md" id="submitPost">작성 완료</button>
+                </div>
+              </div>
+          </div>
+        </div>
+        <script>
+          // writebtn 버튼 클릭 시 offcanvas 활성화
+document.getElementById("writebtn").addEventListener("click", function() {
+  var offcanvasElement = document.getElementById("offcanvas-write");
+  var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+  offcanvas.show();
+});
+        </script>
             <div class="row" data-masonry='{"percentPosition" : true}'>
                 <div class="col-lg-4 col-md-6 col-6">
                     <div class="card shadow border-0">
@@ -174,7 +241,7 @@
                             <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Blog post title</h5></a>
                             <p class="card-text mb-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
-                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0 ">
                             <div class="d-flex align-items-end justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
@@ -184,10 +251,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
                 <div class="col-lg-4 col-md-6 col-6">
                     <div class="card shadow border-0">
@@ -336,9 +401,20 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
+<script>
+    const card = document.querySelector('.card');
+const button = document.querySelector('.btn');
 
+button.addEventListener('click', () => {
+  card.style.maxHeight = 'none';
+  card.style.overflow = 'visible';
+});
+
+</script>
 </div>
 <!-- Blog preview section-->
 <section class="py-5">

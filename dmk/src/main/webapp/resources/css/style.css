@@ -660,6 +660,7 @@ progress {
   .container-md, .container-sm, .container {
     max-width: 720px;
   }
+
 }
 @media (min-width: 992px) {
   .container-lg, .container-md, .container-sm, .container {
@@ -4242,7 +4243,9 @@ textarea.form-control-lg {
   flex-direction: column;
   min-width: 0;
   height: auto;
-  width : 20rem;
+  max-height: 750px;
+  overflow: hidden;
+  width : 100%;
   word-wrap: break-word;
   background-color: var(--bs-card-bg);
   background-clip: border-box;
@@ -4254,7 +4257,7 @@ textarea.form-control-lg {
 .card > hr {
   margin-right: 0;
   margin-left: 0;
-}햄햄
+}
 .card > .list-group {
   border-top: inherit;
   border-bottom: inherit;
@@ -4405,7 +4408,6 @@ textarea.form-control-lg {
 .card-group > .card:not(:first-child) .card-footer {
     border-bottom-left-radius: 0;
   }
-
 }
 
 .accordion {
@@ -11604,12 +11606,13 @@ video {
 
 .cate-drama {
   text-align: center;
+
 }
 
 
 .catetitle{
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   padding: 10px;
  
 }
@@ -11637,3 +11640,55 @@ video {
   background-color: #555; 
 }
 
+.offcanvas-end2 {
+  width: 100%;
+  max-width: 40%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  visibility: visible;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  background-color: rgba(235, 244, 255, 1);
+}
+
+.offcanvas-end2.show {
+  transform: translateX(0);
+}
+
+.comment {
+  border-top: 1px dashed #bed1e6;
+  padding: 10px;
+}
+
+.comment .col-2 {
+  padding-right: 0;
+}
+
+.comment .col-10 {
+  padding-left: 5px;
+}
+
+.commentImg{
+  margin-top: 60%;
+}
+
+.commentText{
+  margin-top: 8px;
+}
+
+.reBox{
+  padding-bottom: 0;
+}
+
+@media (max-width: 576px) {
+  .reBox {
+    padding: 10px;
+  }
+  
+  .commentBox {
+    padding: 5px;
+  }
+}
