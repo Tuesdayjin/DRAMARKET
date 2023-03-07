@@ -69,7 +69,13 @@
                         <a class="nav-link" href="#">게시판</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">마이페이지</a>
+	                    <!-- 글쓰기 회원검증 -->
+						<c:if test="${!empty mvo}">
+                            <a class="nav-link" href="#">마이페이지</a>
+						</c:if>	
+						<c:if test="${empty mvo}">
+                            <a class="nav-link" href="login.do">로그인</a>
+						</c:if>	
                     </li>
                 </ul>
             </div>
