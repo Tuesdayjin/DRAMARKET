@@ -27,5 +27,8 @@ public class t_board {
 
     // 조회수. 조회수
     private Integer views;
+    
+    // 닉네임. 닉네임
+    private String nick;
 
 }

@@ -72,7 +72,7 @@
         <div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #393E46;">
               <div class="container-fluid" style="width: 70%;">
-                  <a class="navbar-brand" href="#" style="color: #FFD369;">드라마켓</a>
+                  <a class="navbar-brand" href="Main.do" style="color: #FFD369;">드라마켓</a>
                   <div class="d-flex justify-content-end">
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
@@ -85,15 +85,23 @@
                                   <span class="visually-hidden">(current)</span>
                               </a>
                           </li>
+                          
                           <li class="nav-item">
                               <a class="nav-link" href="#">게시판</a>
                           </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">마이페이지</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">로그인</a>
-                          </li>
+                        <c:if test="${!empty mvo}">
+	                    <li class="nav-item">
+	                        <a class="nav-link" href="#">마이페이지</a>
+	                    </li>
+	                     <li class="nav-item">
+	                        <a class="nav-link" href="logout.do">로그아웃</a>
+	                    </li>
+	                    </c:if>
+	                   <c:if test="${empty mvo}">
+	                    <li class="nav-item">
+	                        <a class="nav-link" href="login.do">로그인</a>
+	                    </li>
+                    </c:if>
                       </ul>
                   </div>
               </div>
@@ -121,18 +129,18 @@
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-xl-start">
                     <div class="card shadow border-0">
-                        <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt3P7HZHdmCSKfzEAz_8z7NaNU0WEuJIXKXw&usqp=CAU" alt="..."/>
+                        <img class="card-img-top" src="http://localhost:8081/boardimg/${board_vo.img_name}"  alt="..."/>
                         <div class="card-body p-4" style="background-color: #EEEEEE;">
-                            <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">게시글 제목</h5></a>
-                            <p class="card-text mb-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">${board_vo.title}</h5></a>
+                            <p class="card-text mb-0">${board_vo.content}</p>
                         </div>
                         <div class="card-footer p-4 pt-0 bg-transpa0rent border-top-0" style="background-color: #EEEEEE;">
                             <div class="d-flex align-items-end justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
                                     <div class="small">
-                                        <div class="fw-bold">사용자</div>
-                                        <div class="text-muted">작성날짜</div>
+                                        <div class="fw-bold">${board_vo.nick}</div>
+                                        <div class="text-muted"><fmt:formatDate value="${board_vo.indate}" pattern="yyyy-MM-dd HH시 mm분"/></div>
                                     </div>
                                 </div>
                             </div>

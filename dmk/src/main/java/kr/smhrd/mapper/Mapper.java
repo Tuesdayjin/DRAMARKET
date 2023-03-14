@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.smhrd.entity.t_board;
 import kr.smhrd.entity.t_member;
@@ -25,6 +26,15 @@ public interface Mapper {
 	
 	@Select("select * from t_board order by indate desc")
 	public List<t_board> selecT_board();
+
+	@Select("select nick from t_member where id=#{id}")
+	public String nickSelect(String id);
+
+	@Select("select * from t_board where num=#{num}")
+	public t_board selectContent(long num);
+
+	@Update("update t_board set views=views+1 where num=#{num}")
+	public void countUpdate(long num);
 
 	
 	
