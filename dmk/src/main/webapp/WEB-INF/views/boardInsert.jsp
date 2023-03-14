@@ -125,19 +125,21 @@
         <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-xl-start">
-                    <form action="">
+                    <form id="fileform" enctype="multipart/form-data" >
+						<input type="hidden" name="id" id="id" value="id 01">
                         <div class="row btnDiv">
-                            <button type="submit" class="btn btn-primary"><i class="bi bi-pencil"></i>글쓰기</button>
+                            <button type="button" onclick="register()" class="btn btn-primary"><i class="bi bi-pencil"></i>글쓰기</button>
                         </div> 
                       <div class="card shadow border-0" style="background-color: #EEEEEE;">
                         <div class="card-header" style="margin-top: 10px;">
-                          <input type="text" class="form-control" placeholder="글 제목" aria-label="Username" aria-describedby="basic-addon1">
+                          <input name="title" type="text" class="form-control" placeholder="글 제목" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         <div class="card-body p-4">
-                          <textarea class="form-control" placeholder="글 내용" rows="10" aria-label="With textarea"></textarea>
+                          <textarea name="content" class="form-control" placeholder="글 내용" rows="10" aria-label="With textarea"></textarea>
                         </div>
                         <div class="card-footer p-4 pt-0 bg-transparent border-top-0" style="background-color: #EEEEEE;">
-                          <input type="file" accept="video/*" required="" id="file-input">
+                          <input name='file' type="file" accept="image/*" required="" id="file-input">
+                          <input type="hidden" id="img_name" name="img_name" value="">
                         </div>
                       </div>
                       
@@ -174,5 +176,39 @@
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <!-- Bootstrap core JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script type="text/javascript">
+function register(){
+
+	if($("#file").val()!=""){ //파일이 첨부된 경우..
+		var formData=new FormData();
+		formData.append("file", $("input[name=file]")[0].files[0]);
+	    $.ajax({
+		      url: "fileupload.do",
+		      type: "POST",
+		      data: formData,
+		      processData: false,
+		      contentType: false,
+		      success: function(data) {
+		    	 console.log(JSON.stringify(data));
+		    	//$('#imgdiv').append('<img src="http://localhost:8081/boardimg/'+ data +'" id="Sample">');
+		        $('#img_name').val(data);
+		        $('#fileform').attr('method', "post");
+		        $('#fileform').attr('action', "writeaddfile.do");
+		        $('#fileform').submit();
+		      },
+		      error : function(){alert("파일 업로드에 실패하였습니다");}
+		    }); // $.ajax
+	}else{ //파일이 첨부되지 않은 경우..
+		$('#fileform').attr('method', "post");
+        $('#fileform').attr('action', "write.do");
+		$('#fileform').submit();
+		
+	}
+	
+}
+</script>
+
 </body>
 </html>

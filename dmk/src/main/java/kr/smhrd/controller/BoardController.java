@@ -58,22 +58,38 @@ public class BoardController { //DAO 대신 mapper 호출
 	}
 	
 	
-	@GetMapping("/board_Write.do") //글쓰기 페이지 불러오기 
-	public String board_Write() {
+	@GetMapping("/boardInsert.do") //글쓰기 페이지 불러오기 
+	public String boardInsert() {
 		
-		return "board_Write";
+		return "boardInsert";
 	}
-	
-	
-	
-	@RequestMapping(value = "/writeupload.do", method= RequestMethod.POST)
-	public String writeupload(t_board vo) {
 
+	
+	//글 + 첨부파일 insert
+	@RequestMapping(value = "/writeaddfile.do", method= RequestMethod.POST)
+	public String writeaddfile(t_board vo) {
 
+		System.out.println(vo.getImg_name());
+		System.out.println(vo.getId());
+		System.out.println(vo.getTitle());
+		vo.setIndate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
+		mapper.insertWriteaddfile(vo);
+		
+		return "redirect:/boardList.do";
+		
+	}	
+	
+	
+	//글만 insert
+	@RequestMapping(value = "/write.do", method= RequestMethod.POST)
+	public String write(t_board vo) {
+
+		System.out.println(vo.getId());
+		System.out.println(vo.getTitle());
 		vo.setIndate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
 		mapper.insertWrite(vo);
 		
-		return "redirect:/board_Write";
+		return "redirect:/boardList.do";
 		
 	}
 	

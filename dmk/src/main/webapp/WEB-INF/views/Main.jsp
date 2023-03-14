@@ -146,13 +146,13 @@ window.onload = function() {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">게시판</a>
+                        <a class="nav-link" href="boardList.do">게시판</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">마이페이지</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">로그인</a>
+                        <a class="nav-link" href="${cpath}/login.do">로그인</a>
                     </li>
                 </ul>
             </div>
