@@ -20,6 +20,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <!--bootstrap-->
     <link rel="stylesheet" href="${cpath}/resources/css/style.css">
+    <script type="text/javascript" src="${cpath}/resources/js/dmk.js"></script>
     <script src="js/morph/bootstrap.min.js"></script>
 
 <!--google font-->
@@ -47,28 +48,6 @@
     <button onclick="topFunction()" id="myBtn" class="btn btn-info to-top" title="Go to top">
         TOP
     </button>
-    <script>
-        // Get the button
-        let mybutton = document.getElementById("myBtn");
-        
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function() {scrollFunction()};
-        
-        function scrollFunction() {
-          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            mybutton.style.display = "block";
-            mybutton.style.backgroundColor = "#FFD369";
-          } else {
-            mybutton.style.display = "none";
-          }
-        }
-        
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-        }
-        </script>
         <div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #393E46;">
               <div class="container-fluid" style="width: 70%;">
