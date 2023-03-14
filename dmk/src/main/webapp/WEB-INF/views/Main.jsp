@@ -132,7 +132,7 @@ window.onload = function() {
         <div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #393E46;">
         <div class="container-fluid" style="width: 70%;">
-            <a class="navbar-brand" href="#" style="color: #FFD369;">드라마켓</a>
+            <a class="navbar-brand" href="Main.do" style="color: #FFD369;">드라마켓</a>
             <div class="d-flex justify-content-end">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -141,19 +141,26 @@ window.onload = function() {
                 
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link " href="">상품검색
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">게시판</a>
+                        <a class="nav-link" data-href="board">게시판</a>
                     </li>
+                    <c:if test="${!empty mvo}">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">마이페이지</a>
+                        <a class="nav-link" data-href="mypage">마이페이지</a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" data-href="logout">로그아웃</a>
+                    </li>
+                    </c:if>
+                   <c:if test="${empty mvo}">
                     <li class="nav-item">
                         <a class="nav-link" href="${cpath}/login.do">로그인</a>
+
                     </li>
+                    </c:if>
                 </ul>
             </div>
         </div>
@@ -301,12 +308,22 @@ const navLinks = document.querySelectorAll(".nav-link");
 navLinks.forEach(function(link) {
   link.addEventListener("click", function(event) {
     event.preventDefault();
-    // 모든 링크에서 ".active" 클래스 제거
+    // 모든 링크에서 ".active" 클래스 제거    
     navLinks.forEach(function(link) {
       link.classList.remove("active");
     });
     // 클릭한 링크에 ".active" 클래스 추가
     link.classList.add("active");
+	var href = $(this).data("href");
+	if (href=="board"){
+		location.href='boardList.do'
+	} else if (href=="mypage"){
+		location.href='link'    
+	} else if (href=="login"){
+		location.href='login.do'
+	} else if (href=="logout"){
+		location.href='logout.do'
+	} 
     
   });
 });

@@ -1,54 +1,170 @@
 package kr.smhrd.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.mysql.cj.util.Util;
 
-import kr.smhrd.entity.t_member;
+import kr.smhrd.entity.t_board;
 import kr.smhrd.mapper.Mapper;
+import kr.smhrd.util.common_util;
 
 @Controller
-public class BoardController {
-
-	@Autowired
+public class BoardController { //DAO 대신 mapper 호출
+	
+	@Autowired 
 	private Mapper mapper;
 	
-	@RequestMapping("/Main.do") //Main 페이지
-	public String Main() {
-		
-		return "Main";
-	}
-	
-	@GetMapping("/login.do") //login 페이지로 연결
-	public String login() {
-		return "login";
-	}
-	
-	@PostMapping("/login.do") //login 페이지로 연결 
-	public String login(t_member vo, HttpSession session) {
-		 t_member mvo = mapper.loginCheck(vo); //(회원인증매퍼)
-		 if(mvo != null) {
-			 session.setAttribute("mvo", mvo);
-			 // 이때, ★★ model 에 바인딩하면 안된다..!★★
-			 // 원래 스프링에서 HttpSession session 안쓰지만 일단 여기까지만 배움
-			 // 보안에 더 안전한 방법 있는데 그거는 나중에 책보고 해보세요
-		 }
-	 return "redirect:/Main.do";
-	}
-	
 	@RequestMapping("/boardList.do") //게시판 페이지
-	public String boardList() {
+	public String boardList(Model model) {
+		
+		List<t_board> list = mapper.selecT_board();
+		model.addAttribute("list",list);
 		
 		return "boardList";
 	}
 	
+	
+	@GetMapping("/boardInsert.do") //글쓰기 페이지 불러오기 
+	public String boardInsert() {
+		
+		return "boardInsert";
+	}
+
+	
+	//글 + 첨부파일 insert
+	@RequestMapping(value = "/writeaddfile.do", method= RequestMethod.POST)
+	public String writeaddfile(t_board vo) {
+
+		System.out.println(vo.getImg_name());
+		System.out.println(vo.getId());
+		System.out.println(vo.getTitle());
+		String nick=mapper.nickSelect(vo.getId()); //작성자 닉네임 가져오기
+		vo.setNick(nick);
+		vo.setIndate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
+		mapper.insertWriteaddfile(vo);
+		
+		return "redirect:/boardList.do";
+		
+	}	
+	
+	
+	//글만 insert
+	@RequestMapping(value = "/write.do", method= RequestMethod.POST)
+	public String write(t_board vo) {
+
+		System.out.println(vo.getId());
+		System.out.println(vo.getTitle());
+		
+		String nick=mapper.nickSelect(vo.getId()); //작성자 닉네임 가져오기
+		vo.setNick(nick);
+		
+		vo.setIndate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
+		mapper.insertWrite(vo);
+		
+		return "redirect:/boardList.do";
+		
+	}
+	
+	
+	@RequestMapping("/fileupload.do") //파일 등록
+	public String fileupload(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response)
+	throws ServletException, IOException{
+		
+		// 파일 저장 디렉토리 설정
+		String uploadFolder = "C:\\Users\\smhrd\\git\\DRAMARKET\\dmk\\src\\main\\webapp\\resources\\boardimg";
+		//String path = multipartRequest.getServletContext().getRealPath("")+File.separator+"img"; // 쌤 경로
+	    // 날짜별로 디렉토리 생성, uploadPath 설정
+	    File uploadPath = new File(uploadFolder);
+	    if(!uploadPath.exists()) uploadPath.mkdirs();
+		
+
+		Iterator<String> it= multipartRequest.getFileNames();
+		List<String> fileList = new ArrayList<String>();
+		String UploadName="";
+		while (it.hasNext()) { // 마지막 파라메터가 없으면 false 반복 종료
+			String paramFileName = it.next();
+			
+			//파일을 다루는 클래스 (파라메터로 받아온 파일의 이름, 타입, 크기 등의 정보 )
+			MultipartFile mFile = multipartRequest.getFile(paramFileName);
+			String fileRealName = mFile.getOriginalFilename();//실제 파일 이름
+			System.out.println(fileRealName); //넘어오는 값들 확인 
+			fileList.add(fileRealName);
+			
+			
+			//업로드 이름(UploadName) 지정
+			UUID uuid = UUID.randomUUID();
+	        UploadName= uuid.toString() + "_" + fileRealName;
+			
+	        //파일 저장(UploadPath, UploadName)
+	        File saveFile = new File(uploadPath, UploadName);
+	        
+			try {
+				mFile.transferTo(saveFile);
+				System.out.println("저장완료. 저장 경로는 : "+saveFile.getPath() );
+				
+			} catch (Exception error) {
+				System.out.println(error.getMessage());
+			}
+			
+			new common_util().thumb(saveFile, uploadPath, UploadName, fileRealName);
+		}
+		System.out.println(UploadName);
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().print(UploadName);
+		
+		return null;
+
+		
+	}
+	
+	@RequestMapping("/boardContent.do") //게시글 조회 페이지 불러오기 
+	public String boardContent(long num,Model model) {
+		
+		// 조회수 누적
+		mapper.countUpdate(num); 
+		
+		t_board board_vo = mapper.selectContent(num);
+		model.addAttribute("board_vo",board_vo);
+		
+		return "boardContent";
+	}
+	
+
+
 
 }

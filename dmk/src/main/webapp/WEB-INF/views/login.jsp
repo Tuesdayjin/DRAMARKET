@@ -72,7 +72,7 @@
     <div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #393E46;">
           <div class="container-fluid" style="width: 70%;">
-              <a class="navbar-brand" href="#" style="color: #FFD369;">드라마켓</a>
+              <a class="navbar-brand" href="Main.do" style="color: #FFD369;">드라마켓</a>
               <div class="d-flex justify-content-end">
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
@@ -86,13 +86,7 @@
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="#">게시판</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="#">마이페이지</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="#">로그인</a>
+                          <a class="nav-link" href="boardLsit.do">게시판</a>
                       </li>
                   </ul>
               </div>
@@ -120,22 +114,26 @@
                       <div class="col-md-6 offset-md-3">
                         <div class="card">
                           <div class="card-body">
+                          
+                          
                             <h2 class="cardTitle">로그인</h2>
-                            <form id="login-form">
+                            <form id="login-form" action ="login.do" method="post">
                               <div class="form-group">
                                 <label for="id">아이디</label>
-                                <input type="id" class="form-control" id="id">
+                                <input type="id" class="form-control" name="id">
                               </div>
                               <div class="form-group">
                                 <label for="pwd">비밀번호</label>
-                                <input type="pwd" class="form-control" id="pwd">
+                                <input type="pwd" class="form-control" name="pwd">
                               </div>
                               <button type="submit" class="btn btn-primary">로그인</button>
                               <div class="form-group">
                               <a href="#" class="link-unstyled" id="show-signup">회원가입</a>
                             </div>
                             </form>
-                            <form id="signup-form" style="display:none;">
+                            
+                            
+                            <form id="signup-form" style="display:none;" action="memeberRegister.do" >
                               <div class="form-group">
                                 <label for="id">아이디</label>
                                 <input type="text" class="form-control" id="id">
@@ -178,13 +176,16 @@
                               <a href="#" class="link-unstyled" id="show-login">로그인으로 돌아가기</a>
                             </div>
                             </form>
+                            
+                            
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+          
                   
-                  <script>
+<script>
 $(document).ready(function() {
   // 초기화
   $('.cardTitle').text('로그인');
