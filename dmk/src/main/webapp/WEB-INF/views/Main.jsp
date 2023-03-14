@@ -241,8 +241,8 @@ window.onload = function() {
 </div>
 <div class="card-footer">
     <div>
-        <form action=""></form>
-        <input type="file" accept="video/*" required="" id="file-input">
+        <form action="uploadFile.do" method="post" enctype="multipart/form-data">
+        <input type="file" accept="video/*" required="" id="file-input" name="uploadFile">
     </div>
     <div>
         <button class="btn btn-lg btn-primary uploadBtn" type="submit">찾아주라</button>
