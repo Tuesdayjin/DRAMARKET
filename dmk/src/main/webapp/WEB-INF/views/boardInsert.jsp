@@ -77,7 +77,7 @@
         <div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #393E46;">
               <div class="container-fluid" style="width: 70%;">
-                  <a class="navbar-brand" href="#" style="color: #FFD369;">드라마켓</a>
+                  <a class="navbar-brand" href="Main.do" style="color: #FFD369;">드라마켓</a>
                   <div class="d-flex justify-content-end">
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
@@ -86,18 +86,18 @@
                       
                       <ul class="navbar-nav me-auto">
                           <li class="nav-item">
-                              <a class="nav-link " href="#">상품검색
+                              <a class="nav-link " href="Main.do">상품검색
                                   <span class="visually-hidden">(current)</span>
                               </a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">게시판</a>
+                              <a class="nav-link" href="boardList.do">게시판</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">마이페이지</a>
+                              <a class="nav-link" href="mypage.do">마이페이지</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">로그인</a>
+                              <a class="nav-link" href="login.do">로그인</a>
                           </li>
                       </ul>
                   </div>
