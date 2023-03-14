@@ -108,7 +108,7 @@
     </div>
 </header>
 <!-- Testimonial section-->
-<div class="py-5>
+<div class="py-5">
     <div class="container px-5 my-5">
         <div class="container">
             <div class="container text-center">
@@ -116,7 +116,9 @@
                   <div class="col-10"> </div>
                   <div class="col-2">
                   <c:if test="${!empty mvo}">
+                  <div class="writebtn-box">
                     <button type="button" class="btn btn-primary btn-sm" id="writebtn"><i class="bi bi-pencil">_</i>글쓰기</button>
+                    </div>
 					</c:if>
                   </div>
                 </div>
@@ -160,14 +162,6 @@
             </div>
         </div>
 <script>
-//const card = document.querySelector('.card');
-//const button = document.querySelector('.btn');
-
-//button.addEventListener('click', () => {
-//  card.style.maxHeight = 'none';
-//  card.style.overflow = 'visible';
-//});
-
 //글작성하기
 // 버튼 요소 가져오기
 const writeBtn = document.getElementById('writebtn');
@@ -175,12 +169,11 @@ const writeBtn = document.getElementById('writebtn');
 // 클릭 이벤트 처리
 writeBtn.addEventListener('click', () => {
   // 이동할 페이지 URL 설정
-  const url = '주소작성';
+  const url = '/boardInsert.jsp';
 
   // 현재 창에서 페이지 이동
   window.location.href = url;
 });
-
 </script>
 </div>
 <!-- Blog preview section-->

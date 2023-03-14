@@ -26,71 +26,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-.pageTransition-box {
-  position: absolute;
-  z-index: 9999;
-  top: 0;
-  left: -10%;
-  width: calc(100% + 20%);
-  height: 100%;
-  overflow: hidden;
-  background-color: rgba(57, 62, 70,0.9);
-  transform-origin: left;
-  transform: skew(-12deg);
-  transition: all 0.8s ease-in-out;
- 
-}
-
-.pageTransition-box.shrink {
-  width: 0%;
-  transform: skew(-12deg);
-} 
-.selectNav.active {
-  color: #FFD369; 
-  font-weight: 600;
-  border-bottom: 3px solid #FFD369;
-}
-.selectNav:after {
-  content: '';
-  display: block;
-  height: 3px;
-  width: 0;
-}
-
-.selectNav.active:after {
-  width: 100%;
-}
-.selectNavBar{
-    width: 100%; /* ul 요소의 너비를 100%로 설정 */
-  max-width: 800px; /* ul 요소의 최대 너비를 800px로 설정 */
-  margin: 0 auto; /* ul 요소를 수평 중앙에 위치시킴 */  
-}
-
-.selectNavTab{
-    flex: 1; /* li 요소의 너비를 동일하게 설정 */
-  text-align: center; /* li 요소의 텍스트를 가운데 정렬 */
-  margin: 0 10px; /* li와 li 사이의 여백을 10px로 설정 */ 
-}
-
-.uploadBtn {
-  background-color: #EEEEEE;
-}
-
-.uploadFile-svg svg {
-  animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
 
 </style>
 </head>
@@ -108,7 +43,7 @@ window.onload = function() {
         TOP
     </button>
     <script>
-        // Get the button
+        //to top button
         let mybutton = document.getElementById("myBtn");
         
         // When the user scrolls down 20px from the top of the document, show the button
@@ -290,14 +225,16 @@ window.onload = function() {
 <script src="js/scripts.js"></script>
 <script>
 $(document).ready(function() {
- // 초기 화면에서는 howto 내용만 표시합니다.
+ // 초기 화면에서는 howto 내용만 표시
  $('#howto').show().siblings().hide();
-
-  // 클릭 이벤트를 추가합니다.
+ // howto에 강조선 .active 추가
+ $('a[data-target="#howto"]').addClass("active");
+ 
+  // 클릭 이벤트
   $('a[data-target]').click(function(e) {
     e.preventDefault();
     var target = $(this).data('target');
-    // 해당 내용을 표시합니다.
+    // 해당 내용을 표시
     $(target).show().siblings().hide();
   });
 });
