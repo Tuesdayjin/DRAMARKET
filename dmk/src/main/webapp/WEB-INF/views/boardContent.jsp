@@ -129,7 +129,9 @@
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-xl-start">
                     <div class="card shadow border-0">
+                       <c:if test="${!empty board_vo.img_name}"> <!-- 이미지 있을때만 -->
                         <img class="card-img-top" src="http://localhost:8081/boardimg/${board_vo.img_name}"  alt="..."/>
+                        </c:if>   
                         <div class="card-body p-4" style="background-color: #EEEEEE;">
                             <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">${board_vo.title}</h5></a>
                             <p class="card-text mb-0">${board_vo.content}</p>
