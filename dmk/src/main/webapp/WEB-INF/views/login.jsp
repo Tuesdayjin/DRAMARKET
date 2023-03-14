@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 
+
 <style>
     .card-body form > * {
       margin-bottom: 15px;
@@ -43,52 +44,64 @@
   </style>
 </head>
 <body>
-    <button onclick="topFunction()" id="myBtn" class="btn btn-info" title="Go to top">Top</button>
-    <script>
-        // Get the button
-        let mybutton = document.getElementById("myBtn");
-        
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function() {scrollFunction()};
-        
-        function scrollFunction() {
-          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            mybutton.style.display = "block";
-          } else {
-            mybutton.style.display = "none";
-          }
-        }
-        
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-        }
-        </script>
-     <div class="container">
-        <nav class="navbar navbar-expand-lg mx-auto">
-            <div class="container-fluid">
-              <span class="navbar-brand mb-0 h1">DRAMARKET</span>
+  <button onclick="topFunction()" id="myBtn" class="btn btn-info to-top" title="Go to top">
+    TOP
+</button>
+<script>
+    // Get the button
+    let mybutton = document.getElementById("myBtn");
+    
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+    
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+        mybutton.style.backgroundColor = "#FFD369";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+    
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #393E46;">
+          <div class="container-fluid" style="width: 70%;">
+              <a class="navbar-brand" href="#" style="color: #FFD369;">드라마켓</a>
               <div class="d-flex justify-content-end">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">로그인</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">회원가입</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            </div>
-          </nav>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarColor02">
+                  
+                  <ul class="navbar-nav me-auto">
+                      <li class="nav-item">
+                          <a class="nav-link " href="#">상품검색
+                              <span class="visually-hidden">(current)</span>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">게시판</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">마이페이지</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">로그인</a>
+                      </li>
+                  </ul>
+              </div>
           </div>
+          </div>
+        </nav>
+      </div>
 <!-- Header-->
-<header class="bg-dark py-5">
+<header class="bg-dark py-5" style="background-color: #393E46;">
     <div class="container px-5">
         <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -107,26 +120,22 @@
                       <div class="col-md-6 offset-md-3">
                         <div class="card">
                           <div class="card-body">
-<<<<<<< HEAD
                             <h2 class="cardTitle">로그인</h2>
                             <form id="login-form">
-=======
-                            <form id="login-form" method="post" action="login.do">
->>>>>>> branch 'main' of https://github.com/Tuesdayjin/DRAMARKET.git
                               <div class="form-group">
                                 <label for="id">아이디</label>
-                                <input type="id" class="form-control" id="id" name = "id" required="required">
+                                <input type="id" class="form-control" id="id">
                               </div>
                               <div class="form-group">
                                 <label for="pwd">비밀번호</label>
-                                <input type="pwd" class="form-control" id="pwd" name = "pwd" required="required">
+                                <input type="pwd" class="form-control" id="pwd">
                               </div>
                               <button type="submit" class="btn btn-primary">로그인</button>
                               <div class="form-group">
                               <a href="#" class="link-unstyled" id="show-signup">회원가입</a>
                             </div>
                             </form>
-                            <form id="signup-form" style="display:none;" method="post" action="register.do">
+                            <form id="signup-form" style="display:none;">
                               <div class="form-group">
                                 <label for="id">아이디</label>
                                 <input type="text" class="form-control" id="id">
@@ -144,7 +153,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender" id="gender" value="male">
+                                          <input class="form-check-input" type="radio" name="gender" id="male" value="male">
                                           <label class="form-check-label" for="male">
                                             남자
                                           </label>
@@ -152,7 +161,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender" id="gender" value="female">
+                                          <input class="form-check-input" type="radio" name="gender" id="female" value="female">
                                           <label class="form-check-label" for="female">
                                             여자
                                           </label>
@@ -181,14 +190,14 @@ $(document).ready(function() {
   $('.cardTitle').text('로그인');
   
   // 로그인 폼 보이기
-    $('#show-login').click(function() {
+  $('#show-login').click(function() {
     $('#login-form').show();
     $('#signup-form').hide();
     $('.cardTitle').text('로그인');
   });
   
   // 회원가입 폼 보이기
-    $('#show-signup').click(function() {
+  $('#show-signup').click(function() {
     $('#login-form').hide();
     $('#signup-form').show();
     $('.cardTitle').text('회원가입');
@@ -216,44 +225,7 @@ $(document).ready(function() {
       yearRange: "-100:+0", // 현재 날짜로부터 100년 전까지 선택 가능하도록 설정
     });
   });
-                    
-                    
-     // 로그인 기능              
-	$('#login-form').submit(function(e){
-		var $form = $(this);
-		var id = $form.find('input[name="id"]').val();
-		//if( id.length < 8){ alert("아이디는 8글자 이상 입력해 주세요."); return false;  }
-		var pwd = $form.find('input[name="pwd"]').val();
-		//if( pwd.length < 8){ alert("비밀번호는 8글자 이상 입력해 주세요."); return false;  }
-		return true;
-	});
-     
-     // 회원가입 기능              
-	$('#signup-form').submit(function(e){
-		var $form = $(this);
-		
-		// 값 가져오기 (아이디, 비번, 닉네임, 성별, 생년월일)
-		var id = $form.find('input[name="id"]').val();
-		var pwd = $form.find('input[name="pwd"]').val();
-		var nick = $form.find('input[name="nick"]').val();
-		var gender = $form.find("input[name='gender']:checked").val();
-		var birth = $form.find("input[name='birth']").val();
-		
-		//검증
-		//if( id.length < 8){ alert("아이디는 8글자 이상 입력해 주세요."); return false;  }
-		//if( pwd.length < 8){ alert("비밀번호는 8글자 이상 입력해 주세요."); return false;  }
-		
-		return true;
-	});
-                    
-                    
-                    
-                    
                   </script>
-                  
-                  
-                  
-                  
             </div>
         </div>
     </div>
