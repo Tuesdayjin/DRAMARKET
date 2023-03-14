@@ -23,7 +23,7 @@ public class t_board {
     private Date indate;
 
     // 첨부파일. 첨부파일
-    private String scene;
+    private String img_name;
 
     // 조회수. 조회수
     private Integer views;

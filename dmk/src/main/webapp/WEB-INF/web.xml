@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="https://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns="https://xmlns.jcp.org/xml/ns/javaee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+    id="WebApp_ID" version="3.1">
 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
@@ -23,11 +24,41 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		
+		<!-- 파일 업로드 위한 multipart-config -->
+		<multipart-config>
+		<location>c:\\upload\\temp</location> <!-- 저장 경로 -->
+		<max-file-size>20971520</max-file-size> <!-- 1MM * 20 -->
+		<max-request-size>41943040</max-request-size> <!-- 40 MM -->
+		<file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->
+		</multipart-config>
+		<!--  wel.xml설정은 WAS(Tomcat) 자체 설정일 뿐이고,
+   		스프링 업로드 처리는 MultipartResolver라는 타입의 객체를 servlet-context.xml에 추가 설정해야 함!!! -->
+	
 	</servlet>
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
+
+	<!--★★ 한글인코딩 ★★-->
+	<filter> 
+		<filter-name>encoding-filter</filter-name> 
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+		<init-param> 
+			<param-name>encoding</param-name> 
+			<param-value>UTF-8</param-value> 
+		</init-param> 
+		<init-param> 
+			<param-name>forceEncoding</param-name> 
+			<param-value>true</param-value> 
+		</init-param> 
+	</filter> 
+	<filter-mapping> 
+		<filter-name>encoding-filter</filter-name> 
+		<url-pattern>/*</url-pattern> 
+	</filter-mapping>
 
 </web-app>
