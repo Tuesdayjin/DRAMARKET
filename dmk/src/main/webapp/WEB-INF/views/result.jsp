@@ -163,7 +163,17 @@
 												} ]
 											}
 										});
+						var player = document.getElementById("defaultPlayer");
+
+						ytplayer.getCurrentTime();
+					console.log("현재 재생 시간 : ");
+					var player = Amalia.player('myPlayerId');
+					var currentTime = player.getCurrentTime(); // 현재 재생 시간 가져오기
+					console.log(currentTime + "초");
 					});
+					var timeline = $("#timeline");
+					console.log(timeline + "초");
+					
 				</script>
 
 			</div>
