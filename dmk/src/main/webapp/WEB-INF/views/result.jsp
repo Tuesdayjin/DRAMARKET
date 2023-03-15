@@ -108,12 +108,14 @@
 		</div>
 		<div class="content">
 				<div class="card player-card">
-					<div id="player" style="width:100px; height:100px;"></div>
+					<div id="player"></div>
 				</div>
 				<div class="card">
 				<div id="timeline"></div>
 				</div>
 				<div id="currentTimeDisplay"></div>
+				<button id="captureImageButton">캡쳐</button>
+				<img id="capturedImage" style="width:100px; height:100px;"/>
 				<script>
 				var player = null;
 					$(function() {
@@ -141,18 +143,24 @@
 													'container' : '#timeline',
 													'parameters' : {
 														timeaxis : false,
-														toolsbar : false,
 														listOfLines : [
 														{
 															title : '드라마 영상에 나오고 있는 상품',
 															type : 'image',
 															metadataId : '${fileName}',
-															pointNav : true
+															pointNav : true,
+															showToolsbar : false
+															
 														} ]
 													}
 												} ]
 											}
 										});
+					
+					
+						// Add a click event listener to the capture image button
+						  $('#captureImageButton').click(captureImage);
+
 					});
 					//영상 재생 시간 받기
 					function onReady() {
@@ -172,8 +180,26 @@
 						  
 						// 현재 재생 시간을 DIV에 출력합니다.
 						  $("#currentTimeDisplay").text("Current playback time: " + currentTime);
-				
 						}
+					function captureImage() {
+						// Get the video element from the player
+						  var videoElement = $('video', '#player')[0];
+						  var canvas = document.createElement('canvas');
+						  canvas.width = videoElement.videoWidth;
+						  canvas.height = videoElement.videoHeight;
+
+						  // Draw the current video frame onto the canvas
+						  var ctx = canvas.getContext('2d');
+						  ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+						  // Get the current image as a data URL
+						  var imageDataUrl = canvas.toDataURL('image/png');
+
+						  console.log(imageDataUrl);
+					        // Set the captured image as the src of the img element
+					        $('#capturedImage').attr('src', imageDataUrl);
+					}
+					
 				</script>
 
 			</div>
