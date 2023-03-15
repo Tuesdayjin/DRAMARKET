@@ -40,9 +40,9 @@ public interface Mapper {
 	public void countUpdate(long num);
 	
 
-	@Insert("insert into t_member values (#{birth},#{gender},#{id},#{nick},#{pwd})")
-	public void memeberRegister(t_member vo);
-	//,#{profile_name}
+	@Insert("insert into t_member values (#{id},#{pwd},#{nick},#{gender},#{birth},#{profile_name})")
+	public void memberRegister(t_member vo);
+
 	
 	
 }

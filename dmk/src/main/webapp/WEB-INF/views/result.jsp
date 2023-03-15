@@ -181,13 +181,30 @@
 				            player.play();
 				        }
 				    }
+					var times=[]
+					$.getJSON('http://localhost:8081/flask/pyscene/result/${fileName}.json', function(data) {
+
+						for(i in data){
+							times.push(data[i].tc)
+								}
+						    });
+					
 					function onTimeChange(event, data) {
 						  var currentTime = player.getCurrentTime();
 						  console.log('Current playback time:', currentTime);
 						  
 						// 현재 재생 시간을 DIV에 출력합니다.
 						  $("#currentTimeDisplay").text("Current playback time: " + currentTime);
+						var cnt=0
+							for(i in times){
+								
+						if(currentTime==i){
+							consol.log("출력 시간 : " + i);
+							}
+							
 						}
+					}
+					
 					function captureImage() {
 						// Get the video element from the player
 						  var videoElement = $('video', '#player')[0];
@@ -207,7 +224,19 @@
 					        $('#capturedImage').attr('src', imageDataUrl);
 					}
 					
+					
+	                  $('.content').click(function() {
+	  		for(int i=0; )
+	                         // JSON 파일 불러오기
+	                         $.getJSON(`http://localhost:8081/flask/pyscene/result/${fileName}.json`, function(data) {
+	                           // thumb 값을 콘솔에 출력
+	                           console.log('tc value:', data.localisation[0].sublocalisations.localisation[3].tc);
+	                         });
+	                         console.log('${fileName}');
+	                       });
 				</script>
+				
+				
 
 			</div>
 		</div>

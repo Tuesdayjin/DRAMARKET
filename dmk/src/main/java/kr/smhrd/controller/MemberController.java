@@ -1,3 +1,4 @@
+
 package kr.smhrd.controller;
 
 import java.io.File;
@@ -36,6 +37,12 @@ public class MemberController {
 		return "login";
 	}
 	
+	@GetMapping("/register.do") //login 페이지로 연결
+	public String register() {
+		return "register";
+	}
+	
+	
 	@PostMapping("/login.do") //login 기능 구현
 	public String login(t_member vo, HttpSession session) {
 		 t_member mvo = mapper.loginCheck(vo); //(회원인증매퍼)
@@ -57,13 +64,15 @@ public class MemberController {
 		return "redirect:/Main.do";
 	}
 	
-	@RequestMapping("/memeberRegister.do") //회원가입 
-	public String memeberRegister(t_member vo, HttpSession session) {
+	
+	@RequestMapping("/memberRegister.do")
+	public String memberRegister(t_member vo, HttpSession session) {
+		
 		System.out.println(vo.getGender());
 		System.out.println(vo.getId());
 		System.out.println(vo.getProfile_name());
 		System.out.println(vo.getBirth());
-		mapper.memeberRegister(vo); 
+		mapper.memberRegister(vo); 
 		t_member mvo = mapper.loginCheck(vo); //(회원인증매퍼)
 	
 		
@@ -71,6 +80,7 @@ public class MemberController {
 			 session.setAttribute("mvo", mvo);
 		 }
 		return "redirect:/Main.do";
+		
 	}
 	
 	@RequestMapping("/profileupload.do") //파일 등록
@@ -120,7 +130,5 @@ public class MemberController {
 		response.getWriter().print(UploadName);
 		
 		return null;
-
-		
 	}
 }

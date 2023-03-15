@@ -11,54 +11,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dramarket</title>
-<!--bootstrap & bootswatch-->
-<!-- Bootstrap 및 Bootswatch 스타일시트 파일 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootswatch/4.6.0/morph/bootstrap.min.css"
-	integrity="sha384-8QLqx+yb7DgYaFvzV7Ku8Hq3eIYXPHfgvKfZKH4NoJ+dsSdRfR5aIWlFJTG8xV7+"
-	crossorigin="anonymous">
-<!-- Bootstrap 및 Bootswatch 자바스크립트 파일 -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-	crossorigin="anonymous"></script>
-<!--bootstrap-->
-<link rel="stylesheet" href="${cpath}/resources/css/style.css">
-<script type="text/javascript" src="${cpath}/resources/js/dmk.js"></script>
-<script src="js/morph/bootstrap.min.js"></script>
-<!--google font-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-	rel="stylesheet">
-<!--Load the jQuery UI library-->
-<link rel="stylesheet"
-	href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- jQuery와 jQuery UI 라이브러리 불러오기 -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet"
 	href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 
 
-<style>
-.card-body form>* {
-	margin-bottom: 15px;
-}
-
-.link-unstyled {
-	margin-top: 30px;
-}
-</style>
 </head>
 <body>
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
@@ -113,25 +72,8 @@
 								<div class="card">
 									<div class="card-body">
 
-
-										<h2 class="cardTitle">로그인</h2>
-										<form id="login-form" action="login.do" method="post">
-											<div class="form-group">
-												<label for="id">아이디</label> 
-												<input type="id" class="form-control" name="id">
-											</div>
-											<div class="form-group">
-												<label for="pwd">비밀번호</label> 
-												<input type="pwd" class="form-control" name="pwd">
-											</div>
-											<button type="submit" class="btn btn-primary">로그인</button>
-											<div class="form-group">
-												<a href="#" class="link-unstyled" id="show-signup">회원가입</a>
-											</div>
-										</form>
-
-
-										<form id="signup-form" style="display: none;" enctype="multipart/form-data">
+					
+										<form id="signupform" style="display: none;" enctype="multipart/form-data">
 											<div class="form-group">
 												<label for="id">아이디</label> 
 												<input type="text" class="form-control" name="id" id="id" >
@@ -172,7 +114,7 @@
 												<label for="birth">생년월일</label> 
 												<input type="text" class="form-control datepicker" name="birth" id="birth">
 											</div>
-											<button type="button" id="register_btn" class="btn btn-primary" >계정 생성</button>
+											<button type="button" class="btn btn-primary" onclick="member()">계정 생성</button>
 											<div class="form-group">
 												<a href="#" class="link-unstyled" id="show-login">로그인으로
 													돌아가기</a>
@@ -189,50 +131,19 @@
 
 <script>
 	$(document).ready(function() {
-		// 초기화
-		$('.cardTitle').text('로그인');
-
-		// 로그인 폼 보이기
-		$('#show-login').click(function() {
-			$('#login-form').show();
-			$('#signup-form').hide();
-			$('.cardTitle').text('로그인');
+			$('#signupform').show();
+			$('.datepicker').datepicker({
+				dateFormat : 'yy-mm-dd', // 년-월-일 형식으로 날짜 출력
+				changeYear : true, // 년도 선택 가능하도록 설정
+				yearRange : "-100:+0", // 현재 날짜로부터 100년 전까지 선택 가능하도록 설정
+			});
+			
+			
 		});
 
-		// 회원가입 폼 보이기
-		$('#show-signup').click(function() {
-			$('#login-form').hide();
-			$('#signup-form').show();
-			$('.cardTitle').text('회원가입');
-		});
-	});
-
-	
-	$(document).ready(function() {
-		// show/hide login and signup forms
-		$('#show-signup').click(function(event) {
-			event.preventDefault(); // 링크 클릭 이벤트 취소
-			$('#login-form').hide();
-			$('#signup-form').show();
-		});
-		$('#show-login').click(function(event) {
-			event.preventDefault(); // 링크 클릭 이벤트 취소
-			$('#signup-form').hide();
-			$('#login-form').show();
-		});
-	});
-
-	
-	$(document).ready(function() {
-		$('.datepicker').datepicker({
-			dateFormat : 'yy-mm-dd', // 년-월-일 형식으로 날짜 출력
-			changeYear : true, // 년도 선택 가능하도록 설정
-			yearRange : "-100:+0", // 현재 날짜로부터 100년 전까지 선택 가능하도록 설정
-		});
-	});
-	
-	$('#register_btn').click(function(event) {		
-		event.preventDefault();
+			
+	function member(){
+							
 		if($("#profile").val()!=""){ //파일이 첨부된 경우..
 			var formData=new FormData();
 			formData.append("file", $("input[name=file]")[0].files[0]);
@@ -245,28 +156,22 @@
 			      success: function(data) {
 			    	 console.log(JSON.stringify(data));
 			        $('#profile_name').val(data);
-			        //document.signup-form.method = "post";
-			        //document.signup-form.action = "memberRegister.do";
-			        //document.signup-form.submit();
-			        $('#signup-form').attr('method', 'post');
-			        $('#signup-form').attr('action', 'memberRegister.do');
-					$('#signup-form').submit();
-					console.log('ttt');
+			        
+			        $('form').attr("action", "memberRegister.do");
+			        $('form').attr("method", "post");
+					$('form').submit();
+					
 			      },
 			      error : function(){alert("파일 업로드에 실패하였습니다");}
 			    }); // $.ajax
 		}else{
-			console.log('aaa');
-	        //document.signup-form.method = "post";
-	        //document.signup-form.action = "memberRegister.do";
-	        //document.signup-form.submit();
-	        //document.signup-form.submit();
-			//$('#signup-form').removeAttr('enctype');
-			//$('#signup-form').removeAttr('style');
-			$('#signup-form').attr('method', 'post');
-	        $('#signup-form').attr('action', 'memberRegister.do');
-			$('#signup-form').submit();
+	        $('form').attr("action", "memberRegister.do");
+	        $('form').attr("method", "post");
+			$('form').submit();
 		}
+								
+							
+							
 	}//function
 	</script>
 				</div>

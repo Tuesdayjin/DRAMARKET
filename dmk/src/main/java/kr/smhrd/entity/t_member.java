@@ -20,7 +20,7 @@ public class t_member {
     private String gender;
 
     // 생년월일. 생년월일
-    private Date birth;
+    private String birth;
     
     // 프로필 이미지
     private String profile_name;
