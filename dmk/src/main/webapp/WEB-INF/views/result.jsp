@@ -102,33 +102,18 @@
 			</div>
 		</nav>
 	</div>
-	<!-- Header-->
-	<header class="bg-dark py-5" style="background-color: #393E46;">
-		<div class="container px-5">
-			<div class="row gx-5 align-items-center justify-content-center">
-				<div class="col-lg-8 col-xl-7 col-xxl-6">
-					<div class="my-5 text-center text-xl-start">
-						<h1 class="display-5 fw-bolder text-white mb-2">A Bootstrap 5
-							template for modern businesses</h1>
-						<p class="lead fw-normal text-white-50 mb-4">Quickly design
-							and customize responsive mobile-first sites with Bootstrap, the
-							world’s most popular front-end open source toolkit!</p>
 
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</header>
 	<div class="container">
 		<div class="header">
 		</div>
 		<div class="content">
-			<div class="demo">
-				<div class="card">
-					<div id="player"></div>
+				<div class="card player-card">
+					<div id="player" style="width:100px; height:100px;"></div>
 				</div>
+				<div class="card">
 				<div id="timeline"></div>
+				</div>
+				<div id="currentTimeDisplay"></div>
 				<script>
 				var player = null;
 					$(function() {
@@ -155,9 +140,11 @@
 													'className' : 'fr.ina.amalia.player.plugins.TimelinePlugin',
 													'container' : '#timeline',
 													'parameters' : {
+														timeaxis : false,
+														toolsbar : false,
 														listOfLines : [
 														{
-															title : 'Keyframes every 2s',
+															title : '드라마 영상에 나오고 있는 상품',
 															type : 'image',
 															metadataId : '${fileName}',
 															pointNav : true
@@ -182,12 +169,14 @@
 					function onTimeChange(event, data) {
 						  var currentTime = player.getCurrentTime();
 						  console.log('Current playback time:', currentTime);
+						  
+						// 현재 재생 시간을 DIV에 출력합니다.
+						  $("#currentTimeDisplay").text("Current playback time: " + currentTime);
+				
 						}
 				</script>
 
 			</div>
 		</div>
-
-	</div>
 </body>
 </html>

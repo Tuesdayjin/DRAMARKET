@@ -11794,3 +11794,9 @@ video {
 	margin-top: 50px;
 }
 
+.player-card{
+	margin-top : 100px;
+}
+.player{
+	border-radius : 5;
+}
