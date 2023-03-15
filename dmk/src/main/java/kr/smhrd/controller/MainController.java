@@ -34,42 +34,6 @@ public class MainController {
 		return "Main";
 	}
 	
-	@GetMapping("/login.do") //login 페이지로 연결
-	public String login() {
-		return "login";
-	}
-	
-	@PostMapping("/login.do") //login 페이지로 연결 
-	public String login(t_member vo, HttpSession session) {
-		 t_member mvo = mapper.loginCheck(vo); //(회원인증매퍼)
-		 mvo.getId();
-		 if(mvo != null) {
-			 session.setAttribute("mvo", mvo);
-			 // 이때, ★★ model 에 바인딩하면 안된다..!★★
-			 // 원래 스프링에서 HttpSession session 안쓰지만 일단 여기까지만 배움
-			 // 보안에 더 안전한 방법 있는데 그거는 나중에 책보고 해보세요
-		 }
-	 return "redirect:/Main.do";
-	}
-	
-	@PostMapping("/memeberRegister.do") //login 페이지로 연결 
-	public String memeberRegister(t_member vo, HttpSession session) {
-		 t_member mvo = mapper.loginCheck(vo); //(회원인증매퍼)
-		 if(mvo != null) {
-			 session.setAttribute("mvo", mvo);
-			 // 이때, ★★ model 에 바인딩하면 안된다..!★★
-			 // 원래 스프링에서 HttpSession session 안쓰지만 일단 여기까지만 배움
-			 // 보안에 더 안전한 방법 있는데 그거는 나중에 책보고 해보세요
-		 }
-	 return "redirect:/Main.do";
-	}
-	
-	@RequestMapping("/logout.do")
-	public String logout(HttpSession session) {
-		//세션 무효화, 세션 비우기
-		session.invalidate();
-		return "redirect:/Main.do";
-	}
 	
 	@PostMapping("/uploadFile.do")
 	public String upload(@RequestParam("uploadFile") MultipartFile file, RedirectAttributes rttr) {

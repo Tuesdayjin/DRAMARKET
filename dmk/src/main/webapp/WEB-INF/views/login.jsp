@@ -134,16 +134,21 @@
 										<form id="signup-form" style="display: none;"
 											action="memeberRegister.do">
 											<div class="form-group">
-												<label for="id">아이디</label> <input type="text"
-													class="form-control" id="id">
+												<label for="id">아이디</label> 
+												<input type="text" class="form-control" name="id" id="id" >
 											</div>
 											<div class="form-group">
-												<label for="pwd">비밀번호</label> <input type="pwd"
-													class="form-control" id="pwd">
+												<label for="pwd">비밀번호</label> 
+												<input type="pwd" class="form-control" name="pwd" id="pwd">
 											</div>
 											<div class="form-group">
-												<label for="nick">닉네임</label> <input type="nick"
-													class="form-control" id="nick">
+												<label for="nick">닉네임</label> 
+												<input type="nick" class="form-control" name="nick" id="nick">
+											</div>
+											<div class="form-group">
+												<label for="nick">프로필 사진</label> 
+												<input type="file" class="form-control" name="file" id="profile">
+												<input type="hidden" class="form-control" name="profile_name" id="profile_name" value="">
 											</div>
 											<div class="form-group">
 												<label for="gender">성별</label>
@@ -165,10 +170,10 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label for="birth">생년월일</label> <input type="text"
-													class="form-control datepicker" id="birth">
+												<label for="birth">생년월일</label> 
+												<input type="text" class="form-control datepicker" name="birth" id="birth">
 											</div>
-											<button type="submit" class="btn btn-primary">계정 생성</button>
+											<button type="button" class="btn btn-primary" onclick="memberRegister()">계정 생성</button>
 											<div class="form-group">
 												<a href="#" class="link-unstyled" id="show-login">로그인으로
 													돌아가기</a>
@@ -224,6 +229,37 @@
 								yearRange : "-100:+0", // 현재 날짜로부터 100년 전까지 선택 가능하도록 설정
 							});
 						});
+						
+						
+						function memberRegister(){
+
+							if($("#profile").val()!=""){ //파일이 첨부된 경우..
+								var formData=new FormData();
+								formData.append("file", $("input[name=file]")[0].files[0]);
+							    $.ajax({
+								      url: "fileupload.do",
+								      type: "POST",
+								      data: formData,
+								      processData: false,
+								      contentType: false,
+								      success: function(data) {
+								    	 console.log(JSON.stringify(data));
+								    	$('#imgdiv').append('<img src="http://localhost:8081/boardimg/'+ data +'" id="Sample">');
+								        $('#profile_name').val(data);
+								        $('#fileform').attr('method', "post");
+								        $('#fileform').action="writeupload.do"
+								        $('#fileform').submit();
+								      },
+								      error : function(){alert("파일 업로드에 실패하였습니다");}
+								    }); // $.ajax
+							}else{ //파일이 첨부되지 않은 경우..
+								$('#fileform').attr('method', "post");
+								$('#fileform').action="writeupload.do"
+								$('#fileform').submit();
+								
+							}
+							
+						}
 					</script>
 				</div>
 			</div>

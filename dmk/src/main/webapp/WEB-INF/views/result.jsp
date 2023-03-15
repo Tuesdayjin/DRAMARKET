@@ -61,6 +61,11 @@
 	src="http://localhost:8081/flask/full/build/js/amalia.js-plugin-timeline.min.js"></script>
 <script type="text/javascript"
 	src="http://localhost:8081/flask/full/build/js/i18n/amalia.js-message-en.js"></script>
+	<style>
+		.ajs-row .ajs-control-bar {
+			display: none !important;
+		}
+	</style>
 </head>
 <body>
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
@@ -117,7 +122,7 @@
 				<script>
 				var player = null;
 					$(function() {
-
+					     
 						$("#player")
 								.mediaPlayer(
 										{
@@ -155,6 +160,8 @@
 										});
 					});
 					//영상 재생 시간 받기
+					
+			    
 					function onReady() {
 				        player = $('#player').data('fr.ina.amalia.player').getPlayer();
 				        // Set event listener on time change.

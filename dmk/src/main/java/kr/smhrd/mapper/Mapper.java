@@ -27,15 +27,22 @@ public interface Mapper {
 	@Select("select * from t_board order by indate desc")
 	public List<t_board> selecT_board();
 
+	
 	@Select("select nick from t_member where id=#{id}")
 	public String nickSelect(String id);
 
+	
 	@Select("select * from t_board where num=#{num}")
 	public t_board selectContent(long num);
 
+	
 	@Update("update t_board set views=views+1 where num=#{num}")
 	public void countUpdate(long num);
+	
 
+	@Insert("insert into t_member values (#{birth},#{gender},#{id},#{nick},#{pwd})")
+	public t_member memeberRegister(t_member vo);
+	//,#{profile_name}
 	
 	
 }
