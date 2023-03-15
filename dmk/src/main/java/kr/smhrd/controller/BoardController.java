@@ -106,7 +106,7 @@ public class BoardController { //DAO 대신 mapper 호출
 	throws ServletException, IOException{
 		
 		// 파일 저장 디렉토리 설정
-		String uploadFolder = "C:\\Users\\smhrd\\git\\DRAMARKET\\dmk\\src\\main\\webapp\\resources\\boardimg";
+		String uploadFolder = "C:\\Users\\smhrd\\git\\DRAMARKET\\dmk\\src\\main\\webapp\\resources\\img\\boardimg";
 		//String path = multipartRequest.getServletContext().getRealPath("")+File.separator+"img"; // 쌤 경로
 	    // 날짜별로 디렉토리 생성, uploadPath 설정
 	    File uploadPath = new File(uploadFolder);

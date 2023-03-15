@@ -21,5 +21,8 @@ public class t_member {
 
     // 생년월일. 생년월일
     private Date birth;
+    
+    // 프로필 이미지
+    private String profile_name;
 
 }

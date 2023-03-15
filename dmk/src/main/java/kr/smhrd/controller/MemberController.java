@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import kr.smhrd.entity.t_member;
 import kr.smhrd.mapper.Mapper;
 import kr.smhrd.util.common_util;
 
+@Controller
 public class MemberController {
 
 	
@@ -47,21 +49,27 @@ public class MemberController {
 	 return "redirect:/Main.do";
 	}
 	
-	@PostMapping("/memeberRegister.do") //회원가입 
-	public String memeberRegister(t_member vo, HttpSession session) {
-		 t_member mvo = mapper.memeberRegister(vo); //(회원인증매퍼)
-		 
-		 if(mvo != null) {
-			 session.setAttribute("mvo", mvo);
-
-		 }
-	 return "redirect:/Main.do";
-	}
 	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
 		//세션 무효화, 세션 비우기
 		session.invalidate();
+		return "redirect:/Main.do";
+	}
+	
+	@RequestMapping("/memeberRegister.do") //회원가입 
+	public String memeberRegister(t_member vo, HttpSession session) {
+		System.out.println(vo.getGender());
+		System.out.println(vo.getId());
+		System.out.println(vo.getProfile_name());
+		System.out.println(vo.getBirth());
+		mapper.memeberRegister(vo); 
+		t_member mvo = mapper.loginCheck(vo); //(회원인증매퍼)
+	
+		
+		if(mvo != null) {
+			 session.setAttribute("mvo", mvo);
+		 }
 		return "redirect:/Main.do";
 	}
 	

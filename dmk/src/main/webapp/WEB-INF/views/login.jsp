@@ -79,10 +79,10 @@
 					<div class="collapse navbar-collapse" id="navbarColor02">
 
 						<ul class="navbar-nav me-auto">
-							<li class="nav-item"><a class="nav-link " href="#">상품검색
+							<li class="nav-item"><a class="nav-link " href="Main.do">상품검색
 									<span class="visually-hidden">(current)</span>
 							</a></li>
-							<li class="nav-item"><a class="nav-link" href="boardLsit.do">게시판</a>
+							<li class="nav-item"><a class="nav-link" href="boardList.do">게시판</a>
 							</li>
 						</ul>
 					</div>
@@ -117,12 +117,12 @@
 										<h2 class="cardTitle">로그인</h2>
 										<form id="login-form" action="login.do" method="post">
 											<div class="form-group">
-												<label for="id">아이디</label> <input type="id"
-													class="form-control" name="id">
+												<label for="id">아이디</label> 
+												<input type="id" class="form-control" name="id">
 											</div>
 											<div class="form-group">
-												<label for="pwd">비밀번호</label> <input type="pwd"
-													class="form-control" name="pwd">
+												<label for="pwd">비밀번호</label> 
+												<input type="pwd" class="form-control" name="pwd">
 											</div>
 											<button type="submit" class="btn btn-primary">로그인</button>
 											<div class="form-group">
@@ -131,8 +131,7 @@
 										</form>
 
 
-										<form id="signup-form" style="display: none;"
-											action="memeberRegister.do">
+										<form id="signup-form" style="display: none;" enctype="multipart/form-data">
 											<div class="form-group">
 												<label for="id">아이디</label> 
 												<input type="text" class="form-control" name="id" id="id" >
@@ -237,25 +236,25 @@
 								var formData=new FormData();
 								formData.append("file", $("input[name=file]")[0].files[0]);
 							    $.ajax({
-								      url: "fileupload.do",
+								      url: "profileupload.do",
 								      type: "POST",
 								      data: formData,
 								      processData: false,
 								      contentType: false,
 								      success: function(data) {
 								    	 console.log(JSON.stringify(data));
-								    	$('#imgdiv').append('<img src="http://localhost:8081/boardimg/'+ data +'" id="Sample">');
+								    	//$('#imgdiv').append('<img src="http://localhost:8081/boardimg/'+ data +'" id="Sample">');
 								        $('#profile_name').val(data);
-								        $('#fileform').attr('method', "post");
-								        $('#fileform').action="writeupload.do"
-								        $('#fileform').submit();
+								        $('#signup-form').attr('method', "post");
+								        $('#signup-form').attr('action', "memeberRegister.do");
+								        $('#signup-form').submit();
 								      },
 								      error : function(){alert("파일 업로드에 실패하였습니다");}
 								    }); // $.ajax
 							}else{ //파일이 첨부되지 않은 경우..
-								$('#fileform').attr('method', "post");
-								$('#fileform').action="writeupload.do"
-								$('#fileform').submit();
+								$('#signup-form').attr('method', "post");
+								$('#signup-form').attr('action', "memeberRegister.do");
+								$('#signup-form').submit();
 								
 							}
 							

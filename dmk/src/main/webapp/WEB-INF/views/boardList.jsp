@@ -181,7 +181,7 @@ const writeBtn = document.getElementById('writebtn');
 // 클릭 이벤트 처리
 writeBtn.addEventListener('click', () => {
   // 이동할 페이지 URL 설정
-  const url = '/boardInsert.jsp';
+  const url = 'boardInsert.do';
 
   // 현재 창에서 페이지 이동
   window.location.href = url;

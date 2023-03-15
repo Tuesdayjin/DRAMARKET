@@ -41,7 +41,7 @@ public interface Mapper {
 	
 
 	@Insert("insert into t_member values (#{birth},#{gender},#{id},#{nick},#{pwd})")
-	public t_member memeberRegister(t_member vo);
+	public void memeberRegister(t_member vo);
 	//,#{profile_name}
 	
 	

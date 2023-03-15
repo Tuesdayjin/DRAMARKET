@@ -73,8 +73,8 @@
 								</li>
 							</c:if>
 							<c:if test="${empty mvo}">
-								<li class="nav-item"><a class="nav-link"
-									href="${cpath}/login.do">로그인</a></li>
+								<li class="nav-item">
+								<a class="nav-link" data-href="login">로그인</a></li>
 							</c:if>
 						</ul>
 					</div>

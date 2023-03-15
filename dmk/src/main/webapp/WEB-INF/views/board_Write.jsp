@@ -80,14 +80,14 @@ function register(){
 		    	$('#imgdiv').append('<img src="http://localhost:8081/boardimg/'+ data +'" id="Sample">');
 		        $('#img_name').val(data);
 		        $('#fileform').attr('method', "post");
-		        $('#fileform').action="writeupload.do"
+		        $('#fileform').action="writeaddfile.do";
 		        $('#fileform').submit();
 		      },
 		      error : function(){alert("파일 업로드에 실패하였습니다");}
 		    }); // $.ajax
 	}else{ //파일이 첨부되지 않은 경우..
 		$('#fileform').attr('method', "post");
-		$('#fileform').action="writeupload.do"
+		$('#fileform').action="write.do";
 		$('#fileform').submit();
 		
 	}
