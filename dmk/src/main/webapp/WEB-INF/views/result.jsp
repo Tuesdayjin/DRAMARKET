@@ -122,21 +122,25 @@
 	</header>
 	<div class="container">
 		<div class="header">
-			<h1>Plugin timeline</h1>
 		</div>
 		<div class="content">
 			<div class="demo">
-				<div style="height: 350px;">
-					<div id="defaultPlayer"></div>
+				<div class="card">
+					<div id="player"></div>
 				</div>
 				<div id="timeline"></div>
 				<script>
+				var player = null;
 					$(function() {
-						$("#defaultPlayer")
+
+						$("#player")
 								.mediaPlayer(
 										{
 											autoplay : false,
 											src : "http://localhost:8081/flask/upload/${fileName}.mp4",
+											 callbacks: {
+									                onReady: 'onReady'
+									            },
 											controlBar : {
 												sticky : true
 											},
@@ -152,7 +156,6 @@
 													'container' : '#timeline',
 													'parameters' : {
 														listOfLines : [
-
 														{
 															title : 'Keyframes every 2s',
 															type : 'image',
@@ -164,6 +167,22 @@
 											}
 										});
 					});
+					//영상 재생 시간 받기
+					function onReady() {
+				        player = $('#player').data('fr.ina.amalia.player').getPlayer();
+				        // Set event listener on time change.
+				        $('#player').on('fr.ina.amalia.player.PlayerEventType.TIME_CHANGE', onTimeChange);
+				    }
+					
+					function playVideo() {
+				        if (player !== null) {
+				            player.play();
+				        }
+				    }
+					function onTimeChange(event, data) {
+						  var currentTime = player.getCurrentTime();
+						  console.log('Current playback time:', currentTime);
+						}
 				</script>
 
 			</div>
