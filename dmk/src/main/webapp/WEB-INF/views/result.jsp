@@ -63,9 +63,9 @@
 	src="http://localhost:8081/flask/full/build/js/amalia.js-plugin-timeline.min.js"></script>
 <script type="text/javascript"
 	src="http://localhost:8081/flask/full/build/js/i18n/amalia.js-message-en.js"></script>
-<<<<<<< HEAD
-<style>
-    .predict-card{
+
+	<style>
+	   .predict-card{
 display: flex;
   overflow-x: auto;
   border-radius= 10;
@@ -85,14 +85,7 @@ display: flex;
       border-radius: 10px;
       box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
     }
-    </style>   
-=======
-	<style>
-		.ajs-row .ajs-control-bar {
-			display: none !important;
-		}
-		
-		
+
 		.modal {
   display: none;
   position: fixed;
@@ -128,7 +121,7 @@ display: flex;
 		
 		
 	</style>
->>>>>>> branch 'main' of https://github.com/Tuesdayjin/DRAMARKET.git
+
 </head>
 <body>
 <%Object ob = new JSONParser().parse(new FileReader("C:\\dmkServer\\pyscene\\result\\" + request.getAttribute("fileName") + "-array.json"));
@@ -143,10 +136,26 @@ double[] timeArr = new double[json_time.size()];
 for(int i=0; i<json_time.size(); i++) {
     timeArr[i] = (double) json_time.get(i);
     }
-
-String directory = "C:\\dmkServer\\pyscene\\" + request.getAttribute("fileName");
-File dir = new File(directory);
-%>
+File[] topDir = new File[nameArr.length];
+for(int i=0; i<nameArr.length; i++) {
+	String topPath = "C:\\dmkServer\\yolov5\\runs\\detect\\" + request.getAttribute("fileName") + "\\" + nameArr[i].split("\\.")[0] + "\\crops\\top";
+    topDir[i] = new File(topPath);
+}
+File[] bottomDir = new File[nameArr.length];
+for(int i=0; i<nameArr.length; i++) {
+	String bottomPath = "C:\\dmkServer\\yolov5\\runs\\detect\\" + request.getAttribute("fileName") + "\\" + nameArr[i].split("\\.")[0] + "\\crops\\bottom";
+    bottomDir[i] = new File(bottomPath);
+}
+File[] dressDir = new File[nameArr.length];
+for(int i=0; i<nameArr.length; i++) {
+	String dressPath = "C:\\dmkServer\\yolov5\\runs\\detect\\" + request.getAttribute("fileName") + "\\" + nameArr[i].split("\\.")[0] + "\\crops\\dress";
+    dressDir[i] = new File(dressPath);
+}
+File[] bagDir = new File[nameArr.length];
+for(int i=0; i<nameArr.length; i++) {
+	String bagPath = "C:\\dmkServer\\yolov5\\runs\\detect\\" + request.getAttribute("fileName") + "\\" + nameArr[i].split("\\.")[0] + "\\crops\\bag";
+    bagDir[i] = new File(bagPath);
+}%>
 
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
@@ -193,19 +202,9 @@ File dir = new File(directory);
 		<div class="content">
 				<div class="card player-card">
 					<div id="player"></div>
-					<div id="timeline"></div>
 				</div>
-<<<<<<< HEAD
-				
-				<!--현재 재생시간 출력<div id="currentTimeDisplay"></div> -->
-				<button class="btn" id="captureImageButton">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
-  <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
-  <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
-</svg>
-				</button>
-				<img id="capturedImage" style="width:100px; height:100px;"/>
-=======
+					<div id="timeline"></div>
+
 				<div class="card">
 				<div id="timeline"></div>
 				</div>
@@ -213,7 +212,12 @@ File dir = new File(directory);
 				
 				<!-- 캡쳐버튼 로그인 검증  <c:if test="${!empty mvo}">  
 				</c:if>  -->
-				<button id="captureImageButton" onclick="openModal()">캡쳐</button>
+				<button id="captureImageButton" onclick="openModal()" class="btn">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+  <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+  <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+</svg>
+				</button>
 				
 
 				<div id="myModal" class="modal">
@@ -261,7 +265,6 @@ File dir = new File(directory);
 				
 				
 
->>>>>>> branch 'main' of https://github.com/Tuesdayjin/DRAMARKET.git
 				<script>
 				
 				var player = null;
@@ -419,18 +422,78 @@ File dir = new File(directory);
 				
 <%for(int i=0; i<nameArr.length; i++) {%>
 <div class="predict_content<%=i%> predict-card" style="display:none;">
-<div class="objImg">
-<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/top/<%=nameArr[i]%>'/>
-</div> 
-<div class="objImg">
-<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bottom/<%=nameArr[i]%>'/>
-</div>
-<div class="objImg"> 
-<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/dress/<%=nameArr[i]%>'/>
-</div>
-<div class="objImg"> 
-<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bag/<%=nameArr[i]%>'/> 
- </div>
+<%
+try {
+    if (topDir[i] != null) {
+        for(int j=0; j<topDir[i].list().length; j++) {
+            // 이미지 출력 코드%>
+            <div class="objImg">
+      		  	<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/top/<%=topDir[i].list()[j]%>'/>
+	        </div> 
+        <%}
+    } else {
+        // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
+        // 또는 예외 처리를 위한 예외 발생
+        throw new Exception("topDir[i] 객체가 null입니다.");
+    }
+} catch (Exception e) {
+    // 예외 처리 코드
+    // 예외 메시지 출력, 로그 기록 등
+}
+
+try {
+    if (bottomDir[i] != null) {
+        for(int j=0; j<bottomDir[i].list().length; j++) {
+            // 이미지 출력 코드%>
+            <div class="objImg">
+      		  	<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bottom/<%=bottomDir[i].list()[j]%>'/>
+	        </div> 
+        <%}
+    } else {
+        // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
+        // 또는 예외 처리를 위한 예외 발생
+        throw new Exception("bottomDir[i] 객체가 null입니다.");
+    }
+} catch (Exception e) {
+    // 예외 처리 코드
+    // 예외 메시지 출력, 로그 기록 등
+}
+
+try {
+    if (dressDir[i] != null) {
+        for(int j=0; j<dressDir[i].list().length; j++) {
+            // 이미지 출력 코드%>
+            <div class="objImg">
+      		  	<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/dress/<%=dressDir[i].list()[j]%>'/>
+	        </div> 
+        <%}
+    } else {
+        // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
+        // 또는 예외 처리를 위한 예외 발생
+        throw new Exception("dressDir[i] 객체가 null입니다.");
+    }
+} catch (Exception e) {
+    // 예외 처리 코드
+    // 예외 메시지 출력, 로그 기록 등
+}
+
+try {
+    if (bagDir[i] != null) {
+        for(int j=0; j<bagDir[i].list().length; j++) {
+            // 이미지 출력 코드%>
+            <div class="objImg">
+      		  	<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bag/<%=bagDir[i].list()[j]%>'/>
+	        </div> 
+        <%}
+    } else {
+        // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
+        // 또는 예외 처리를 위한 예외 발생
+        throw new Exception("bagDir[i] 객체가 null입니다.");
+    }
+} catch (Exception e) {
+    // 예외 처리 코드
+    // 예외 메시지 출력, 로그 기록 등
+}%>
  
 <input type="hidden" class="start_time<%=i%>" value="<%=timeArr[i]%>">
 <input type="hidden" class="end_time<%=i%>" value="<%=timeArr[i+1]%>">
