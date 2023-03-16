@@ -40,6 +40,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.mysql.cj.util.Util;
 
 import kr.smhrd.entity.t_board;
+import kr.smhrd.entity.t_member;
 import kr.smhrd.mapper.Mapper;
 import kr.smhrd.util.common_util;
 
@@ -54,6 +55,7 @@ public class BoardController { //DAO 대신 mapper 호출
 		
 		List<t_board> list = mapper.selecT_board();
 		model.addAttribute("list",list);
+		
 		
 		return "boardList";
 	}
@@ -73,8 +75,11 @@ public class BoardController { //DAO 대신 mapper 호출
 		System.out.println(vo.getImg_name());
 		System.out.println(vo.getId());
 		System.out.println(vo.getTitle());
-		String nick=mapper.nickSelect(vo.getId()); //작성자 닉네임 가져오기
-		vo.setNick(nick);
+		
+		t_member writerVO=mapper.memberById(vo.getId());  //작성자 vo 가져오기
+		vo.setNick(writerVO.getNick());  // 게시글에 작성자 닉네임 추가 
+		vo.setNick(writerVO.getProfile_name());  // 게시글에 작성자 프로필 이미지 패스 추가
+		
 		vo.setIndate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
 		mapper.insertWriteaddfile(vo);
 		
@@ -90,8 +95,9 @@ public class BoardController { //DAO 대신 mapper 호출
 		System.out.println(vo.getId());
 		System.out.println(vo.getTitle());
 		
-		String nick=mapper.nickSelect(vo.getId()); //작성자 닉네임 가져오기
-		vo.setNick(nick);
+		t_member writerVO=mapper.memberById(vo.getId());  //작성자 vo 가져오기
+		vo.setNick(writerVO.getNick());  // 게시글에 작성자 닉네임 추가 
+		vo.setNick(writerVO.getProfile_name());  // 게시글에 작성자 프로필 이미지 패스 추가
 		
 		vo.setIndate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
 		mapper.insertWrite(vo);

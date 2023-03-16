@@ -1,3 +1,4 @@
+<%@page import="kr.smhrd.entity.t_member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -96,7 +97,7 @@
                 </div>
             </div>
             
-        </div>
+        </div> 
     </div>
 </header>
 <section class="py-5">
@@ -105,7 +106,9 @@
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-xl-start">
                     <form id="fileform" enctype="multipart/form-data" >
-						<input type="hidden" name="id" id="id" value="id 01">
+                   <% t_member mvo = (t_member)(session.getAttribute("mvo"));
+                      String id = mvo.getId(); %> 
+						<input type="hidden" name="id" id="id"  value="<% id %>"/>
                         <div class="row btnDiv">
                             <button type="button" onclick="register()" class="btn btn-primary"><i class="bi bi-pencil"></i>글쓰기</button>
                         </div> 
@@ -158,6 +161,8 @@
 
 
 <script type="text/javascript">
+var id = $('#id').val();
+consol.log(id)
 function register(){
 
 	if($("#file").val()!=""){ //파일이 첨부된 경우..
@@ -185,6 +190,7 @@ function register(){
 		$('#fileform').submit();
 		
 	}
+
 	
 }
 </script>

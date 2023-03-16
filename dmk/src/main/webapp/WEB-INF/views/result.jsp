@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="org.json.simple.JSONObject" %>
+<%@ page import="org.json.simple.JSONArray" %>
+<%@ page import="org.json.simple.parser.JSONParser" %>
+<%@ page import="java.io.FileReader" %>
+<%@ page import="java.io.File" %>
 <c:set var="cpath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
@@ -68,6 +73,22 @@
 	</style>
 </head>
 <body>
+<%Object ob = new JSONParser().parse(new FileReader("C:\\Users\\SMHRD\\dmkFlask\\pyscene\\result\\" + request.getAttribute("fileName") + "-array.json"));
+JSONObject js = (JSONObject) ob;
+JSONArray json_name = (JSONArray) js.get("name");
+JSONArray json_time = (JSONArray) js.get("time");
+String[] nameArr = new String[json_name.size()];
+for(int i=0; i<json_name.size(); i++) {
+    nameArr[i] = (String) json_name.get(i);
+    }
+double[] timeArr = new double[json_time.size()];
+for(int i=0; i<json_time.size(); i++) {
+    timeArr[i] = (double) json_time.get(i);
+    }
+
+String directory = "C:\\Users\\SMHRD\\dmkFlask\\pyscene\\" + request.getAttribute("fileName");
+File dir = new File(directory);
+%>
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
 	
@@ -181,30 +202,28 @@
 				            player.play();
 				        }
 				    }
-					var times=[]
-					$.getJSON('http://localhost:8081/flask/pyscene/result/${fileName}.json', function(data) {
-
-						for(i in data){
-							times.push(data[i].tc)
-								}
-						    });
-					
 					function onTimeChange(event, data) {
 						  var currentTime = player.getCurrentTime();
+
+						  <%for(int i=0; i<nameArr.length; i++) {%>
+						  
+						  var start_time<%=i%> = $('.start_time<%=i%>').val();
+						  var end_time<%=i%> = $('.end_time<%=i%>').val();
+						  
+						  if (currentTime >= start_time<%=i%> && currentTime < end_time<%=i%>) {
+							  $('.predict_content<%=i%>').removeAttr('style');
+						  }else {
+							  $('.predict_content<%=i%>').attr('style','display:none');
+						  }
+						  <%}%>
+						  
 						  console.log('Current playback time:', currentTime);
 						  
 						// 현재 재생 시간을 DIV에 출력합니다.
 						  $("#currentTimeDisplay").text("Current playback time: " + currentTime);
-						var cnt=0
-							for(i in times){
-								
-						if(currentTime==i){
-							consol.log("출력 시간 : " + i);
-							}
-							
+						
+
 						}
-					}
-					
 					function captureImage() {
 						// Get the video element from the player
 						  var videoElement = $('video', '#player')[0];
@@ -223,21 +242,23 @@
 					        // Set the captured image as the src of the img element
 					        $('#capturedImage').attr('src', imageDataUrl);
 					}
-					
-					
-	                  $('.content').click(function() {
-	  		for(int i=0; )
-	                         // JSON 파일 불러오기
-	                         $.getJSON(`http://localhost:8081/flask/pyscene/result/${fileName}.json`, function(data) {
-	                           // thumb 값을 콘솔에 출력
-	                           console.log('tc value:', data.localisation[0].sublocalisations.localisation[3].tc);
-	                         });
-	                         console.log('${fileName}');
-	                       });
 				</script>
-				
-				
-
+<%for(int i=0; i<nameArr.length; i++) {%>
+<div class="predict_content<%=i%>" style="display:none;">
+<br>top<br>
+<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/top/<%=nameArr[i]%>'/>
+<br>bottom<br>
+<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bottom/<%=nameArr[i]%>'/>
+<br>dress<br>
+<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/dress/<%=nameArr[i]%>'/>
+<br>bag<br>
+<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bag/<%=nameArr[i]%>'/>
+<br>time<br>
+<input class="start_time<%=i%>" value="<%=timeArr[i]%>">
+<input class="end_time<%=i%>" value="<%=timeArr[i+1]%>">
+<br>
+</div>
+<%}%>
 			</div>
 		</div>
 </body>

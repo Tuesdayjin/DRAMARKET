@@ -155,7 +155,7 @@
 									<div class="d-flex align-items-end justify-content-between">
 										<div class="d-flex align-items-center">
 											<img class="rounded-circle me-3"
-												src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+												src="http://localhost:8081/profile/profile_${board_vo.profile_name}" alt="..." />
 											<div class="small">
 												<div class="fw-bold">${board_vo.nick}</div>
 												<div class="text-muted">

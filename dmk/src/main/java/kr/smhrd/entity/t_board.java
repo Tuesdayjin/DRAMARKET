@@ -30,5 +30,9 @@ public class t_board {
     
     // 닉네임. 닉네임
     private String nick;
+    
+    // 프로필 이미지 
+    private String profile_name;
+
 
 }
