@@ -71,7 +71,7 @@ public class BoardController { //DAO 대신 mapper 호출
 	//글 + 첨부파일 insert
 	@RequestMapping(value = "/writeaddfile.do", method= RequestMethod.POST)
 	public String writeaddfile(t_board vo) {
-		
+		System.out.println("1번) 이미지는 : "+vo.getImg_name());
 		String id=vo.getId();
 		t_member writerVO=mapper.memberById(id);  //작성자 vo 가져오기
 		System.out.println(writerVO.getNick());
@@ -79,6 +79,7 @@ public class BoardController { //DAO 대신 mapper 호출
 		vo.setProfile_name(writerVO.getProfile_name());  // 게시글에 작성자 프로필 이미지 패스 추가
 		
 		vo.setIndate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
+		System.out.println("2번)이미지는 : "+vo.getImg_name());
 		mapper.insertWriteaddfile(vo);
 		
 		return "redirect:/boardList.do";
@@ -162,8 +163,8 @@ public class BoardController { //DAO 대신 mapper 호출
 		
 		// 조회수 누적
 		mapper.countUpdate(num); 
-		
 		t_board board_vo = mapper.selectContent(num);
+		System.out.println("이미지 파일:"+board_vo.getImg_name());
 		model.addAttribute("board_vo",board_vo);
 		
 		return "boardContent";

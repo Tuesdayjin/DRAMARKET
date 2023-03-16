@@ -64,7 +64,7 @@
 <script type="text/javascript"
 	src="http://localhost:8081/flask/full/build/js/i18n/amalia.js-message-en.js"></script>
 
-	<style>
+<style>
 	        .content {
             display: flex;
             justify-content: center;
@@ -227,7 +227,7 @@ for(int i=0; i<nameArr.length; i++) {
 		</nav>
 	</div>
 
-	<div class="container">
+<div class="container">
 		<div class="header">
 		</div>
 		<div class="content">
@@ -252,12 +252,16 @@ for(int i=0; i<nameArr.length; i++) {
 </svg>
 				</button>
 				
+
 				<div id="myModal" class="modal">
-				  <div class="modal-content" style="width:800px;">
+				  <div class="modal-content">
+	<section class="py-5">
+    <div class="container px-5">
         <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-xl-start">
                     <form id="fileform" enctype="multipart/form-data" >
+
 						<input type="hidden" name="id" id="id"  value="${mvo.id}"/>
                       <div class="card shadow border-0" style="background-color: #EEEEEE;">
                       
@@ -269,19 +273,34 @@ for(int i=0; i<nameArr.length; i++) {
                         </div>
                         <div class="card-footer p-4 pt-0 bg-transparent border-top-0" style="background-color: #EEEEEE;">
 						<img id="capturedImage" style="width:100px; height:100px;"/>
+						<input type="hidden" id="img_name" name="img_name" value="">
                         </div>
                       </div>
                         <div class="row btnDiv">
                             <button type="button" onclick="register()" class="btn btn-primary"><i class="bi bi-pencil"></i>글쓰기</button>
                         </div> 
+                      
                     </form>
                   </div>
                 </div>
+
             </div>
+        </div>
+
     </div>
+</section>	
   </div>
-		
+</div>			
+					
+
+				
+				
+				
+				
+				
+
 				<script>
+				
 				var player = null;
 					$(function() {
 					     
@@ -310,7 +329,7 @@ for(int i=0; i<nameArr.length; i++) {
 														timeaxis : false,
 														listOfLines : [
 														{
-															title : 'AI가 분석한 상품이 있는 장면입니다',
+															title : '드라마 영상에 나오고 있는 상품',
 															type : 'image',
 															metadataId : '${fileName}',
 															pointNav : true,
@@ -410,9 +429,11 @@ for(int i=0; i<nameArr.length; i++) {
 						
 						
 						function register(){
+							
+						    	var file = base64toFile($('#capturedImage').attr('src'), 'capture.png');  
 
 								var formData=new FormData();
-								formData.append("img_name", $("#capturedImage"));
+								formData.append("file", file);
 							    $.ajax({
 								      url: "fileupload.do",
 								      type: "POST",
@@ -421,7 +442,6 @@ for(int i=0; i<nameArr.length; i++) {
 								      contentType: false,
 								      success: function(data) {
 								    	 console.log(JSON.stringify(data));
-								    	//$('#imgdiv').append('<img src="http://localhost:8081/boardimg/'+ data +'" id="Sample">');
 								        $('#img_name').val(data);
 								        $('#fileform').attr('method', "post");
 								        $('#fileform').attr('action', "writeaddfile.do");
@@ -431,6 +451,18 @@ for(int i=0; i<nameArr.length; i++) {
 								    }); // $.ajax
 							}			
 		
+					// base64 이미지 -> File 객체로 변환하는 함수
+						function base64toFile(base_data, filename) {
+						    var arr = base_data.split(','),
+						        mime = arr[0].match(/:(.*?);/)[1],
+						        bstr = atob(arr[1]),
+						        n = bstr.length,
+						        u8arr = new Uint8Array(n);
+						    while(n--){
+						        u8arr[n] = bstr.charCodeAt(n);
+						    }
+						    return new File([u8arr], filename, {type:mime});
+						}
 				</script>
 				
 <%for(int i=0; i<nameArr.length; i++) {%>

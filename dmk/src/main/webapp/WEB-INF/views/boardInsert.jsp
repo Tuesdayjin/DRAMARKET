@@ -111,9 +111,9 @@
                 <div class="my-5 text-xl-start">
                     <form id="fileform" enctype="multipart/form-data" >
 
-						<input type="hidden" name="id" id="id"  value="${mvo.id}"/>
                       <div class="card shadow border-0" style="background-color: #EEEEEE;">
                         <div class="card-header" style="margin-top: 10px;">
+						 <input type="hidden" name="id" id="id"  value="${mvo.id}"/>
                           <input name="title" type="text" class="form-control" placeholder="글 제목" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         <div class="card-body p-4">

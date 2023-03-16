@@ -17,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -130,4 +132,25 @@ public class MemberController {
 		
 		return null;
 	}
+	@RequestMapping(value="/IdCheckService.do", method= RequestMethod.POST)
+	public String IdCheckService(t_member vo,HttpServletResponse response) throws ServletException, IOException{
+		
+			
+		t_member mvo= mapper.memberById(vo.getId());
+				
+				if(mvo != null) {
+					System.out.println("중복된 회원이 존재함");
+					response.setContentType("text/html;charset=utf-8");
+					response.getWriter().print("NO");
+				}else {
+					System.out.println("중복된 회원이 존재하지 않음");
+					response.setContentType("text/html;charset=utf-8");
+					response.getWriter().print("OK");
+
+				}
+				
+		return null;
+	}
+	
+	
 }

@@ -135,15 +135,18 @@
 										<form id="signup-form" style="display: none;" enctype="multipart/form-data">
 											<div class="form-group">
 												<label for="id">아이디</label> 
-												<input type="text" class="form-control" name="id" id="joinid" >
+												<input type="text" class="form-control" name="id" id="joinid" placeholder='6~16 자리의 영어,숫자' class="patternCheck" pattern="^[A-Za-z0-9_-]{6,16}$" required>
+												<button type="button" id="idCheck" onclick="id_Check()">중복확인</button><br>
 											</div>
 											<div class="form-group">
 												<label for="pwd">비밀번호</label> 
-												<input type="pwd" class="form-control" name="pwd" id="joinpwd">
+												<input type="pwd" class="form-control patternCheck" name="pwd" id="joinpwd" pattern="^[A-Za-z\d$@$!%*#?&]{4,16}$" required>
+												<label for="pwd">비밀번호 재확인</label> 
+												<input type="pwd" class="form-control patternCheck" name="pwdCheck" id="joinpwdCheck" pattern="^[A-Za-z\d$@$!%*#?&]{4,16}$" required>
 											</div>
 											<div class="form-group">
 												<label for="nick">닉네임</label> 
-												<input type="nick" class="form-control" name="nick" id="joinnick">
+												<input type="nick" class="form-control" name="nick" id="joinnick" placeholder="2~8글자(특수문자,공백불가)" pattern="^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,8}$" required>
 											</div>
 											<div class="form-group">
 												<label for="nick">프로필 사진</label> 
@@ -343,6 +346,63 @@
         }); // end submit()
     }); // end ready()
 
+
+	$(document).ready(function() {
+		$('#idCheck').click(function() {
+        var id = $('#joinid').val(); // input_id에 입력되는 값
+        var idRegExp = /^[a-zA-z0-9]{6,16}$/; //아이디 유효성 검사
+        console.log(id);
+        
+        if(id == "" ){
+          	Swal.fire({
+                  icon: '',
+                  title: '',
+                  text: '아이디를 입력해 주세요.',
+                  confirmButtonColor: '#FFD35F'
+              });
+          }else if(!idRegExp.test(id)){
+            	Swal.fire({
+                    icon: '',
+                    title: '',
+                    text: '영문 대소문자와 숫자 6~16자리로 입력해주세요',
+                    confirmButtonColor: '#FFD35F'
+                });
+          }else{
+        	  
+        $.ajax({
+           url : "IdCheckService.do",
+           type : "post",
+           data : {"id": id},
+           success : function(data){
+        	   console.log("통신 성공");
+              if(data == "OK" && idRegExp.test(id) ){
+              	Swal.fire({
+                      icon: 'success',
+                      title: '',
+                      text: '중복되지 않은 아이디입니다.',
+                      confirmButtonColor: '#FFD35F'
+                  });
+              } else{
+              	Swal.fire({
+                      icon: 'error',
+                      title: '',
+                      text: '이미 사용중인 아이디입니다.',
+                      confirmButtonColor: '#FFD35F'
+                  });
+              } 
+           },//통신 성공
+           error : function(){
+               console.log("통신실패");
+           }//통신 실패
+        })//ajax
+          }
+        
+        
+         
+	     });
+     });
+    
+    
     
 	</script>
 				</div>
