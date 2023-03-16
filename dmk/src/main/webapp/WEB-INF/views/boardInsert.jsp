@@ -192,8 +192,6 @@ function register(){
 		$('#fileform').submit();
 		
 	}
-	var id = $('#id').val();
-	consol.log(id)
 	
 }
 </script>
