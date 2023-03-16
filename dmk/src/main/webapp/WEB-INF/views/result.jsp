@@ -240,6 +240,7 @@ for(int i=0; i<nameArr.length; i++) {
                         </div>
                         <div class="card-footer p-4 pt-0 bg-transparent border-top-0" style="background-color: #EEEEEE;">
 						<img id="capturedImage" style="width:100px; height:100px;"/>
+						<input type="hidden" id="img_name" name="img_name" value="">
                         </div>
                       </div>
                         <div class="row btnDiv">
@@ -395,9 +396,11 @@ for(int i=0; i<nameArr.length; i++) {
 						
 						
 						function register(){
+							
+						    	var file = base64toFile($('#capturedImage').attr('src'), 'capture.png');  
 
 								var formData=new FormData();
-								formData.append("img_name", $("#capturedImage"));
+								formData.append("file", file);
 							    $.ajax({
 								      url: "fileupload.do",
 								      type: "POST",
@@ -406,7 +409,6 @@ for(int i=0; i<nameArr.length; i++) {
 								      contentType: false,
 								      success: function(data) {
 								    	 console.log(JSON.stringify(data));
-								    	//$('#imgdiv').append('<img src="http://localhost:8081/boardimg/'+ data +'" id="Sample">');
 								        $('#img_name').val(data);
 								        $('#fileform').attr('method', "post");
 								        $('#fileform').attr('action', "writeaddfile.do");
@@ -416,8 +418,18 @@ for(int i=0; i<nameArr.length; i++) {
 								    }); // $.ajax
 							}			
 		
-					
-					
+					// base64 이미지 -> File 객체로 변환하는 함수
+						function base64toFile(base_data, filename) {
+						    var arr = base_data.split(','),
+						        mime = arr[0].match(/:(.*?);/)[1],
+						        bstr = atob(arr[1]),
+						        n = bstr.length,
+						        u8arr = new Uint8Array(n);
+						    while(n--){
+						        u8arr[n] = bstr.charCodeAt(n);
+						    }
+						    return new File([u8arr], filename, {type:mime});
+						}
 				</script>
 				
 <%for(int i=0; i<nameArr.length; i++) {%>

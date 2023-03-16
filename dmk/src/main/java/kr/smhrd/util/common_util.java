@@ -40,7 +40,7 @@ public class common_util {
 	            BufferedImage thumbnailImage = Scalr.resize(originalImage, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_WIDTH, 384);
 	            ImageIO.write(thumbnailImage, extension.substring(1), thumbnailFile);
 	        } catch (Exception error) {
-	            System.out.println(error.getMessage());
+	            System.out.println("썸네일 실패");
 	        }
 	    }
 	    
