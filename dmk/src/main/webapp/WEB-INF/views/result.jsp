@@ -544,6 +544,57 @@ try {
 <input type="hidden" class="end_time<%=i%>" value="<%=timeArr[i+1]%>">
 </div>
 <%}%>
+<form method="post" id = "search_form">
+	<input id="search_img" name="img_path" value="">
+	<input type="submit" id="search_btn">
+</form>
+<div id="search">
+
+</div>
+
+         </div>
+      </div>
+<script type="text/javascript">
+   $(function() {
+      $(".objImg img").click(function() {
+       var imgpath = $(this).attr('src');
+       imgpath = 'C:/dmkServer/' + imgpath.split('flask/')[1];
+       $("#search_img").val(imgpath);
+       })
+   });
+       
+   $(function() {
+      $("#search_btn").on("click", function(event) {
+          event.preventDefault();
+          var form = $('#search_form')[0];
+          var data = new FormData(form);
+          $.ajax({
+              url : "http://127.0.0.1:5001/seek",
+              async : true,
+              type : "POST",
+              data: data,
+              processData : false,
+              contentType : false,
+              cache : false,
+              timeout : 600000,
+              success : function(data) {
+                  console.log(data)                  
+                  var html = "";
+					 for (var i = 0; i < 3; i++) {					
+						html += '	<img src="' + data['image'][i] + '">';
+						html += "	<h2>"+'<a href="' + data['link'][i] + '">'+data['text'][i]+"</a>"+"</h2>";				
+					}					
+					$('#search').html(html);
+              },
+              error : function(e) {
+                  console.log("ERROR : ", e);
+                  alert("fail");
+              }
+          });
+
+      })
+   });
+</script> 
 
 			</div>
 		</div>
