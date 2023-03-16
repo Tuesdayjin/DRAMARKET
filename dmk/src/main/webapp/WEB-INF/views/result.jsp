@@ -63,6 +63,7 @@
 	src="http://localhost:8081/flask/full/build/js/amalia.js-plugin-timeline.min.js"></script>
 <script type="text/javascript"
 	src="http://localhost:8081/flask/full/build/js/i18n/amalia.js-message-en.js"></script>
+<<<<<<< HEAD
 <style>
     .predict-card{
 display: flex;
@@ -85,6 +86,49 @@ display: flex;
       box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
     }
     </style>   
+=======
+	<style>
+		.ajs-row .ajs-control-bar {
+			display: none !important;
+		}
+		
+		
+		.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background-color: rgba(0,0,0,0);
+  margin: 15% auto;
+  padding: 20px;
+  width: 80%;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+		
+		
+	</style>
+>>>>>>> branch 'main' of https://github.com/Tuesdayjin/DRAMARKET.git
 </head>
 <body>
 <%Object ob = new JSONParser().parse(new FileReader("C:\\dmkServer\\pyscene\\result\\" + request.getAttribute("fileName") + "-array.json"));
@@ -151,6 +195,7 @@ File dir = new File(directory);
 					<div id="player"></div>
 					<div id="timeline"></div>
 				</div>
+<<<<<<< HEAD
 				
 				<!--현재 재생시간 출력<div id="currentTimeDisplay"></div> -->
 				<button class="btn" id="captureImageButton">
@@ -160,7 +205,65 @@ File dir = new File(directory);
 </svg>
 				</button>
 				<img id="capturedImage" style="width:100px; height:100px;"/>
+=======
+				<div class="card">
+				<div id="timeline"></div>
+				</div>
+				<div id="currentTimeDisplay"></div>
+				
+				<!-- 캡쳐버튼 로그인 검증  <c:if test="${!empty mvo}">  
+				</c:if>  -->
+				<button id="captureImageButton" onclick="openModal()">캡쳐</button>
+				
+
+				<div id="myModal" class="modal">
+				  <div class="modal-content">
+	<section class="py-5">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                <div class="my-5 text-xl-start">
+                    <form id="fileform" enctype="multipart/form-data" >
+
+						<input type="hidden" name="id" id="id"  value="${mvo.id}"/>
+                      <div class="card shadow border-0" style="background-color: #EEEEEE;">
+                      
+                        <div class="card-header" style="margin-top: 10px;">
+                          <input name="title" type="text" class="form-control" placeholder="글 제목" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="card-body p-4">
+                          <textarea name="content" class="form-control" placeholder="글 내용" rows="5" aria-label="With textarea"></textarea>
+                        </div>
+                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0" style="background-color: #EEEEEE;">
+						<img id="capturedImage" style="width:100px; height:100px;"/>
+                        </div>
+                      </div>
+                        <div class="row btnDiv">
+                            <button type="button" onclick="register()" class="btn btn-primary"><i class="bi bi-pencil"></i>글쓰기</button>
+                        </div> 
+                      
+                    </form>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>	
+  </div>
+</div>			
+					
+
+				
+				
+				
+				
+				
+
+>>>>>>> branch 'main' of https://github.com/Tuesdayjin/DRAMARKET.git
 				<script>
+				
 				var player = null;
 					$(function() {
 					     
@@ -259,7 +362,59 @@ File dir = new File(directory);
 						  console.log(imageDataUrl);
 					        // Set the captured image as the src of the img element
 					        $('#capturedImage').attr('src', imageDataUrl);
+					        
+					        
+					        // 캡쳐버튼 모달창 활성화 
+					        document.getElementById("myModal").style.display = "block";
+					        
+							window.onclick = function(event) {
+								  var modal = document.getElementById("myModal");
+								  if (event.target == modal) {
+								    modal.style.display = "none";
+								  }
+								}
+					        
 					}
+					
+					
+
+	
+						function closeModal() {
+						  document.getElementById("myModal").style.display = "none";
+						}
+
+						window.onclick = function(event) {
+						  var modal = document.getElementById("myModal");
+						  if (event.target == modal) {
+						    modal.style.display = "none";
+						  }
+						}
+						
+						
+						function register(){
+
+								var formData=new FormData();
+								formData.append("img_name", $("#capturedImage"));
+							    $.ajax({
+								      url: "fileupload.do",
+								      type: "POST",
+								      data: formData,
+								      processData: false,
+								      contentType: false,
+								      success: function(data) {
+								    	 console.log(JSON.stringify(data));
+								    	//$('#imgdiv').append('<img src="http://localhost:8081/boardimg/'+ data +'" id="Sample">');
+								        $('#img_name').val(data);
+								        $('#fileform').attr('method', "post");
+								        $('#fileform').attr('action', "writeaddfile.do");
+								        $('#fileform').submit();
+								      },
+								      error : function(){alert("파일 업로드에 실패하였습니다");}
+								    }); // $.ajax
+							}			
+		
+					
+					
 				</script>
 				
 <%for(int i=0; i<nameArr.length; i++) {%>

@@ -60,12 +60,11 @@
                       
                       <ul class="navbar-nav me-auto">
                           <li class="nav-item">
-                              <a class="nav-link " href="#">상품검색
+                              <a class="nav-link " href="Main.do">상품검색
                                   <span class="visually-hidden">(current)</span>
                               </a>
                           </li>
-                          
-                          <li class="nav-item">
+                            <li class="nav-item">
                               <a class="nav-link" href="boardList.do">게시판</a>
                           </li>
                         <c:if test="${!empty mvo}">

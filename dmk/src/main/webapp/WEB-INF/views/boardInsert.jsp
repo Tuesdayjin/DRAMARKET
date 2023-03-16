@@ -73,12 +73,16 @@
                           <li class="nav-item">
                               <a class="nav-link" href="boardList.do">게시판</a>
                           </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="mypage.do">마이페이지</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="login.do">로그인</a>
-                          </li>
+          						<c:if test="${!empty mvo}">
+								<li class="nav-item"><a class="nav-link" href="#">마이페이지</a>
+								</li>
+								<li class="nav-item"><a class="nav-link" href="logout.do">로그아웃</a>
+								</li>
+							</c:if>
+							<c:if test="${empty mvo}">
+								<li class="nav-item"><a class="nav-link" href="login.do">로그인</a>
+								</li>
+							</c:if>
                       </ul>
                   </div>
               </div>
@@ -188,8 +192,6 @@ function register(){
 		$('#fileform').submit();
 		
 	}
-	var id = $('#id').val();
-	consol.log(id)
 	
 }
 </script>

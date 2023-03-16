@@ -24,9 +24,7 @@
 	<!-- 스프링 파일 업로드 처리 : 멀티파트 리졸버 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 최대 업로드 크기 -->
-		<beans:property name="maxUploadSize" value="52224000"></beans:property>
-		<!-- 임시 메모리 공간 -->
-		<beans:property name="maxInMemorySize" value="52224000"></beans:property>
+		<beans:property name="maxUploadSize" value="-1"></beans:property>
 		<!-- 한글 파일 인코딩 -->
 		<beans:property name="defaultEncoding" value="utf-8"></beans:property>
     </beans:bean>

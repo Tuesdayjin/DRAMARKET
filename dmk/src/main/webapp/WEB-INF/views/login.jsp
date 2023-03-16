@@ -48,6 +48,7 @@
 <link rel="stylesheet"
 	href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
 <style>
@@ -118,11 +119,11 @@
 										<form id="login-form" action="login.do" method="post">
 											<div class="form-group">
 												<label for="id">아이디</label> 
-												<input type="text" class="form-control" name="id">
+												<input type="text" class="form-control" name="id" id="loginId" >
 											</div>
 											<div class="form-group">
 												<label for="pwd">비밀번호</label> 
-												<input type="password" class="form-control" name="pwd">
+												<input type="password" class="form-control" name="pwd" id="loginpwd">
 											</div>
 											<button type="submit" class="btn btn-primary">로그인</button>
 											<div class="form-group">
@@ -134,15 +135,15 @@
 										<form id="signup-form" style="display: none;" enctype="multipart/form-data">
 											<div class="form-group">
 												<label for="id">아이디</label> 
-												<input type="text" class="form-control" name="id" id="id" >
+												<input type="text" class="form-control" name="id" id="joinid" >
 											</div>
 											<div class="form-group">
 												<label for="pwd">비밀번호</label> 
-												<input type="pwd" class="form-control" name="pwd" id="pwd">
+												<input type="pwd" class="form-control" name="pwd" id="joinpwd">
 											</div>
 											<div class="form-group">
 												<label for="nick">닉네임</label> 
-												<input type="nick" class="form-control" name="nick" id="nick">
+												<input type="nick" class="form-control" name="nick" id="joinnick">
 											</div>
 											<div class="form-group">
 												<label for="nick">프로필 사진</label> 
@@ -155,14 +156,14 @@
 													<div class="col">
 														<div class="form-check form-check-inline">
 															<input class="form-check-input" type="radio"
-																name="gender" id="male" value="male"> <label
+																name="gender" id="male joingender" value="male"> <label
 																class="form-check-label" for="male"> 남자 </label>
 														</div>
 													</div>
 													<div class="col">
 														<div class="form-check form-check-inline">
 															<input class="form-check-input" type="radio"
-																name="gender" id="female" value="female"> <label
+																name="gender" id="female joingender" value="female"> <label
 																class="form-check-label" for="female"> 여자 </label>
 														</div>
 													</div>
@@ -170,7 +171,7 @@
 											</div>
 											<div class="form-group">
 												<label for="birth">생년월일</label> 
-												<input type="text" class="form-control datepicker" name="birth" id="birth">
+												<input type="text" class="form-control datepicker" name="birth" id="joinbirth">
 											</div>
 											<button type="button" id="register_btn" class="btn btn-primary" onclick="memberRegister()" >계정 생성</button>
 											<div class="form-group">
@@ -206,6 +207,9 @@
 			$('.cardTitle').text('회원가입');
 		});
 	});
+	
+	
+	
 
 	
 	$(document).ready(function() {
@@ -222,6 +226,31 @@
 		});
 	});
 
+	
+	
+	 $(document).ready(function() {
+	        $('#login-form').submit(function() {
+	        	let id=$('#loginId').val();
+	        	let pw=$('#loginpwd').val();
+	            if (id=="") {
+	            	 Swal.fire({
+	                     icon: '',
+	                     title: '',
+	                     text: '아이디를 입력해주세요',
+	                     confirmButtonColor: '#FFD35F'
+	                 });
+	                return false;
+	            }else if(pw==""){
+	            	 Swal.fire({
+	                     icon: '',
+	                     title: '',
+	                     text: '비밀번호를 입력해주세요',
+	                     confirmButtonColor: '#FFD35F'
+	                 });
+	            	 return false;
+	            }
+	        }); // end submit()
+	    }); // end ready()
 	
 	// 아래로는 회원가입 관련
 	
@@ -258,9 +287,63 @@
 			$('#signup-form').attr('method', 'post');
 	        $('#signup-form').attr('action', 'memberRegister.do');
 			$('#signup-form').submit();
+			
+			
 		}
 	}
 
+    
+    $(document).ready(function() {
+    	$('#signup-form').submit(function() {
+        	let id=$('#joinid').val();
+        	let pw=$('#joinpwd').val();
+        	let nick=$('#joinnick').val();
+        	let gender=$('#joingender').val();
+        	let birth=$('#joinbirth').val();
+            if (id=="") {
+            	 Swal.fire({
+                     text: '아이디를 입력해주세요',
+                     confirmButtonColor: '#FFD35F'
+                 });
+                return false;
+            }else if(pw==""){
+            	 Swal.fire({
+                     icon: '',
+                     title: '',
+                     text: '비밀번호를 입력해주세요',
+                     confirmButtonColor: '#FFD35F'
+                 });
+            	 return false;
+            }else if(nick==""){
+            	 Swal.fire({
+                     icon: '',
+                     title: '',
+                     text: '닉네임을 입력해주세요',
+                     confirmButtonColor: '#FFD35F'
+                 });
+            	 return false;
+            }else if(gender=="e" || gender=="E"){
+            	 Swal.fire({
+                     icon: '',
+                     title: '',
+                     text: '성별을 입력해주세요',
+                     confirmButtonColor: '#FFD35F'
+                 });
+            	 return false;
+            }else if(birth==""){
+            	 Swal.fire({
+                     icon: '',
+                     title: '',
+                     text: '생년월일을 입력해주세요',
+                     confirmButtonColor: '#FFD35F'
+                 });
+            	 return false;
+            }
+            
+        }); // end submit()
+    }); // end ready()
+
+    
 	</script>
 				</div>
 			</div>
