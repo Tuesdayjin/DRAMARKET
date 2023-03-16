@@ -73,7 +73,7 @@
 	</style>
 </head>
 <body>
-<%Object ob = new JSONParser().parse(new FileReader("C:\\Users\\SMHRD\\dmkFlask\\pyscene\\result\\" + request.getAttribute("fileName") + "-array.json"));
+<%Object ob = new JSONParser().parse(new FileReader("C:\\dmkServer\\pyscene\\result\\" + request.getAttribute("fileName") + "-array.json"));
 JSONObject js = (JSONObject) ob;
 JSONArray json_name = (JSONArray) js.get("name");
 JSONArray json_time = (JSONArray) js.get("time");
@@ -86,7 +86,7 @@ for(int i=0; i<json_time.size(); i++) {
     timeArr[i] = (double) json_time.get(i);
     }
 
-String directory = "C:\\Users\\SMHRD\\dmkFlask\\pyscene\\" + request.getAttribute("fileName");
+String directory = "C:\\dmkServer\\pyscene\\" + request.getAttribute("fileName");
 File dir = new File(directory);
 %>
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
