@@ -34,6 +34,12 @@ public class MainController {
 		return "Main";
 	}
 	
+	@RequestMapping("/test.do") //Main 페이지
+	public String test() {
+		
+		return "test";
+	}
+	
 	
 	@PostMapping("/uploadFile.do")
 	public String upload(@RequestParam("uploadFile") MultipartFile file, RedirectAttributes rttr) {
