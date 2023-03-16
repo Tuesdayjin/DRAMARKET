@@ -36,17 +36,16 @@ public class MemberController {
 	public String login() {
 		return "login";
 	}
-	
-	@GetMapping("/register.do") //login 페이지로 연결
-	public String register() {
-		return "register";
-	}
-	
+
 	
 	@PostMapping("/login.do") //login 기능 구현
 	public String login(t_member vo, HttpSession session) {
+		System.out.println(vo.getId());
+		System.out.println(vo.getPwd());
+		
 		 t_member mvo = mapper.loginCheck(vo); //(회원인증매퍼)
-		 mvo.getId();
+		 System.out.println(mvo.getId());
+		 
 		 if(mvo != null) {
 			 session.setAttribute("mvo", mvo);
 			 // 이때, ★★ model 에 바인딩하면 안된다..!★★

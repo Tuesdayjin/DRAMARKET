@@ -58,7 +58,7 @@ public String profilecut(File saveFile, File uploadPath, String UploadName, Stri
 	        File proFile = new File(uploadPath, proFileName); // 임시 썸네일 생성
 	        try {
 	            BufferedImage originalImage = ImageIO.read(saveFile);
-	            int dw = 40, dh = 40; //썸네일 크기 
+	            int dw = 50, dh = 50; //썸네일 크기 
 	        	int ow = originalImage.getWidth(); //원본 크기
 	        	int oh = originalImage.getHeight();
 	        	int nw = ow; int nh = (ow * dh) / dw; // 원본 너비를 기준으로 하여 썸네일의 비율로 높이를 계산합니다.

@@ -71,14 +71,12 @@ public class BoardController { //DAO 대신 mapper 호출
 	//글 + 첨부파일 insert
 	@RequestMapping(value = "/writeaddfile.do", method= RequestMethod.POST)
 	public String writeaddfile(t_board vo) {
-
-		System.out.println(vo.getImg_name());
-		System.out.println(vo.getId());
-		System.out.println(vo.getTitle());
 		
-		t_member writerVO=mapper.memberById(vo.getId());  //작성자 vo 가져오기
+		String id=vo.getId();
+		t_member writerVO=mapper.memberById(id);  //작성자 vo 가져오기
+		System.out.println(writerVO.getNick());
 		vo.setNick(writerVO.getNick());  // 게시글에 작성자 닉네임 추가 
-		vo.setNick(writerVO.getProfile_name());  // 게시글에 작성자 프로필 이미지 패스 추가
+		vo.setProfile_name(writerVO.getProfile_name());  // 게시글에 작성자 프로필 이미지 패스 추가
 		
 		vo.setIndate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
 		mapper.insertWriteaddfile(vo);
@@ -93,11 +91,12 @@ public class BoardController { //DAO 대신 mapper 호출
 	public String write(t_board vo) {
 
 		System.out.println(vo.getId());
-		System.out.println(vo.getTitle());
+		String id=vo.getId();
 		
-		t_member writerVO=mapper.memberById(vo.getId());  //작성자 vo 가져오기
+		t_member writerVO=mapper.memberById(id);  //작성자 vo 가져오기
+		System.out.println(writerVO.getNick());
 		vo.setNick(writerVO.getNick());  // 게시글에 작성자 닉네임 추가 
-		vo.setNick(writerVO.getProfile_name());  // 게시글에 작성자 프로필 이미지 패스 추가
+		vo.setProfile_name(writerVO.getProfile_name());  // 게시글에 작성자 프로필 이미지 패스 추가
 		
 		vo.setIndate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
 		mapper.insertWrite(vo);

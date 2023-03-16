@@ -26,11 +26,13 @@ public interface Mapper {
 	public void memberRegister(t_member vo);
 
 	//글 등록 (no file)
-	@Insert("insert into t_board (title,content,id,indate,views) values (#{title},#{content},#{id},#{indate},0)")
+	@Insert("insert into t_board (title,content,id,indate,nick,profile_name,views) "
+						+ "values (#{title},#{content},#{id},#{indate},#{nick},#{profile_name},0)")
 	public void insertWrite(t_board vo);
 	
 	//글 등록 (add file)
-	@Insert("insert into t_board (title,content,id,indate,img_name,views) values (#{title},#{content},#{id},#{indate},#{img_name},0)")
+	@Insert("insert into t_board (title,content,id,indate,img_name,nick,profile_name,views) "
+						+ "values (#{title},#{content},#{id},#{indate},#{img_name},#{nick},#{profile_name},0)")
 	public void insertWriteaddfile(t_board vo);
 	
 	//글 전체 조회 (최신순)

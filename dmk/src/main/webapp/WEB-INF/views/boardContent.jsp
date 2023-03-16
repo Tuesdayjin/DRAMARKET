@@ -66,7 +66,7 @@
                           </li>
                           
                           <li class="nav-item">
-                              <a class="nav-link" href="#">게시판</a>
+                              <a class="nav-link" href="boardList.do">게시판</a>
                           </li>
                         <c:if test="${!empty mvo}">
 	                    <li class="nav-item">
@@ -118,7 +118,7 @@
                         <div class="card-footer p-4 pt-0 bg-transpa0rent border-top-0" style="background-color: #EEEEEE;">
                             <div class="d-flex align-items-end justify-content-between">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+                                    <img class="rounded-circle me-3" src="http://localhost:8081/profile/profile_${board_vo.profile_name}" alt="..." />
                                     <div class="small">
                                         <div class="fw-bold">${board_vo.nick}</div>
                                         <div class="text-muted"><fmt:formatDate value="${board_vo.indate}" pattern="yyyy-MM-dd HH시 mm분"/></div>

@@ -118,11 +118,11 @@
 										<form id="login-form" action="login.do" method="post">
 											<div class="form-group">
 												<label for="id">아이디</label> 
-												<input type="id" class="form-control" name="id">
+												<input type="text" class="form-control" name="id">
 											</div>
 											<div class="form-group">
 												<label for="pwd">비밀번호</label> 
-												<input type="pwd" class="form-control" name="pwd">
+												<input type="password" class="form-control" name="pwd">
 											</div>
 											<button type="submit" class="btn btn-primary">로그인</button>
 											<div class="form-group">
@@ -172,7 +172,7 @@
 												<label for="birth">생년월일</label> 
 												<input type="text" class="form-control datepicker" name="birth" id="birth">
 											</div>
-											<button type="button" id="register_btn" class="btn btn-primary" >계정 생성</button>
+											<button type="button" id="register_btn" class="btn btn-primary" onclick="memberRegister()" >계정 생성</button>
 											<div class="form-group">
 												<a href="#" class="link-unstyled" id="show-login">로그인으로
 													돌아가기</a>
@@ -223,6 +223,8 @@
 	});
 
 	
+	// 아래로는 회원가입 관련
+	
 	$(document).ready(function() {
 		$('.datepicker').datepicker({
 			dateFormat : 'yy-mm-dd', // 년-월-일 형식으로 날짜 출력
@@ -231,8 +233,8 @@
 		});
 	});
 	
-	$('#register_btn').click(function(event) {		
-		event.preventDefault();
+
+    function memberRegister(){
 		if($("#profile").val()!=""){ //파일이 첨부된 경우..
 			var formData=new FormData();
 			formData.append("file", $("input[name=file]")[0].files[0]);
@@ -245,29 +247,20 @@
 			      success: function(data) {
 			    	 console.log(JSON.stringify(data));
 			        $('#profile_name').val(data);
-			        //document.signup-form.method = "post";
-			        //document.signup-form.action = "memberRegister.do";
-			        //document.signup-form.submit();
+
 			        $('#signup-form').attr('method', 'post');
 			        $('#signup-form').attr('action', 'memberRegister.do');
 					$('#signup-form').submit();
-					console.log('ttt');
 			      },
 			      error : function(){alert("파일 업로드에 실패하였습니다");}
 			    }); // $.ajax
 		}else{
-			console.log('aaa');
-	        //document.signup-form.method = "post";
-	        //document.signup-form.action = "memberRegister.do";
-	        //document.signup-form.submit();
-	        //document.signup-form.submit();
-			//$('#signup-form').removeAttr('enctype');
-			//$('#signup-form').removeAttr('style');
 			$('#signup-form').attr('method', 'post');
 	        $('#signup-form').attr('action', 'memberRegister.do');
 			$('#signup-form').submit();
 		}
-	}//function
+	}
+
 	</script>
 				</div>
 			</div>
