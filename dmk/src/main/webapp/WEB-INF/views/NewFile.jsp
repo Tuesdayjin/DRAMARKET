@@ -8,35 +8,14 @@
 <%@ page import="org.json.simple.parser.JSONParser" %>
 <%@ page import="java.io.FileReader" %>
 <%@ page import="java.io.File" %>
-    <c:set var="cpath" value="${pageContext.request.contextPath}"/>
-        
+<c:set var="cpath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
-    <title>Dramarket</title>
-<!-- Bootstrap 및 Bootswatch 스타일시트 파일 -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.6.0/morph/bootstrap.min.css" integrity="sha384-8QLqx+yb7DgYaFvzV7Ku8Hq3eIYXPHfgvKfZKH4NoJ+dsSdRfR5aIWlFJTG8xV7+" crossorigin="anonymous">
-<!-- Bootstrap 및 Bootswatch 자바스크립트 파일 -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-<!--bootstrap-->
-    <link rel="stylesheet" href="${cpath}/resources/css/style.css">
-    <script type="text/javascript" src="${cpath}/resources/js/dmk.js"></script>
-    <script src="js/morph/bootstrap.min.js"></script>
-
-<!--google font-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <!-- Bootstrap Icons library -->
- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
- <title>Dramarket</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=\, initial-scale=1.0">
+<title>Dramarket</title>
 
 <!-- Bootstrap 및 Bootswatch 스타일시트 파일 -->
 <link rel="stylesheet"
@@ -120,7 +99,6 @@ width : 100%;
     padding-bottom : 0px;
 	}
 	.timeline-box{
-	position: relative;
 	width : 100%;
 	height : auto;
 	background-color : #EEEEEE;
@@ -130,20 +108,17 @@ width : 100%;
     padding-top : 0px;
 	}
 
-.predict-container{
-margin-bottom:50px;
-}
  .predict-Bigbox{
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
         	margin-top : 50px;
         		width : 80%;
 	height : auto; 	
-	border-radius: 5px;
         }
 	.predictTitle-box{
 width : 100%;
 	height : auto;
-	}	
+
+	}
 	.predictObj-box{
 	width : 100%;
 	height : auto;
@@ -206,15 +181,7 @@ background-color: rgba(238, 238, 238,0.6);
 .predict-row{
 width : 100%;
 }
-   .cover {
-  position: absolute;
-  width: 200px;
-  height: 20px;
-  background-color: black;
-  z-index : 800;
-  margin-bottom : 1000px;
-  margin-left : 830px;
-}
+   
  </style>
 
 </head>
@@ -319,7 +286,6 @@ for(int i=0; i<nameArr.length; i++) {
 				</div>
 				<div class="timeline-box">
 				<div id="timeline"></div>
-				<div class="cover"></div>
 				</div>
 				</div>
 				<!--영상현재시간출력<div id="currentTimeDisplay"></div>-->
@@ -531,7 +497,7 @@ for(int i=0; i<nameArr.length; i++) {
 						}
 				</script>
 <!--인식한 객체 출력-->
-<div class="container predict-container">
+<div class="container">
 		<div class="content">
 				<div class="predict-Bigbox">
 				<div class="predictTilte-box">
@@ -624,21 +590,6 @@ try {
 				</div>
 				</div>
 </div>
-</div>
-<!-- Footer-->
-<footer class="bg-dark py-4 mt-auto" style="width:100%;">
-<div class="container px-5">
-    <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-        <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; DRAMARKET 2023</div></div>
-        <div class="col-auto">
-            <a class="link-light small" href="#!">Privacy</a>
-            <span class="text-white mx-1">&middot;</span>
-            <a class="link-light small" href="#!">Terms</a>
-            <span class="text-white mx-1">&middot;</span>
-            <a class="link-light small" href="#!">Contact</a>
-        </div>
-    </div>
-</div>
-</footer>
+
 </body>
 </html>
