@@ -45,10 +45,7 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap Icons library -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
-	rel="stylesheet">
+
 
 <!--amalia.js-->
 <script type="text/javascript"
@@ -66,11 +63,28 @@
 	src="http://localhost:8081/flask/full/build/js/amalia.js-plugin-timeline.min.js"></script>
 <script type="text/javascript"
 	src="http://localhost:8081/flask/full/build/js/i18n/amalia.js-message-en.js"></script>
-	<style>
-		.ajs-row .ajs-control-bar {
-			display: none !important;
-		}
-	</style>
+<style>
+    .predict-card{
+display: flex;
+  overflow-x: auto;
+  border-radius= 10;
+    }
+
+    .objImg {
+      flex: 0 0 auto;
+      padding: 20px;
+      width: 200px;
+      height: auto;
+    }
+  
+    .objImg img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
+    }
+    </style>   
 </head>
 <body>
 <%Object ob = new JSONParser().parse(new FileReader("C:\\dmkServer\\pyscene\\result\\" + request.getAttribute("fileName") + "-array.json"));
@@ -89,9 +103,9 @@ for(int i=0; i<json_time.size(); i++) {
 String directory = "C:\\dmkServer\\pyscene\\" + request.getAttribute("fileName");
 File dir = new File(directory);
 %>
+
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
-	
 	<div
 		style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
@@ -135,12 +149,16 @@ File dir = new File(directory);
 		<div class="content">
 				<div class="card player-card">
 					<div id="player"></div>
+					<div id="timeline"></div>
 				</div>
-				<div class="card">
-				<div id="timeline"></div>
-				</div>
-				<div id="currentTimeDisplay"></div>
-				<button id="captureImageButton">캡쳐</button>
+				
+				<!--현재 재생시간 출력<div id="currentTimeDisplay"></div> -->
+				<button class="btn" id="captureImageButton">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+  <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+  <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+</svg>
+				</button>
 				<img id="capturedImage" style="width:100px; height:100px;"/>
 				<script>
 				var player = null;
@@ -219,8 +237,8 @@ File dir = new File(directory);
 						  
 						  console.log('Current playback time:', currentTime);
 						  
-						// 현재 재생 시간을 DIV에 출력합니다.
-						  $("#currentTimeDisplay").text("Current playback time: " + currentTime);
+						// 현재 재생 시간을 div에 출력
+						//$("#currentTimeDisplay").text("Current playback time: " + currentTime);
 						
 
 						}
@@ -243,22 +261,27 @@ File dir = new File(directory);
 					        $('#capturedImage').attr('src', imageDataUrl);
 					}
 				</script>
+				
 <%for(int i=0; i<nameArr.length; i++) {%>
-<div class="predict_content<%=i%>" style="display:none;">
-<br>top<br>
+<div class="predict_content<%=i%> predict-card" style="display:none;">
+<div class="objImg">
 <img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/top/<%=nameArr[i]%>'/>
-<br>bottom<br>
+</div> 
+<div class="objImg">
 <img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bottom/<%=nameArr[i]%>'/>
-<br>dress<br>
+</div>
+<div class="objImg"> 
 <img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/dress/<%=nameArr[i]%>'/>
-<br>bag<br>
-<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bag/<%=nameArr[i]%>'/>
-<br>time<br>
-<input class="start_time<%=i%>" value="<%=timeArr[i]%>">
-<input class="end_time<%=i%>" value="<%=timeArr[i+1]%>">
-<br>
+</div>
+<div class="objImg"> 
+<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bag/<%=nameArr[i]%>'/> 
+ </div>
+ 
+<input type="hidden" class="start_time<%=i%>" value="<%=timeArr[i]%>">
+<input type="hidden" class="end_time<%=i%>" value="<%=timeArr[i+1]%>">
 </div>
 <%}%>
+
 			</div>
 		</div>
 </body>
