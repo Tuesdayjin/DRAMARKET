@@ -65,6 +65,38 @@
 	src="http://localhost:8081/flask/full/build/js/i18n/amalia.js-message-en.js"></script>
 
 	<style>
+	        .content {
+            display: flex;
+            justify-content: center;
+             align-items: center;
+            flex-wrap: wrap;
+        }
+        .player-Bigbox{
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        	margin-top : 100px;
+        	border-radius: 5px;
+        		width : 80%;
+	height : auto;
+        	
+        }
+	.player-box{
+		width : 100%;
+	height : auto;
+	background-color : #EEEEEE;
+	border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding : 10px;
+    padding-bottom : 0px;
+	}
+	.timeline-box{
+	width : 100%;
+	height : auto;
+	background-color : #EEEEEE;
+	border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding : 10px;
+    padding-top : 0px;
+	}
 	   .predict-card{
 display: flex;
   overflow-x: auto;
@@ -85,21 +117,20 @@ display: flex;
       border-radius: 10px;
       box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
     }
-
-		.modal {
+    
+   
+      .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 9999;
   left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.6);
+  overflow: hidden;
 }
 
 .modal-content {
-  background-color: rgba(0,0,0,0);
+background-color: rgba(238, 238, 238,0.6);
+ box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
   margin: 15% auto;
   padding: 20px;
   width: 80%;
@@ -118,9 +149,9 @@ display: flex;
   text-decoration: none;
   cursor: pointer;
 }
-		
-		
-	</style>
+
+   
+ </style>
 
 </head>
 <body>
@@ -200,16 +231,18 @@ for(int i=0; i<nameArr.length; i++) {
 		<div class="header">
 		</div>
 		<div class="content">
-				<div class="card player-card">
+				<div class="player-Bigbox">
+				<div class="player-box">
 					<div id="player"></div>
 				</div>
-					<div id="timeline"></div>
-
-				<div class="card">
+				<div class="timeline-box">
 				<div id="timeline"></div>
 				</div>
-				<div id="currentTimeDisplay"></div>
-				
+				</div>
+				<!--영상현재시간출력<div id="currentTimeDisplay"></div>-->
+</div>
+
+<div class="content">
 				<!-- 캡쳐버튼 로그인 검증  <c:if test="${!empty mvo}">  
 				</c:if>  -->
 				<button id="captureImageButton" onclick="openModal()" class="btn">
@@ -219,16 +252,12 @@ for(int i=0; i<nameArr.length; i++) {
 </svg>
 				</button>
 				
-
 				<div id="myModal" class="modal">
-				  <div class="modal-content">
-	<section class="py-5">
-    <div class="container px-5">
+				  <div class="modal-content" style="width:800px;">
         <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-xl-start">
                     <form id="fileform" enctype="multipart/form-data" >
-
 						<input type="hidden" name="id" id="id"  value="${mvo.id}"/>
                       <div class="card shadow border-0" style="background-color: #EEEEEE;">
                       
@@ -245,28 +274,14 @@ for(int i=0; i<nameArr.length; i++) {
                         <div class="row btnDiv">
                             <button type="button" onclick="register()" class="btn btn-primary"><i class="bi bi-pencil"></i>글쓰기</button>
                         </div> 
-                      
                     </form>
                   </div>
                 </div>
-
             </div>
-        </div>
-
     </div>
-</section>	
   </div>
-</div>			
-					
-
-				
-				
-				
-				
-				
-
+		
 				<script>
-				
 				var player = null;
 					$(function() {
 					     
@@ -295,7 +310,7 @@ for(int i=0; i<nameArr.length; i++) {
 														timeaxis : false,
 														listOfLines : [
 														{
-															title : '드라마 영상에 나오고 있는 상품',
+															title : 'AI가 분석한 상품이 있는 장면입니다',
 															type : 'image',
 															metadataId : '${fileName}',
 															pointNav : true,
@@ -416,8 +431,6 @@ for(int i=0; i<nameArr.length; i++) {
 								    }); // $.ajax
 							}			
 		
-					
-					
 				</script>
 				
 <%for(int i=0; i<nameArr.length; i++) {%>
