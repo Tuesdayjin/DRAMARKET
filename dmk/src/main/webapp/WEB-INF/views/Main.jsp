@@ -139,9 +139,9 @@
 									</div>
 									<div class="card-footer">
 										<div>
-											<form action="">
+											<form action="http://localhost:5000/link" method="post">
 												<input type="text" class="form-control"
-													placeholder="링크를 입력해주세요">
+													placeholder="링크를 입력해주세요" name="uploadLink">
 										</div>
 										<div>
 											<button class="btn btn-lg btn-primary uploadBtn"
@@ -264,6 +264,13 @@
 
 			});
 		});
+		
+		$(document).ready(function(){
+	          $('form').submit(function(){
+	              $('.btn.btn-lg.btn-primary.uploadBtn').attr('disabled',true).text('업로드 중...');
+	              // 파일 업로드를 시작할 때 버튼을 비활성화합니다.
+	          });
+	      });
 	</script>
 </body>
 </html>

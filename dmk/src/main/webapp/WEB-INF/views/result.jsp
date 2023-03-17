@@ -86,17 +86,19 @@
 	src="http://localhost:8081/flask/full/build/js/i18n/amalia.js-message-en.js"></script>
 
 <style>
-.capBtn-row{
-margin-top : 100px;
+#captureImageButton {
+  position: fixed;
+  bottom: 20px;
+  right: 120px;
+  z-index: 999;
+  background-color : #FFD369;
+  color : #FFFFFF;
 }
-.capBtn-col1{
-width : 10%;
+#captureImageButton svg {
+  width: 30px;
+  height: 30px;
+  stroke-width: 3px; /* 아이콘의 선 굵기를 조절합니다. */
 }
-.capBtn-col2{
-width : 80%;
-text-align: right;
-}
-
 	        .content {
             display: flex;
             justify-content: center;
@@ -129,6 +131,20 @@ width : 100%;
     padding : 10px;
     padding-top : 0px;
 	}
+	
+	#timeline{
+	position: relative;
+	}
+	.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 98.1%;
+  height: 39px;
+  background-color : #3f3f3f;
+  margin-top:103px;
+  margin-left :10px;
+}
 
 .predict-container{
 margin-bottom:50px;
@@ -238,15 +254,7 @@ background-color: rgba(238, 238, 238,0.6);
 .predict-row{
 width : 100%;
 }
-   .cover {
-  position: absolute;
-  width: 200px;
-  height: 20px;
-  background-color: black;
-  z-index : 800;
-  margin-bottom : 1000px;
-  margin-left : 830px;
-}
+
 
 /*로더*/
 .wrapper {
@@ -425,22 +433,12 @@ for(int i=0; i<nameArr.length; i++) {
 		</div>
 						<!-- 캡쳐버튼 로그인 검증  <c:if test="${!empty mvo}">  
 				</c:if>  -->
-<div class="row capBtn-row">
-<div class="capBtn-col1"></div>
-<div class="capBtn-col2">
-<div class="row">
-				<div class="capBtn-box">
-				<button id="captureImageButton" onclick="openModal()" class="btn">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+<button id="captureImageButton" onclick="openModal()" class="btn">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
   <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
   <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
 </svg>
 </button>
-</div>
-</div>
-<div class="capBtn-col1"></div>
-</div>
-		</div>
 		<div class="content">
 				<div class="player-Bigbox">
 				<div class="player-box">
