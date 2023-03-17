@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.smhrd.entity.t_board;
+import kr.smhrd.entity.t_comment;
 import kr.smhrd.entity.t_member;
 
 public interface Mapper {
@@ -46,6 +47,9 @@ public interface Mapper {
 	//글 조회수 +1 
 	@Update("update t_board set views=views+1 where num=#{num}")
 	public void countUpdate(long num);
+
+	@Insert("insert into t_comment (board_num, cmt, cmt_id, indate) values (#{board_num},#{cmt},#{cmt_id},#{indate})")
+	public void cmtinsert(t_comment cmt_vo);
 	
 
 	

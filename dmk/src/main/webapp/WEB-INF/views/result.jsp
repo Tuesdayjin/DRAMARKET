@@ -8,14 +8,35 @@
 <%@ page import="org.json.simple.parser.JSONParser" %>
 <%@ page import="java.io.FileReader" %>
 <%@ page import="java.io.File" %>
-<c:set var="cpath" value="${pageContext.request.contextPath}" />
+    <c:set var="cpath" value="${pageContext.request.contextPath}"/>
+        
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=\, initial-scale=1.0">
-<title>Dramarket</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Dramarket</title>
+<!-- Bootstrap 및 Bootswatch 스타일시트 파일 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.6.0/morph/bootstrap.min.css" integrity="sha384-8QLqx+yb7DgYaFvzV7Ku8Hq3eIYXPHfgvKfZKH4NoJ+dsSdRfR5aIWlFJTG8xV7+" crossorigin="anonymous">
+<!-- Bootstrap 및 Bootswatch 자바스크립트 파일 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<!--bootstrap-->
+    <link rel="stylesheet" href="${cpath}/resources/css/style.css">
+    <script type="text/javascript" src="${cpath}/resources/js/dmk.js"></script>
+    <script src="js/morph/bootstrap.min.js"></script>
+
+<!--google font-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <!-- Bootstrap Icons library -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+ <title>Dramarket</title>
 
 <!-- Bootstrap 및 Bootswatch 스타일시트 파일 -->
 <link rel="stylesheet"
@@ -65,6 +86,17 @@
 	src="http://localhost:8081/flask/full/build/js/i18n/amalia.js-message-en.js"></script>
 
 <style>
+.capBtn-row{
+margin-top : 100px;
+}
+.capBtn-col1{
+width : 10%;
+}
+.capBtn-col2{
+width : 80%;
+text-align: right;
+}
+
 	        .content {
             display: flex;
             justify-content: center;
@@ -73,14 +105,13 @@
         }
         .player-Bigbox{
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-        	margin-top : 100px;
+        	margin-top : 20px;
         	border-radius: 5px;
         		width : 80%;
-	height : auto;
-        	
+	height : auto; 	
         }
 	.player-box{
-		width : 100%;
+width : 100%;
 	height : auto;
 	background-color : #EEEEEE;
 	border-top-left-radius: 5px;
@@ -89,6 +120,7 @@
     padding-bottom : 0px;
 	}
 	.timeline-box{
+	position: relative;
 	width : 100%;
 	height : auto;
 	background-color : #EEEEEE;
@@ -97,13 +129,52 @@
     padding : 10px;
     padding-top : 0px;
 	}
+
+.predict-container{
+margin-bottom:50px;
+}
+ .predict-Bigbox{
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        	margin-top : 50px;
+        		width : 80%;
+	height : auto; 	
+	border-radius: 5px;
+        }
+	.predictTitle-box{
+width : 100%;
+	height : auto;
+	}	
+	.predictObj-box{
+	width : 100%;
+	height : auto;
+	}
+
 	   .predict-card{
+	   margin-top : 20px;
+	   width : 80%;
 display: flex;
   overflow-x: auto;
   border-radius= 10;
     }
 
-    .objImg {
+    #search-objImg {
+      flex: 0 0 auto;
+      padding: 20px;
+      width: 200px;
+      height: auto;
+      background-color : red;
+    }
+  
+    #search-objImg img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
+    }
+    
+    
+        .objImg {
       flex: 0 0 auto;
       padding: 20px;
       width: 200px;
@@ -118,7 +189,8 @@ display: flex;
       box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
     }
     
-   
+    
+    
       .modal {
   display: none;
   position: fixed;
@@ -149,8 +221,18 @@ background-color: rgba(238, 238, 238,0.6);
   text-decoration: none;
   cursor: pointer;
 }
-
-   
+.predict-row{
+width : 100%;
+}
+   .cover {
+  position: absolute;
+  width: 200px;
+  height: 20px;
+  background-color: black;
+  z-index : 800;
+  margin-bottom : 1000px;
+  margin-left : 830px;
+}
  </style>
 
 </head>
@@ -230,6 +312,24 @@ for(int i=0; i<nameArr.length; i++) {
 <div class="container">
 		<div class="header">
 		</div>
+						<!-- 캡쳐버튼 로그인 검증  <c:if test="${!empty mvo}">  
+				</c:if>  -->
+<div class="row capBtn-row">
+<div class="capBtn-col1"></div>
+<div class="capBtn-col2">
+<div class="row">
+				<div class="capBtn-box">
+				<button id="captureImageButton" onclick="openModal()" class="btn">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+  <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+  <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+</svg>
+</button>
+</div>
+</div>
+<div class="capBtn-col1"></div>
+</div>
+		</div>
 		<div class="content">
 				<div class="player-Bigbox">
 				<div class="player-box">
@@ -237,22 +337,13 @@ for(int i=0; i<nameArr.length; i++) {
 				</div>
 				<div class="timeline-box">
 				<div id="timeline"></div>
+				<div class="cover"></div>
 				</div>
 				</div>
 				<!--영상현재시간출력<div id="currentTimeDisplay"></div>-->
 </div>
-
+</div>
 <div class="content">
-				<!-- 캡쳐버튼 로그인 검증  <c:if test="${!empty mvo}">  
-				</c:if>  -->
-				<button id="captureImageButton" onclick="openModal()" class="btn">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
-  <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
-  <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
-</svg>
-				</button>
-				
-
 				<div id="myModal" class="modal">
 				  <div class="modal-content">
 	<section class="py-5">
@@ -291,13 +382,6 @@ for(int i=0; i<nameArr.length; i++) {
 </section>	
   </div>
 </div>			
-					
-
-				
-				
-				
-				
-				
 
 				<script>
 				
@@ -329,7 +413,7 @@ for(int i=0; i<nameArr.length; i++) {
 														timeaxis : false,
 														listOfLines : [
 														{
-															title : '드라마 영상에 나오고 있는 상품',
+															title : 'AI가 분석한 상품이 있는 장면입니다',
 															type : 'image',
 															metadataId : '${fileName}',
 															pointNav : true,
@@ -342,7 +426,7 @@ for(int i=0; i<nameArr.length; i++) {
 										});
 					
 					
-						// Add a click event listener to the capture image button
+						//캡쳐기능
 						  $('#captureImageButton').click(captureImage);
 
 					});
@@ -383,21 +467,21 @@ for(int i=0; i<nameArr.length; i++) {
 
 						}
 					function captureImage() {
-						// Get the video element from the player
+						//비디오 플레이어를 불러오기
 						  var videoElement = $('video', '#player')[0];
 						  var canvas = document.createElement('canvas');
 						  canvas.width = videoElement.videoWidth;
 						  canvas.height = videoElement.videoHeight;
 
-						  // Draw the current video frame onto the canvas
+						  //비디오 위에 공간 잡기
 						  var ctx = canvas.getContext('2d');
 						  ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
-						  // Get the current image as a data URL
+						  //지금 이미지의 주소 잡기
 						  var imageDataUrl = canvas.toDataURL('image/png');
 
 						  console.log(imageDataUrl);
-					        // Set the captured image as the src of the img element
+					        //이미지 src가져오기
 					        $('#capturedImage').attr('src', imageDataUrl);
 					        
 					        
@@ -464,8 +548,19 @@ for(int i=0; i<nameArr.length; i++) {
 						    return new File([u8arr], filename, {type:mime});
 						}
 				</script>
-				
-<%for(int i=0; i<nameArr.length; i++) {%>
+<!--인식한 객체 출력-->
+<div class="container predict-container">
+		<div class="content">
+				<div class="predict-Bigbox">
+				<div class="predictTilte-box">
+					<div class="predict-title">
+<h3>재생 중인 장면 속 상품입니다</h3>
+<p>클릭하면 상세 정보를 알</p>
+</div>
+
+				</div>
+				<div class="predictObg-box">
+				<%for(int i=0; i<nameArr.length; i++) {%>
 <div class="predict_content<%=i%> predict-card" style="display:none;">
 <%
 try {
@@ -473,8 +568,8 @@ try {
         for(int j=0; j<topDir[i].list().length; j++) {
             // 이미지 출력 코드%>
             <div class="objImg">
-      		  	<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/top/<%=topDir[i].list()[j]%>'/>
-	        </div> 
+                 <img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/top/<%=topDir[i].list()[j]%>'/>
+           </div> 
         <%}
     } else {
         // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
@@ -491,8 +586,8 @@ try {
         for(int j=0; j<bottomDir[i].list().length; j++) {
             // 이미지 출력 코드%>
             <div class="objImg">
-      		  	<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bottom/<%=bottomDir[i].list()[j]%>'/>
-	        </div> 
+                 <img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bottom/<%=bottomDir[i].list()[j]%>'/>
+           </div> 
         <%}
     } else {
         // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
@@ -509,8 +604,8 @@ try {
         for(int j=0; j<dressDir[i].list().length; j++) {
             // 이미지 출력 코드%>
             <div class="objImg">
-      		  	<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/dress/<%=dressDir[i].list()[j]%>'/>
-	        </div> 
+                 <img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/dress/<%=dressDir[i].list()[j]%>'/>
+           </div> 
         <%}
     } else {
         // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
@@ -527,8 +622,8 @@ try {
         for(int j=0; j<bagDir[i].list().length; j++) {
             // 이미지 출력 코드%>
             <div class="objImg">
-      		  	<img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bag/<%=bagDir[i].list()[j]%>'/>
-	        </div> 
+                 <img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bag/<%=bagDir[i].list()[j]%>'/>
+           </div> 
         <%}
     } else {
         // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
@@ -544,22 +639,40 @@ try {
 <input type="hidden" class="end_time<%=i%>" value="<%=timeArr[i+1]%>">
 </div>
 <%}%>
-<form method="post" id = "search_form">
-	<input id="search_img" name="img_path" value="">
-	<input type="submit" id="search_btn">
-</form>
-<div id="search">
-
-</div>
-
          </div>
-      </div>
+      </div><!-- end predict-Bigbox -->
+      
+
+<!-- 객체 이미지 검색 -->
+<form method="post" id = "search_form">
+	<input type="hidden" id="search_img" name="img_path" value="">
+	<input type="submit" id="search_btn" style="display:none;">
+</form>
+<div class="predict-Bigbox">
+    <div class="predictTilte-box">
+      <div class="predict-title">
+<h3>선택한 상품의 정보입니다</h3>
+</div>
+    </div>
+    <div class="predictObg-box">
+<div class="predict-card">
+  <div id="search">
+  </div>
+       </div> 
+</div>
+     </div>
+  </div>
+</div><!--end content-->
+</div><!--end predict-container-->
 <script type="text/javascript">
    $(function() {
       $(".objImg img").click(function() {
        var imgpath = $(this).attr('src');
        imgpath = 'C:/dmkServer/' + imgpath.split('flask/')[1];
        $("#search_img").val(imgpath);
+       //자동으로 버튼 클릭
+       $("#search_btn").click();
+       
        })
    });
        
@@ -581,8 +694,8 @@ try {
                   console.log(data)                  
                   var html = "";
 					 for (var i = 0; i < 3; i++) {					
-						html += '	<img src="' + data['image'][i] + '">';
-						html += "	<h2>"+'<a href="' + data['link'][i] + '">'+data['text'][i]+"</a>"+"</h2>";				
+						 html += '<div class="objImg searchObjImg"><img src="' + data['image'][i] + '"></div>';
+						html += "	<div class='obj-link'>"+'<a href="' + data['link'][i] + '">'+data['text'][i]+"</a>"+"</div>";				
 					}					
 					$('#search').html(html);
               },
@@ -596,11 +709,22 @@ try {
    });
 </script> 
 
-
-			</div>
-		</div>
-		
-		
-		
+				</div>
+				</div>
+<!-- Footer-->
+<footer class="bg-dark py-4 mt-auto" style="width:100%;">
+<div class="container px-5">
+    <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+        <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; DRAMARKET 2023</div></div>
+        <div class="col-auto">
+            <a class="link-light small" href="#!">Privacy</a>
+            <span class="text-white mx-1">&middot;</span>
+            <a class="link-light small" href="#!">Terms</a>
+            <span class="text-white mx-1">&middot;</span>
+            <a class="link-light small" href="#!">Contact</a>
+        </div>
+    </div>
+</div>
+</footer>
 </body>
 </html>

@@ -31,15 +31,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mysql.cj.util.Util;
 
 import kr.smhrd.entity.t_board;
+import kr.smhrd.entity.t_comment;
 import kr.smhrd.entity.t_member;
 import kr.smhrd.mapper.Mapper;
 import kr.smhrd.util.common_util;
@@ -170,6 +173,15 @@ public class BoardController { //DAO 대신 mapper 호출
 		return "boardContent";
 	}
 	
+	
+	@PostMapping("/commentInsert.do")
+	@ResponseBody
+	public String commentInsert(t_comment cmt_vo) {
+		cmt_vo.setIndate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
+		mapper.cmtinsert(cmt_vo);
+		
+		return null;
+	}
 
 
 

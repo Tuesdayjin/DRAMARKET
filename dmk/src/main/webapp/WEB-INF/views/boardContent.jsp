@@ -29,6 +29,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
  <!-- Bootstrap Icons library -->
  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 <style>
@@ -129,18 +130,37 @@
 <!--댓글 작성-->
 <div class="card shadow border-0 mt-3">
     <div class="card-body reBox" style="background-color: #EEEEEE;">
-      <form>
+    
+    
+    <!--댓글 입력-->
+    <!--  로그인 했으면 댓글 입력   -->
+     <c:if test="${!empty mvo}">  
+      <form id="reply_form">
         <div class="mb-3">
           <div class="row insertRe">
             <div class="col-10">
-                <textarea class="form-control" placeholder="댓글을 입력하세요."rows="1"></textarea>
+            	<input type="hidden" name="board_num" id="board_num"  value="${board_vo.num}"/>
+            	<input type="hidden" name="cmt_id" id="cmt_id"  value="${mvo.id}"/>
+                <textarea class="form-control" name="cmt" id="cmt" placeholder="댓글을 입력하세요."rows="1"></textarea>
             </div>
             <div class="col-2">
-                <button type="submit" class="btn btn-primary btn-md"><i class="bi bi-pencil"></i></button>
+                <button type="button" id="reply_btn" class="btn btn-primary btn-md" onclick="insertreply()"><i class="bi bi-pencil"></i></button>
             </div>
           </div>
         </form>
-          <!--댓글 목록-->
+    	</c:if>
+    <!-- 로그인 안했으면 -->	
+    <c:if test="${empty mvo}">  
+        <div class="mb-3">
+            <div class="col-10">
+                <textarea class="form-control" readonly="readonly" placeholder="댓글은 로그인 후 작성할 수 있습니다 :)" rows="1" onclick="location.href='login.do'"></textarea>
+            </div>
+          </div>
+    	</c:if>
+    <!--댓글 입력-->        
+    	
+    	
+      <!--작성 댓글 목록-->
           <div class="row comment">
             <div class="col-1 ">
                 <img class="rounded-circle me-3 commentImg" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
@@ -159,6 +179,9 @@
                 </div>
             </div>
           </div>
+    <!--작성 댓글 목록 끝-->
+          
+          
         </div>
       
     </div>
@@ -171,6 +194,67 @@
     </div>
 </section>
 </main>
+
+
+
+
+<script type="text/javascript">
+
+function insertreply() {
+	var cmt =  $("#cmt").val();
+	var form = $("#reply_form").serialize()
+
+	if(cmt.length == 0){
+       	 Swal.fire({
+             icon: '',
+             title: '',
+             text: '💛댓글을 입력해주세요💛',
+             confirmButtonColor: '#FFD35F'
+         });
+            return;
+    }else{
+    	   $.ajax({
+               url : "commentInsert.do",
+               type : "POST",
+               contentType : 'application/x-www-form-urlencoded; charset=UTF-8', 
+                             //application/json , JSON.stringify , 컨트롤러에 매개변수 앞에 @RequestBody 3가지가 하나의 세트             
+               data :form,
+               success : function(){
+				   console.log('댓글 등록 완료');   
+                   $('#cmt').val('');
+                   getList();
+               },
+               error : function(err){
+                   console.log("댓글 입력 실패")
+               }
+               
+           });//ajax
+    }
+	
+}// 댓글 insert
+
+
+function getList(){
+    $.ajax({
+        
+        url : "commentSelect.do",
+        type : "GET",
+        dataType : "json",
+        success :function(obj){
+        	
+        }
+	
+}
+        
+        
+
+    
+</script>
+
+
+
+
+
 <!-- Footer-->
 <footer class="bg-dark py-4 mt-auto">
 <div class="container px-5">
