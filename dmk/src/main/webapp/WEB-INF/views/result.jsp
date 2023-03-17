@@ -149,7 +149,6 @@ width : 100%;
 	height : auto;
 	}
 
-
 	   .predict-card{
 	   margin-top : 20px;
 	   width : 80%;
@@ -158,7 +157,24 @@ display: flex;
   border-radius= 10;
     }
 
-    .objImg {
+    #search-objImg {
+      flex: 0 0 auto;
+      padding: 20px;
+      width: 200px;
+      height: auto;
+      background-color : red;
+    }
+  
+    #search-objImg img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
+    }
+    
+    
+        .objImg {
       flex: 0 0 auto;
       padding: 20px;
       width: 200px;
@@ -172,6 +188,8 @@ display: flex;
       border-radius: 10px;
       box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
     }
+    
+    
     
       .modal {
   display: none;
@@ -537,6 +555,7 @@ for(int i=0; i<nameArr.length; i++) {
 				<div class="predictTilte-box">
 					<div class="predict-title">
 <h3>재생 중인 장면 속 상품입니다</h3>
+<p>클릭하면 상세 정보를 알</p>
 </div>
 
 				</div>
@@ -620,22 +639,40 @@ try {
 <input type="hidden" class="end_time<%=i%>" value="<%=timeArr[i+1]%>">
 </div>
 <%}%>
-<form method="post" id = "search_form">
-	<input id="search_img" name="img_path" value="">
-	<input type="submit" id="search_btn">
-</form>
-<div id="search">
-
-</div>
-
          </div>
-      </div>
+      </div><!-- end predict-Bigbox -->
+      
+
+<!-- 객체 이미지 검색 -->
+<form method="post" id = "search_form">
+	<input type="hidden" id="search_img" name="img_path" value="">
+	<input type="submit" id="search_btn" style="display:none;">
+</form>
+<div class="predict-Bigbox">
+    <div class="predictTilte-box">
+      <div class="predict-title">
+<h3>선택한 상품의 정보입니다</h3>
+</div>
+    </div>
+    <div class="predictObg-box">
+<div class="predict-card">
+  <div id="search">
+  </div>
+       </div> 
+</div>
+     </div>
+  </div>
+</div><!--end content-->
+</div><!--end predict-container-->
 <script type="text/javascript">
    $(function() {
       $(".objImg img").click(function() {
        var imgpath = $(this).attr('src');
        imgpath = 'C:/dmkServer/' + imgpath.split('flask/')[1];
        $("#search_img").val(imgpath);
+       //자동으로 버튼 클릭
+       $("#search_btn").click();
+       
        })
    });
        
@@ -657,8 +694,8 @@ try {
                   console.log(data)                  
                   var html = "";
 					 for (var i = 0; i < 3; i++) {					
-						html += '	<img src="' + data['image'][i] + '">';
-						html += "	<h2>"+'<a href="' + data['link'][i] + '">'+data['text'][i]+"</a>"+"</h2>";				
+						 html += '<div class="objImg searchObjImg"><img src="' + data['image'][i] + '"></div>';
+						html += "	<div class='obj-link'>"+'<a href="' + data['link'][i] + '">'+data['text'][i]+"</a>"+"</div>";				
 					}					
 					$('#search').html(html);
               },
@@ -674,8 +711,6 @@ try {
 
 				</div>
 				</div>
-</div>
-</div>
 <!-- Footer-->
 <footer class="bg-dark py-4 mt-auto" style="width:100%;">
 <div class="container px-5">
