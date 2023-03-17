@@ -114,10 +114,10 @@
                       <div class="card shadow border-0" style="background-color: #EEEEEE;">
                         <div class="card-header" style="margin-top: 10px;">
 						 <input type="hidden" name="id" id="id"  value="${mvo.id}"/>
-                          <input name="title" type="text" class="form-control" placeholder="글 제목" aria-label="Username" aria-describedby="basic-addon1">
+                          <input name="title" id="title" type="text" class="form-control" placeholder="글 제목" aria-label="Username" aria-describedby="basic-addon1" required>
                         </div>
                         <div class="card-body p-4">
-                          <textarea name="content" class="form-control" placeholder="글 내용" rows="10" aria-label="With textarea"></textarea>
+                          <textarea name="content" id="content" class="form-control" placeholder="글 내용" rows="10" aria-label="With textarea" required></textarea>
                         </div>
                         <div class="card-footer p-4 pt-0 bg-transparent border-top-0" style="background-color: #EEEEEE;">
                           <input name='file' type="file" accept="image/*" required="" id="file-input">
@@ -125,7 +125,7 @@
                         </div>
                       </div>
                         <div class="row btnDiv">
-                            <button type="button" onclick="register()" class="btn btn-primary"><i class="bi bi-pencil"></i>글쓰기</button>
+                            <button type="button" id="registerbtn" onclick="register()" class="btn btn-primary"><i class="bi bi-pencil"></i>글쓰기</button>
                         </div> 
                       
                     </form>
@@ -165,8 +165,29 @@
 
 <script type="text/javascript">
 
-function register(){
 
+// 글 등록
+
+$(document).ready(function () {
+	const title = document.querySelector('#title');
+	const content = document.querySelector('#content');
+	const registerButton = document.querySelector('#registerbtn');
+	
+	title.addEventListener('keyup', activeEvent);
+	content.addEventListener('keyup', activeEvent);
+	registerButton.addEventListener('click', errorEvent);
+
+	function activeEvent() {
+	  switch(!(title.value && content.value)){
+	    case true : registerButton.disabled = true; break;
+	    case false : registerButton.disabled = false; break;
+	  }
+	}
+	
+}
+
+
+function register(){ 
 	if($("#file").val()!=""){ //파일이 첨부된 경우..
 		var formData=new FormData();
 		formData.append("file", $("input[name=file]")[0].files[0]);
@@ -190,10 +211,8 @@ function register(){
 		$('#fileform').attr('method', "post");
         $('#fileform').attr('action', "write.do");
 		$('#fileform').submit();
-		
 	}
-	
-}
+}// 글 등록 끝
 </script>
 
 </body>
