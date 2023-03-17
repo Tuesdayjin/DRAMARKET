@@ -136,9 +136,9 @@
 									</div>
 									<div class="card-footer">
 										<div>
-											<form action="">
+											<form action="http://localhost:5000/link" method="post">
 												<input type="text" class="form-control"
-													placeholder="링크를 입력해주세요">
+													placeholder="링크를 입력해주세요" name="uploadLink">
 										</div>
 										<div>
 											<button class="btn btn-lg btn-primary uploadBtn"
