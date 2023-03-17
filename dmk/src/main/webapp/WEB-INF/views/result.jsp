@@ -162,7 +162,7 @@ width : 100%;
 	   .predict-card{
 	   position: relative;
 	   margin-top : 20px;
-	   width : 80%;
+	   width : 100%;
 display: flex;
   overflow-x: auto;
   border-radius= 10;
@@ -670,7 +670,7 @@ for(int i=0; i<nameArr.length; i++) {
 </div>
 
 				</div>
-				<div class="predictObg-box">
+				<div class="predictObj-box">
 				<%for(int i=0; i<nameArr.length; i++) {%>
 <div class="predict_content<%=i%> predict-card" style="display:none;">
 <%
@@ -787,62 +787,61 @@ try {
 </div><!--end content-->
 </div><!--end predict-container-->
  <script type="text/javascript">
- 
- 
-   $(function() {
-      $(".objImg img").click(function() {
-       var imgpath = $(this).attr('src');
-       imgpath = 'C:/dmkServer/' + imgpath.split('flask/')[1];
-       $("#search_img").val(imgpath);
-       //자동으로 버튼 클릭
-       $("#search_btn").click();
-       //로더 보이기
-       $(".wrapper").show();
-      });   
+ $(function() {
+     $(".objImg img").click(function() {
+      var imgpath = $(this).attr('src');
+      imgpath = 'C:/dmkServer/' + imgpath.split('flask/')[1];
+      $("#search_img").val(imgpath);
+      // 검색 버튼 클릭 이벤트 강제로 실행
+      $("#search_btn").trigger('click');
+      // 로딩 화면 보이기
+      $(".wrapper").show();
+     });   
+ });
+
+  $(function() {
+     $("#search_btn").on("click", function(event) {
+         event.preventDefault();
+         var form = $('#search_form')[0];
+         var data = new FormData(form);
+
+         $.ajax({
+             url : "http://127.0.0.1:5001/seek",
+             async : true,
+             type : "POST",
+             data: data,
+             processData : false,
+             contentType : false,
+             cache : false,
+             timeout : 600000,
+             success : function(data) {
+                 console.log(data)                  
+                 var html = "";
+                 for (var i = 0; i < 4; i++) {  
+                     html += '<div class="search-objImg"><a href="' + data['link'][i] + '" target="_blank"><img src="' + data['image'][i] + '"></a></div>';
+                 }
+                 $(".search-title").show();
+                 $(".search-subTitle").show();
+                 $('#search').html(html);
+             },
+             error : function(e) {
+                 console.log("ERROR : ", e);
+                 alert("fail");
+             },
+             complete : function() {
+                 // 로딩 화면 숨기기
+                 $(".wrapper").hide();
+             }
+         });
+
+     })
   });
- 
-   $(function() {
-      $("#search_btn").on("click", function(event) {
-          event.preventDefault();
-          var form = $('#search_form')[0];
-          var data = new FormData(form);
-
-          $.ajax({
-              url : "http://127.0.0.1:5001/seek",
-              async : true,
-              type : "POST",
-              data: data,
-              processData : false,
-              contentType : false,
-              cache : false,
-              timeout : 600000,
-              success : function(data) {
-                  console.log(data)                  
-                  var html = "";
-                  for (var i = 0; i < 4; i++) {  
-                      html += '<div class="search-objImg"><a href="' + data['link'][i] + '" target="_blank"><img src="' + data['image'][i] + '"></a></div>';
-                  }
-                  $(".search-title").show();
-                  $(".search-subTitle").show();
-                  $(".wrapper").hide();
-                  $('#search').html(html);
-
-              },
-              error : function(e) {
-                  console.log("ERROR : ", e);
-                  alert("fail");
-              }
-          });
-
-      })
+  
+  $(function() {
+      $(".content").click(function() {
+           $(".search-objImg").hide();
+      });
    });
-   
-   $(function() {
-	   $(".content").click(function() {
-		      $(".search-objImg").hide();
-	   });
-	  });
-	 
 </script>
  
 

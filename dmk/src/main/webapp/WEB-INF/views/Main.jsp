@@ -51,7 +51,10 @@
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
 			style="background-color: #393E46;">
 			<div class="container-fluid" style="width: 70%;">
-				<a class="navbar-brand" href="Main.do" style="color: #FFD369;">드라마켓</a>
+				<a class="navbar-brand" href="Main.do" style="color: #FFD369;">
+                  <span>드라마켓</span>
+				<img src="${cpath}/resources/img/dmkimg/dmksim.png"width="20" height="24" style="margin-left:3px; margin-top:4px;" class="d-inline-block align-text-top">
+                  </a>
 				<div class="d-flex justify-content-end">
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarColor02"
