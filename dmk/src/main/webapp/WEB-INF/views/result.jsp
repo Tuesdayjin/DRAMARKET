@@ -144,12 +144,23 @@ margin-bottom:50px;
 width : 100%;
 	height : auto;
 	}	
+	.predict-title h3{
+	color:#393E46;
+	margin-left:40px;
+	margin-top:40px;
+	}
+	
+	.predict-title p{
+	color : rgb(57, 62, 70,0.5);
+	margin-left:40px;
+	}
 	.predictObj-box{
 	width : 100%;
 	height : auto;
 	}
 
 	   .predict-card{
+	   position: relative;
 	   margin-top : 20px;
 	   width : 80%;
 display: flex;
@@ -157,24 +168,27 @@ display: flex;
   border-radius= 10;
     }
 
-    #search-objImg {
+.search-objImg{
+display: inline-block;
+vertical-align: top; /* 이미지를 수직으로 맞춤 */
+margin-left:40px;
+      	margin-bottom:40px;  
       flex: 0 0 auto;
       padding: 20px;
       width: 200px;
       height: auto;
-      background-color : red;
-    }
-  
-    #search-objImg img {
-      display: block;
+}
+.search-objImg img{
+display: block;
       width: 100%;
       height: auto;
       border-radius: 10px;
       box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
-    }
-    
-    
+}
+
         .objImg {
+      	margin-left:40px;
+      	margin-bottom:40px;  
       flex: 0 0 auto;
       padding: 20px;
       width: 200px;
@@ -233,6 +247,100 @@ width : 100%;
   margin-bottom : 1000px;
   margin-left : 830px;
 }
+
+/*로더*/
+.wrapper {
+  width: 200px;
+  height: 60px;
+  position: relative;
+  z-index: 1;
+   margin-left:405px;
+   margin-top : 30px;
+   margin-bottom : 30px;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #FFD369;
+  left: 15%;
+  transform-origin: 50%;
+  animation: circle7124 .5s alternate infinite ease;
+}
+
+@keyframes circle7124 {
+  0% {
+    top: 60px;
+    height: 5px;
+    border-radius: 50px 50px 25px 25px;
+    transform: scaleX(1.7);
+  }
+
+  40% {
+    height: 20px;
+    border-radius: 50%;
+    transform: scaleX(1);
+  }
+
+  100% {
+    top: 0%;
+  }
+}
+
+.circle:nth-child(2) {
+  left: 45%;
+  animation-delay: .2s;
+}
+
+.circle:nth-child(3) {
+  left: auto;
+  right: 15%;
+  animation-delay: .3s;
+}
+
+.circle2 {
+  width: 20px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgb(57, 62, 70,0.9);
+  position: absolute;
+  top: 62px;
+  transform-origin: 50%;
+  z-index: -1;
+  left: 15%;
+  filter: blur(1px);
+  animation: circle2046 .5s alternate infinite ease;
+}
+
+@keyframes circle2046 {
+  0% {
+    transform: scaleX(1.5);
+  }
+
+  40% {
+    transform: scaleX(1);
+    opacity: .7;
+  }
+
+  100% {
+    transform: scaleX(.2);
+    opacity: .4;
+  }
+}
+
+.circle2:nth-child(4) {
+  left: 45%;
+  animation-delay: .2s
+}
+
+.circle2:nth-child(5) {
+  left: auto;
+  right: 15%;
+  animation-delay: .3s;
+}
+
  </style>
 
 </head>
@@ -277,7 +385,10 @@ for(int i=0; i<nameArr.length; i++) {
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
 			style="background-color: #393E46;">
 			<div class="container-fluid" style="width: 70%;">
-				<a class="navbar-brand" href="Main.do" style="color: #FFD369;">드라마켓</a>
+				<a class="navbar-brand" href="Main.do" style="color: #FFD369;">
+				<span>드라마켓</span>
+				<img src="${cpath}/resources/img/dmkimg/dmksim.png"width="20" height="24" style="margin-left:3px; margin-top:4px;" class="d-inline-block align-text-top">
+				</a>
 				<div class="d-flex justify-content-end">
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarColor02"
@@ -555,7 +666,7 @@ for(int i=0; i<nameArr.length; i++) {
 				<div class="predictTilte-box">
 					<div class="predict-title">
 <h3>재생 중인 장면 속 상품입니다</h3>
-<p>클릭하면 상세 정보를 알</p>
+<p>상세정보를 보려면 이미지를 클릭하세요</p>
 </div>
 
 				</div>
@@ -568,7 +679,7 @@ try {
         for(int j=0; j<topDir[i].list().length; j++) {
             // 이미지 출력 코드%>
             <div class="objImg">
-                 <img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/top/<%=topDir[i].list()[j]%>'/>
+                  <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/top/<%=topDir[i].list()[j]%>'/></a>
            </div> 
         <%}
     } else {
@@ -586,7 +697,7 @@ try {
         for(int j=0; j<bottomDir[i].list().length; j++) {
             // 이미지 출력 코드%>
             <div class="objImg">
-                 <img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bottom/<%=bottomDir[i].list()[j]%>'/>
+                  <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bottom/<%=bottomDir[i].list()[j]%>'/></a>
            </div> 
         <%}
     } else {
@@ -604,7 +715,7 @@ try {
         for(int j=0; j<dressDir[i].list().length; j++) {
             // 이미지 출력 코드%>
             <div class="objImg">
-                 <img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/dress/<%=dressDir[i].list()[j]%>'/>
+                  <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/dress/<%=dressDir[i].list()[j]%>'/></a>
            </div> 
         <%}
     } else {
@@ -622,7 +733,7 @@ try {
         for(int j=0; j<bagDir[i].list().length; j++) {
             // 이미지 출력 코드%>
             <div class="objImg">
-                 <img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bag/<%=bagDir[i].list()[j]%>'/>
+                 <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bag/<%=bagDir[i].list()[j]%>'/></a>
            </div> 
         <%}
     } else {
@@ -651,12 +762,23 @@ try {
 <div class="predict-Bigbox">
     <div class="predictTilte-box">
       <div class="predict-title">
-<h3>선택한 상품의 정보입니다</h3>
+<h3 class="search-title" style="display:none;">선택한 상품의 정보입니다</h3>
+<p class="search-subTitle"  style="display:none;">이미지를 클릭하면 판매사이트로 이동합니다</p>
 </div>
     </div>
     <div class="predictObg-box">
-<div class="predict-card">
+<div class="search-card">
   <div id="search">
+  <div class="wrapper"   style="display:none;">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle2"></div>
+    <div class="circle2"></div>
+    <div class="circle2"></div>
+</div>
+
+
   </div>
        </div> 
 </div>
@@ -664,7 +786,9 @@ try {
   </div>
 </div><!--end content-->
 </div><!--end predict-container-->
-<script type="text/javascript">
+ <script type="text/javascript">
+ 
+ 
    $(function() {
       $(".objImg img").click(function() {
        var imgpath = $(this).attr('src');
@@ -672,15 +796,17 @@ try {
        $("#search_img").val(imgpath);
        //자동으로 버튼 클릭
        $("#search_btn").click();
-       
-       })
-   });
-       
+       //로더 보이기
+       $(".wrapper").show();
+      });   
+  });
+ 
    $(function() {
       $("#search_btn").on("click", function(event) {
           event.preventDefault();
           var form = $('#search_form')[0];
           var data = new FormData(form);
+
           $.ajax({
               url : "http://127.0.0.1:5001/seek",
               async : true,
@@ -693,11 +819,14 @@ try {
               success : function(data) {
                   console.log(data)                  
                   var html = "";
-					 for (var i = 0; i < 3; i++) {					
-						 html += '<div class="objImg searchObjImg"><img src="' + data['image'][i] + '"></div>';
-						html += "	<div class='obj-link'>"+'<a href="' + data['link'][i] + '">'+data['text'][i]+"</a>"+"</div>";				
-					}					
-					$('#search').html(html);
+                  for (var i = 0; i < 4; i++) {  
+                      html += '<div class="search-objImg"><a href="' + data['link'][i] + '" target="_blank"><img src="' + data['image'][i] + '"></a></div>';
+                  }
+                  $(".search-title").show();
+                  $(".search-subTitle").show();
+                  $(".wrapper").hide();
+                  $('#search').html(html);
+
               },
               error : function(e) {
                   console.log("ERROR : ", e);
@@ -707,7 +836,15 @@ try {
 
       })
    });
-</script> 
+   
+   $(function() {
+	   $(".content").click(function() {
+		      $(".search-objImg").hide();
+	   });
+	  });
+	 
+</script>
+ 
 
 				</div>
 				</div>
