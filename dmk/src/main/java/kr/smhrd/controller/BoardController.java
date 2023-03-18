@@ -26,10 +26,15 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.imgscalr.Scalr;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -109,8 +114,8 @@ public class BoardController { //DAO 대신 mapper 호출
 		
 	}
 	
-	
-	@RequestMapping("/fileupload.do") //파일 등록
+	//글 등록 전 파일 등록
+	@RequestMapping("/fileupload.do") 
 	public String fileupload(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response)
 	throws ServletException, IOException{
 		
@@ -161,7 +166,8 @@ public class BoardController { //DAO 대신 mapper 호출
 		
 	}
 	
-	@RequestMapping("/boardContent.do") //게시글 조회 페이지 불러오기 
+	//게시글 조회 페이지 불러오기 
+	@RequestMapping("/boardContent.do") 
 	public String boardContent(long num,Model model) {
 		
 		// 조회수 누적
@@ -173,16 +179,53 @@ public class BoardController { //DAO 대신 mapper 호출
 		return "boardContent";
 	}
 	
-	
+	//댓글 달기
 	@PostMapping("/commentInsert.do")
 	@ResponseBody
 	public String commentInsert(t_comment cmt_vo) {
 		cmt_vo.setIndate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
+		System.out.println("댓글 입력 id는 : "+cmt_vo.getCmt_id());
+		t_member mvo=mapper.memberById(cmt_vo.getCmt_id());
+		cmt_vo.setNick(mvo.getNick());
+		cmt_vo.setProfile_name(mvo.getProfile_name());
+		System.out.println("댓글 입력 프로필 경로는 : "+cmt_vo.getProfile_name());
 		mapper.cmtinsert(cmt_vo);
 		
 		return null;
 	}
-
-
+	
+	//댓글 불러오기
+    @ResponseBody  // ResponseBody : return 의 string 이 .jsp를 반환하지 않고, 문자열 그 자체를 반환
+    @RequestMapping(value="/commentList.do", method = RequestMethod.POST)
+    public List<t_comment> commentList(@RequestBody Map<String, Object> request) throws Exception{
+    	
+    	 long board_num = Long.parseLong((String) request.get("board_num"));
+    	 System.out.println("ajax 요청 도착 : "+ board_num);
+    	 List<t_comment> commentList = mapper.commentselect(board_num);
+    	 System.out.println("댓글 uuid : "+commentList.get(0).getCmt_num());
+    	 System.out.println("댓글 내용 : "+commentList.get(0).getCmt());
+    	 
+        
+         return commentList;
+        
+    }
+    
+    
+    
+    @ResponseBody
+    @RequestMapping(value="/commentDelete.do", method=RequestMethod.GET)
+    public String commentDelete(@RequestParam("cmt_num") long cmt_num) {
+        int result =mapper.cmtDelete(cmt_num);
+        String message=null;
+        if(result==1) {
+            message = "success";
+        } else {
+            message ="fail";
+        }
+        return message;
+    }
+    
+    
+    
 
 }

@@ -139,7 +139,8 @@
 											<div class="form-group">
 												<label for="id">아이디</label> 
 												<input type="text" class="form-control" name="id" id="joinid" placeholder='6~16 자리의 영어,숫자' class="patternCheck" pattern="^[A-Za-z0-9_-]{6,16}$" required>
-												<button type="button" id="idCheck" onclick="id_Check()">중복확인</button><br>
+												<button type="button" id="idCheck" class="btn btn-sm" onclick="id_Check()"  style="margin-top: 8px;  box-shadow: none; background-color: #FFD35F; color: white;">중복확인</button>
+												
 											</div>
 											<div class="form-group">
 												<label for="pwd">비밀번호</label> 

@@ -171,23 +171,6 @@
 
 // 글 등록
 
-$(document).ready(function () {
-	const title = document.querySelector('#title');
-	const content = document.querySelector('#content');
-	const registerButton = document.querySelector('#registerbtn');
-	
-	title.addEventListener('keyup', activeEvent);
-	content.addEventListener('keyup', activeEvent);
-	registerButton.addEventListener('click', errorEvent);
-
-	function activeEvent() {
-	  switch(!(title.value && content.value)){
-	    case true : registerButton.disabled = true; break;
-	    case false : registerButton.disabled = false; break;
-	  }
-	}
-	
-}
 
 
 function register(){ 

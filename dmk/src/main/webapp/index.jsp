@@ -2,4 +2,4 @@
     pageEncoding="UTF-8"%>
 <!--JSTL 코어 라이브러리 불러오기 , 리다이렉트 걸어주기 -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:redirect url="Main.do"/>
+<c:redirect url="intro.do"/>
