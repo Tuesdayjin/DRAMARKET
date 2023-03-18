@@ -51,7 +51,10 @@
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
 			style="background-color: #393E46;">
 			<div class="container-fluid" style="width: 70%;">
-				<a class="navbar-brand" href="Main.do" style="color: #FFD369;">드라마켓</a>
+				<a class="navbar-brand" href="Main.do" style="color: #FFD369;">
+                  <span>드라마켓</span>
+				<img src="${cpath}/resources/img/dmkimg/dmksim.png"width="20" height="24" style="margin-left:3px; margin-top:4px;" class="d-inline-block align-text-top">
+                  </a>
 				<div class="d-flex justify-content-end">
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarColor02"
@@ -136,9 +139,9 @@
 									</div>
 									<div class="card-footer">
 										<div>
-											<form action="">
+											<form action="http://localhost:5000/link" method="post">
 												<input type="text" class="form-control"
-													placeholder="링크를 입력해주세요">
+													placeholder="링크를 입력해주세요" name="uploadLink">
 										</div>
 										<div>
 											<button class="btn btn-lg btn-primary uploadBtn"
@@ -261,6 +264,13 @@
 
 			});
 		});
+		
+		$(document).ready(function(){
+	          $('form').submit(function(){
+	              $('.btn.btn-lg.btn-primary.uploadBtn').attr('disabled',true).text('업로드 중...');
+	              // 파일 업로드를 시작할 때 버튼을 비활성화합니다.
+	          });
+	      });
 	</script>
 </body>
 </html>
