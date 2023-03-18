@@ -131,6 +131,7 @@
                         </div>
                     </div>
 <!--댓글 작성-->
+
 <div class="card shadow border-0 mt-3">
     <div class="card-body reBox" style="background-color: #EEEEEE;">
     
@@ -249,9 +250,7 @@ function getList(){
 	
 }
         
-        
-
-    
+  
 </script>
 
 
