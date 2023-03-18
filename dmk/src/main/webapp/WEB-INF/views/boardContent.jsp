@@ -139,12 +139,11 @@
         <div class="mb-3">
           <div class="row insertRe">
             <div class="col-10">
-            	<input type="hidden" name="board_num" id="board_num"  value="${board_vo.num}"/>
             	<input type="hidden" name="cmt_id" id="cmt_id"  value="${mvo.id}"/>
                 <textarea class="form-control" name="cmt" id="cmt" placeholder="댓글을 입력하세요."rows="1"></textarea>
             </div>
             <div class="col-2">
-                <button type="button" id="reply_btn" class="btn btn-primary btn-md" onclick="insertreply()"><i class="bi bi-pencil"></i></button>
+                <button type="button" id="reply_btn" class="btn btn-primary btn-md" ><i class="bi bi-pencil"></i></button>
             </div>
           </div>
         </form>
@@ -161,23 +160,16 @@
     	
     	
       <!--작성 댓글 목록-->
-          <div class="row comment">
-            <div class="col-1 ">
-                <img class="rounded-circle me-3 commentImg" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+          <input type="hidden" name="board_num" id="board_num"  value="${board_vo.num}"/>
+          <div class="row comment" id='commentList'>
+       
             </div>
-            <div class="col-11 small commentBox">
-                <div class="row commentText" style="padding-left: 20px;">
-                    <div class="col-2">
-                        <div class="fw-bold">사용자</div>
-                    </div>
-                    <div class="col-10">
-                        <div class="text-muted">작성날짜</div>
-                    </div>
-                </div>
-                <div class="row" style="padding-left: 20px;">
-                <p>댓글 내용</p>
-                </div>
-            </div>
+            
+            
+            
+            
+            
+            
           </div>
     <!--작성 댓글 목록 끝-->
           
@@ -197,59 +189,6 @@
 
 
 
-
-<script type="text/javascript">
-
-function insertreply() {
-	var cmt =  $("#cmt").val();
-	var form = $("#reply_form").serialize()
-
-	if(cmt.length == 0){
-       	 Swal.fire({
-             icon: '',
-             title: '',
-             text: '💛댓글을 입력해주세요💛',
-             confirmButtonColor: '#FFD35F'
-         });
-            return;
-    }else{
-    	   $.ajax({
-               url : "commentInsert.do",
-               type : "POST",
-               contentType : 'application/x-www-form-urlencoded; charset=UTF-8', 
-                             //application/json , JSON.stringify , 컨트롤러에 매개변수 앞에 @RequestBody 3가지가 하나의 세트             
-               data :form,
-               success : function(){
-				   console.log('댓글 등록 완료');   
-                   $('#cmt').val('');
-                   getList();
-               },
-               error : function(err){
-                   console.log("댓글 입력 실패")
-               }
-               
-           });//ajax
-    }
-	
-}// 댓글 insert
-
-
-function getList(){
-    $.ajax({
-        
-        url : "commentSelect.do",
-        type : "GET",
-        dataType : "json",
-        success :function(obj){
-        	
-        }
-	
-}
-        
-        
-
-    
-</script>
 
 
 
@@ -278,5 +217,145 @@ function getList(){
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <!-- Bootstrap core JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script type="text/javascript">
+
+// jsp 열리면서 댓글 불러오는 함수
+$(document).ready(function(){
+	 init();
+   $('#reply_btn').on('click',replyinsert);
+	});
+
+//댓글 작성하는 함수
+function replyinsert(){
+	   var cmt =  $("#cmt").val();
+	   var form = $("#reply_form").serialize()
+
+	   if(cmt.length == 0){
+	           Swal.fire({
+	             icon: '',
+	             title: '',
+	             text: '💛댓글을 입력해주세요💛',
+	             confirmButtonColor: '#FFD35F'
+	         });
+	            return;
+	    }else{
+	          $.ajax({
+	               url : "commentInsert.do",
+	               type : "POST",
+	               contentType : 'application/x-www-form-urlencoded; charset=UTF-8', 
+	                             //application/json , JSON.stringify , 컨트롤러에 매개변수 앞에 @RequestBody 3가지가 하나의 세트             
+	               data :form,
+	               success : function(){
+	               console.log('댓글 등록 완료');   
+	               		init();
+	                   $('#cmt').val('');
+	               },
+	               error : function(err){
+	                   console.log("댓글 입력 실패");
+	               }
+	           });//ajax
+	    }
+    };// 댓글 입력 
+  
+     
+     
+//댓글 불러오는 함수 
+function init() {
+	var str = "";
+    var board_num = $("#board_num").val();
+    var sendData = {"board_num": board_num};
+    $.ajax({
+        url: 'commentList.do',
+        method: 'POST',
+        data: JSON.stringify(sendData),
+        contentType: 'application/json; charset=UTF-8',
+        dataType: 'json',
+        success: function(data) {
+            console.log('댓글 불러오기 성공');
+            output(data);
+        },
+        error: function(xhr, status, error) {
+        	str += "<p  style='margin-left: 15px; color: gray; font-size:13px;'>등록된 댓글이 없습니다</p>";
+        	$("#commentList").html(str);
+        	
+            console.error(xhr.responseText);
+            console.error(status);
+            console.error(error);
+            console.log('댓글 불러오기 실패');
+        }
+    });
+};
+
+
+
+
+//불러온 댓글 html에 뿌리는 함수 
+function output(data) {
+	var str = "";
+	if (data.length > 0) {
+		$.each(data,function(index, item) {
+			str += '<div class="col-1 "><img class="rounded-circle me-3 commentImg" src="http://localhost:8081/profile/profile_' + item["profile_name"] + '" alt="..." /></div>';
+			str += '<div class="col-11 small commentBox">';     
+			str += '<div class="row commentText" style="padding-left: 20px;">';
+			str += '<div class="col-2"><div class="fw-bold">'
+					+ item["cmt_id"] + '</div>';
+			str += '</div>';
+			str += '<div class="col-10"><div class="text-muted">'
+					+ formatDate(item["indate"]) + '</div>';
+			str += '</div>';
+			str += '</div>';
+			str += '<div class="row" style="padding-left: 20px;">';
+			str += '<p>' + item["cmt"];
+			str += '<input type="hidden" name="cmt_num" id="cmt_num"  value="'+item["cmt_num"]+'"/>';
+			if ("${sessionScope.mvo.id}" == item["cmt_id"]) {
+				str += '<a id="replyDelete" onclick="replyDelete()" style="margin-left: 15px; color: tomato; font-weight: bold; cursor:hand;">x</a></p>';
+			}
+	
+			str += '</div>';
+			str += '</div>';
+	
+		});
+
+	} else {
+		str += "<p>등록된 댓글이 없습니다.</p>";
+	}
+	$("#commentList").html(str);
+};
+
+//date형식 날짜 포맷팅 함수
+function formatDate(dateStr) {
+	var date = new Date(dateStr);
+	var year = date.getFullYear();
+	var month = ("0" + (date.getMonth() + 1)).slice(-2);
+	var day = ("0" + date.getDate()).slice(-2);
+	return year + "-" + month + "-" + day;
+};
+
+//댓글 삭제
+function replyDelete() {
+	var cmt_num = $('#cmt_num').val();
+	console.log(cmt_num);
+	var sendData = { "cmt_num" : parseInt(cmt_num) }
+	$.ajax({
+		method : 'GET',
+		url : 'commentDelete.do?' + $.param(sendData),
+		success : function(data) {
+            console.log('댓글 삭제 성공 :'+data);
+            init();
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+            console.error(status);
+            console.error(error);
+            console.log('댓글 삭제 실패');
+        }
+	});
+	};
+</script>
+
+
+
 </body>
 </html>

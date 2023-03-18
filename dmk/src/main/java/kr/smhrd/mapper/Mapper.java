@@ -1,7 +1,9 @@
 package kr.smhrd.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -48,8 +50,18 @@ public interface Mapper {
 	@Update("update t_board set views=views+1 where num=#{num}")
 	public void countUpdate(long num);
 
-	@Insert("insert into t_comment (board_num, cmt, cmt_id, indate) values (#{board_num},#{cmt},#{cmt_id},#{indate})")
+	//댓글 insert
+	@Insert("insert into t_comment (board_num, cmt, cmt_id, indate, nick, profile_name) "
+						+ "values (#{board_num},#{cmt},#{cmt_id},#{indate},#{nick},#{profile_name})")
 	public void cmtinsert(t_comment cmt_vo);
+
+	//댓글 불러오기
+	@Select("select * from t_comment where board_num=#{board_num} order by indate desc")
+	public ArrayList<t_comment> commentselect(Long board_num);
+
+	//댓글 삭제
+	@Delete("delete from t_comment where cmt_num=#{cmt_num}")
+	public int cmtDelete(long cmt_num);
 	
 
 	
