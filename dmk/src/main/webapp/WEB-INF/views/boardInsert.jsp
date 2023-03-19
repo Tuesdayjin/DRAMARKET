@@ -142,7 +142,7 @@
 </section>
 </main>
 <!-- Footer-->
-<footer class="bg-dark py-4 mt-auto">
+<footer class="py-4 mt-auto"  style="background-color:#393E46;">
 <div class="container px-5">
     <div class="row align-items-center justify-content-between flex-column flex-sm-row">
         <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; DRAMARKET 2023</div></div>

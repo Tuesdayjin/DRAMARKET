@@ -59,15 +59,26 @@
 .link-unstyled {
 	margin-top: 30px;
 }
+.loginHeader{
+width : 100%;
+height : 100%;
+
+}
+body {
+  background-color: #393E46;
+}
+footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  }
 </style>
 </head>
 <body>
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
-	<div
-		style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
-			style="background-color: #393E46;">
+	<div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
+		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid" style="width: 70%;">
 				<a class="navbar-brand" href="Main.do" style="color: #FFD369;">
                   <span>드라마켓</span>
@@ -95,7 +106,7 @@
 		</nav>
 	</div>
 	<!-- Header-->
-	<header class="bg-dark py-5" style="background-color: #393E46;">
+	<header class="py-5 loginHeader">
 		<div class="container px-5">
 			<div class="row gx-5 align-items-center justify-content-center">
 				<div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -110,283 +121,288 @@
 
 					</div>
 				</div>
-				<div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-					<div class="container mt-5">
-						<div class="row">
-							<div class="col-md-6 offset-md-3">
-								<div class="card">
-									<div class="card-body">
+
+			</div>
+		</div>
+	</header>
+	<div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
+               <div class="container mt-5">
+                  <div class="row">
+                     <div class="col-md-6 offset-md-3">
+                        <div class="card">
+                           <div class="card-body">
 
 
-										<h2 class="cardTitle">로그인</h2>
-										<form id="login-form" action="login.do" method="post">
-											<div class="form-group">
-												<label for="id">아이디</label> 
-												<input type="text" class="form-control" name="id" id="loginId" >
-											</div>
-											<div class="form-group">
-												<label for="pwd">비밀번호</label> 
-												<input type="password" class="form-control" name="pwd" id="loginpwd">
-											</div>
-											<button type="submit" class="btn btn-primary">로그인</button>
-											<div class="form-group">
-												<a href="#" class="link-unstyled" id="show-signup">회원가입</a>
-											</div>
-										</form>
+                              <h2 class="cardTitle">로그인</h2>
+                              <form id="login-form" action="login.do" method="post">
+                                 <div class="form-group">
+                                    <label for="id">아이디</label> 
+                                    <input type="text" class="form-control" name="id" id="loginId" >
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="pwd">비밀번호</label> 
+                                    <input type="password" class="form-control" name="pwd" id="loginpwd">
+                                 </div>
+                                 <button type="submit" class="btn btn-primary">로그인</button>
+                                 <div class="form-group">
+                                    <a href="#" class="link-unstyled" id="show-signup">회원가입</a>
+                                 </div>
+                              </form>
 
 
-										<form id="signup-form" style="display: none;" enctype="multipart/form-data">
-											<div class="form-group">
-												<label for="id">아이디</label> 
-												<input type="text" class="form-control" name="id" id="joinid" placeholder='6~16 자리의 영어,숫자' class="patternCheck" pattern="^[A-Za-z0-9_-]{6,16}$" required>
-												<button type="button" id="idCheck" onclick="id_Check()">중복확인</button><br>
-											</div>
-											<div class="form-group">
-												<label for="pwd">비밀번호</label> 
-												<input type="pwd" class="form-control patternCheck" name="pwd" id="joinpwd" pattern="^[A-Za-z\d$@$!%*#?&]{4,16}$" required>
-												<label for="pwd">비밀번호 재확인</label> 
-												<input type="pwd" class="form-control patternCheck" name="pwdCheck" id="joinpwdCheck" pattern="^[A-Za-z\d$@$!%*#?&]{4,16}$" required>
-											</div>
-											<div class="form-group">
-												<label for="nick">닉네임</label> 
-												<input type="nick" class="form-control" name="nick" id="joinnick" placeholder="2~8글자(특수문자,공백불가)" pattern="^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,8}$" required>
-											</div>
-											<div class="form-group">
-												<label for="nick">프로필 사진</label> 
-												<input type="file" class="form-control" name="file" id="profile">
-												<input type="hidden" class="form-control" name="profile_name" id="profile_name" value="defaultprofile.png">
-											</div>
-											<div class="form-group">
-												<label for="gender">성별</label>
-												<div class="row">
-													<div class="col">
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio"
-																name="gender" id="male joingender" value="male"> <label
-																class="form-check-label" for="male"> 남자 </label>
-														</div>
-													</div>
-													<div class="col">
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio"
-																name="gender" id="female joingender" value="female"> <label
-																class="form-check-label" for="female"> 여자 </label>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="form-group">
-												<label for="birth">생년월일</label> 
-												<input type="text" class="form-control datepicker" name="birth" id="joinbirth">
-											</div>
-											<button type="button" id="register_btn" class="btn btn-primary" onclick="memberRegister()" >계정 생성</button>
-											<div class="form-group">
-												<a href="#" class="link-unstyled" id="show-login">로그인으로
-													돌아가기</a>
-											</div>
-										</form>
+                              <form id="signup-form" style="display: none;" enctype="multipart/form-data">
+                                 <div class="form-group">
+                                    <label for="id">아이디</label> 
+                                    <input type="text" class="form-control" name="id" id="joinid" placeholder='6~16 자리의 영어,숫자' class="patternCheck" pattern="^[A-Za-z0-9_-]{6,16}$" required>
+                                    <button type="button" id="idCheck" class="btn btn-sm" onclick="id_Check()"  style="margin-top: 8px;  box-shadow: none; background-color: #FFD35F; color: white;">중복확인</button>
+                                    
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="pwd">비밀번호</label> 
+                                    <input type="pwd" class="form-control patternCheck" name="pwd" id="joinpwd" pattern="^[A-Za-z\d$@$!%*#?&]{4,16}$" required>
+                                    <label for="pwd">비밀번호 재확인</label> 
+                                    <input type="pwd" class="form-control patternCheck" name="pwdCheck" id="joinpwdCheck" pattern="^[A-Za-z\d$@$!%*#?&]{4,16}$" required>
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="nick">닉네임</label> 
+                                    <input type="nick" class="form-control" name="nick" id="joinnick" placeholder="2~8글자(특수문자,공백불가)" pattern="^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,8}$" required>
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="nick">프로필 사진</label> 
+                                    <input type="file" class="form-control" name="file" id="profile">
+                                    <input type="hidden" class="form-control" name="profile_name" id="profile_name" value="defaultprofile.png">
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="gender">성별</label>
+                                    <div class="row">
+                                       <div class="col">
+                                          <div class="form-check form-check-inline">
+                                             <input class="form-check-input" type="radio"
+                                                name="gender" id="male joingender" value="male"> <label
+                                                class="form-check-label" for="male"> 남자 </label>
+                                          </div>
+                                       </div>
+                                       <div class="col">
+                                          <div class="form-check form-check-inline">
+                                             <input class="form-check-input" type="radio"
+                                                name="gender" id="female joingender" value="female"> <label
+                                                class="form-check-label" for="female"> 여자 </label>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="birth">생년월일</label> 
+                                    <input type="text" class="form-control datepicker" name="birth" id="joinbirth">
+                                 </div>
+                                 <button type="button" id="register_btn" class="btn btn-primary" onclick="memberRegister()" >계정 생성</button>
+                                 <div class="form-group">
+                                    <a href="#" class="link-unstyled" id="show-login">로그인으로
+                                       돌아가기</a>
+                                 </div>
+                              </form>
 
 
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
 
 
 <script>
-	$(document).ready(function() {
-		// 초기화
-		$('.cardTitle').text('로그인');
+   $(document).ready(function() {
+      // 초기화
+      $('.cardTitle').text('로그인');
 
-		// 로그인 폼 보이기
-		$('#show-login').click(function() {
-			$('#login-form').show();
-			$('#signup-form').hide();
-			$('.cardTitle').text('로그인');
-		});
+      // 로그인 폼 보이기
+      $('#show-login').click(function() {
+         $('#login-form').show();
+         $('#signup-form').hide();
+         $('.cardTitle').text('로그인');
+      });
 
-		// 회원가입 폼 보이기
-		$('#show-signup').click(function() {
-			$('#login-form').hide();
-			$('#signup-form').show();
-			$('.cardTitle').text('회원가입');
-		});
-	});
-	
-	
-	
+      // 회원가입 폼 보이기
+      $('#show-signup').click(function() {
+         $('#login-form').hide();
+         $('#signup-form').show();
+         $('.cardTitle').text('회원가입');
+      });
+   });
+   
+   
+   
 
-	
-	$(document).ready(function() {
-		// show/hide login and signup forms
-		$('#show-signup').click(function(event) {
-			event.preventDefault(); // 링크 클릭 이벤트 취소
-			$('#login-form').hide();
-			$('#signup-form').show();
-		});
-		$('#show-login').click(function(event) {
-			event.preventDefault(); // 링크 클릭 이벤트 취소
-			$('#signup-form').hide();
-			$('#login-form').show();
-		});
-	});
+   
+   $(document).ready(function() {
+      // show/hide login and signup forms
+      $('#show-signup').click(function(event) {
+         event.preventDefault(); // 링크 클릭 이벤트 취소
+         $('#login-form').hide();
+         $('#signup-form').show();
+      });
+      $('#show-login').click(function(event) {
+         event.preventDefault(); // 링크 클릭 이벤트 취소
+         $('#signup-form').hide();
+         $('#login-form').show();
+      });
+   });
 
-	
-	
-	 $(document).ready(function() {
-	        $('#login-form').submit(function() {
-	        	let id=$('#loginId').val();
-	        	let pw=$('#loginpwd').val();
-	            if (id=="") {
-	            	 Swal.fire({
-	                     icon: '',
-	                     title: '',
-	                     text: '아이디를 입력해주세요',
-	                     confirmButtonColor: '#FFD35F'
-	                 });
-	                return false;
-	            }else if(pw==""){
-	            	 Swal.fire({
-	                     icon: '',
-	                     title: '',
-	                     text: '비밀번호를 입력해주세요',
-	                     confirmButtonColor: '#FFD35F'
-	                 });
-	            	 return false;
-	            }
-	        }); // end submit()
-	    }); // end ready()
-	
-	// 아래로는 회원가입 관련
-	
-	$(document).ready(function() {
-		$('.datepicker').datepicker({
-			dateFormat : 'yy-mm-dd', // 년-월-일 형식으로 날짜 출력
-			changeYear : true, // 년도 선택 가능하도록 설정
-			yearRange : "-100:+0", // 현재 날짜로부터 100년 전까지 선택 가능하도록 설정
-		});
-	});
-	
+   
+   
+    $(document).ready(function() {
+           $('#login-form').submit(function() {
+              let id=$('#loginId').val();
+              let pw=$('#loginpwd').val();
+               if (id=="") {
+                   Swal.fire({
+                        icon: '',
+                        title: '',
+                        text: '아이디를 입력해주세요',
+                        confirmButtonColor: '#FFD35F'
+                    });
+                   return false;
+               }else if(pw==""){
+                   Swal.fire({
+                        icon: '',
+                        title: '',
+                        text: '비밀번호를 입력해주세요',
+                        confirmButtonColor: '#FFD35F'
+                    });
+                   return false;
+               }
+           }); // end submit()
+       }); // end ready()
+   
+   // 아래로는 회원가입 관련
+   
+   $(document).ready(function() {
+      $('.datepicker').datepicker({
+         dateFormat : 'yy-mm-dd', // 년-월-일 형식으로 날짜 출력
+         changeYear : true, // 년도 선택 가능하도록 설정
+         yearRange : "-100:+0", // 현재 날짜로부터 100년 전까지 선택 가능하도록 설정
+      });
+   });
+   
 
     function memberRegister(){
-		if($("#profile").val()!=""){ //파일이 첨부된 경우..
-			var formData=new FormData();
-			formData.append("file", $("input[name=file]")[0].files[0]);
-		    $.ajax({
-			      url: "profileupload.do",
-			      type: "POST",
-			      data: formData,
-			      processData: false,
-			      contentType: false,
-			      success: function(data) {
-			    	 console.log(JSON.stringify(data));
-			        $('#profile_name').val(data);
+      if($("#profile").val()!=""){ //파일이 첨부된 경우..
+         var formData=new FormData();
+         formData.append("file", $("input[name=file]")[0].files[0]);
+          $.ajax({
+               url: "profileupload.do",
+               type: "POST",
+               data: formData,
+               processData: false,
+               contentType: false,
+               success: function(data) {
+                 console.log(JSON.stringify(data));
+                 $('#profile_name').val(data);
 
-			        $('#signup-form').attr('method', 'post');
-			        $('#signup-form').attr('action', 'memberRegister.do');
-					$('#signup-form').submit();
-			      },
-			      error : function(){alert("파일 업로드에 실패하였습니다");}
-			    }); // $.ajax
-		}else{
-			$('#signup-form').attr('method', 'post');
-	        $('#signup-form').attr('action', 'memberRegister.do');
-			$('#signup-form').submit();
-			
-			
-		}
-	}
+                 $('#signup-form').attr('method', 'post');
+                 $('#signup-form').attr('action', 'memberRegister.do');
+               $('#signup-form').submit();
+               },
+               error : function(){alert("파일 업로드에 실패하였습니다");}
+             }); // $.ajax
+      }else{
+         $('#signup-form').attr('method', 'post');
+           $('#signup-form').attr('action', 'memberRegister.do');
+         $('#signup-form').submit();
+         
+         
+      }
+   }
 
     
     $(document).ready(function() {
-    	$('#signup-form').submit(function() {
-        	let id=$('#joinid').val();
-        	let pw=$('#joinpwd').val();
-        	let nick=$('#joinnick').val();
-        	let gender=$('#joingender').val();
-        	let birth=$('#joinbirth').val();
+       $('#signup-form').submit(function() {
+           let id=$('#joinid').val();
+           let pw=$('#joinpwd').val();
+           let nick=$('#joinnick').val();
+           let gender=$('#joingender').val();
+           let birth=$('#joinbirth').val();
             if (id=="") {
-            	 Swal.fire({
+                Swal.fire({
                      text: '아이디를 입력해주세요',
                      confirmButtonColor: '#FFD35F'
                  });
                 return false;
             }else if(pw==""){
-            	 Swal.fire({
+                Swal.fire({
                      icon: '',
                      title: '',
                      text: '비밀번호를 입력해주세요',
                      confirmButtonColor: '#FFD35F'
                  });
-            	 return false;
+                return false;
             }else if(nick==""){
-            	 Swal.fire({
+                Swal.fire({
                      icon: '',
                      title: '',
                      text: '닉네임을 입력해주세요',
                      confirmButtonColor: '#FFD35F'
                  });
-            	 return false;
+                return false;
             }else if(gender=="e" || gender=="E"){
-            	 Swal.fire({
+                Swal.fire({
                      icon: '',
                      title: '',
                      text: '성별을 입력해주세요',
                      confirmButtonColor: '#FFD35F'
                  });
-            	 return false;
+                return false;
             }else if(birth==""){
-            	 Swal.fire({
+                Swal.fire({
                      icon: '',
                      title: '',
                      text: '생년월일을 입력해주세요',
                      confirmButtonColor: '#FFD35F'
                  });
-            	 return false;
+                return false;
             }
             
         }); // end submit()
     }); // end ready()
 
 
-	$(document).ready(function() {
-		$('#idCheck').click(function() {
+   $(document).ready(function() {
+      $('#idCheck').click(function() {
         var id = $('#joinid').val(); // input_id에 입력되는 값
         var idRegExp = /^[a-zA-z0-9]{6,16}$/; //아이디 유효성 검사
         console.log(id);
         
         if(id == "" ){
-          	Swal.fire({
+             Swal.fire({
                   icon: '',
                   title: '',
                   text: '아이디를 입력해 주세요.',
                   confirmButtonColor: '#FFD35F'
               });
           }else if(!idRegExp.test(id)){
-            	Swal.fire({
+               Swal.fire({
                     icon: '',
                     title: '',
                     text: '영문 대소문자와 숫자 6~16자리로 입력해주세요',
                     confirmButtonColor: '#FFD35F'
                 });
           }else{
-        	  
+             
         $.ajax({
            url : "IdCheckService.do",
            type : "post",
            data : {"id": id},
            success : function(data){
-        	   console.log("통신 성공");
+              console.log("통신 성공");
               if(data == "OK" && idRegExp.test(id) ){
-              	Swal.fire({
+                 Swal.fire({
                       icon: 'success',
                       title: '',
                       text: '중복되지 않은 아이디입니다.',
                       confirmButtonColor: '#FFD35F'
                   });
               } else{
-              	Swal.fire({
+                 Swal.fire({
                       icon: 'error',
                       title: '',
                       text: '이미 사용중인 아이디입니다.',
@@ -402,17 +418,37 @@
         
         
          
-	     });
+        });
      });
     
     
     
-	</script>
+   </script>
+            </div>
+<!-- Footer-->
+	<footer class="py-4 mt-auto"  style="background-color:#393E46;">
+		<div class="container px-5">
+			<div
+				class="row align-items-center justify-content-between flex-column flex-sm-row">
+				<div class="col-auto">
+					<div class="small m-0 text-white">Copyright &copy; DRAMARKET
+						2023</div>
+				</div>
+				<div class="col-auto">
+					<a class="link-light small" href="#!">Privacy</a> <span
+						class="text-white mx-1">&middot;</span> <a
+						class="link-light small" href="#!">Terms</a> <span
+						class="text-white mx-1">&middot;</span> <a
+						class="link-light small" href="#!">Contact</a>
 				</div>
 			</div>
 		</div>
-	</header>
 	</footer>
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -48,8 +48,7 @@
 		title="Go to top">TOP</button>
 
 	<div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
-			style="background-color: #393E46;">
+		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid" style="width: 70%;">
 				<a class="navbar-brand" href="Main.do" style="color: #FFD369;">
                   <span>드라마켓</span>
@@ -86,7 +85,7 @@
 		</nav>
 	</div>
 	<!-- Header-->
-	<header class="bg-dark py-5" style="background-color: #393E46;">
+	<header class="py-5 dmkHeader">
 		<div class="container px-5">
 			<div class="row gx-5 align-items-center justify-content-center">
 				<div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -96,7 +95,6 @@
 						<p class="lead fw-normal text-white-50 mb-4">Quickly design
 							and customize responsive mobile-first sites with Bootstrap, the
 							world’s most popular front-end open source toolkit!</p>
-
 					</div>
 				</div>
 
@@ -201,7 +199,7 @@
 
 	</main>
 	<!-- Footer-->
-	<footer class="bg-dark py-4 mt-auto">
+	<footer class="py-4 mt-auto"  style="background-color:#393E46;">
 		<div class="container px-5">
 			<div
 				class="row align-items-center justify-content-between flex-column flex-sm-row">

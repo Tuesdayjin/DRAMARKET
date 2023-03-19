@@ -433,7 +433,7 @@ for(int i=0; i<nameArr.length; i++) {
 		</div>
 						<!-- 캡쳐버튼 로그인 검증  <c:if test="${!empty mvo}">  
 				</c:if>  -->
-<button id="captureImageButton" onclick="openModal()" class="btn">
+<button id="captureImageButton" class="btn">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
   <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
   <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
@@ -451,47 +451,7 @@ for(int i=0; i<nameArr.length; i++) {
 				</div>
 				<!--영상현재시간출력<div id="currentTimeDisplay"></div>-->
 </div>
-</div>
-<div class="content">
-				<div id="myModal" class="modal">
-				  <div class="modal-content">
-	<section class="py-5">
-    <div class="container px-5">
-        <div class="row gx-5 align-items-center justify-content-center">
-            <div class="col-lg-8 col-xl-7 col-xxl-6">
-                <div class="my-5 text-xl-start">
-                    <form id="fileform" enctype="multipart/form-data" >
-
-						<input type="hidden" name="id" id="id"  value="${mvo.id}"/>
-                      <div class="card shadow border-0" style="background-color: #EEEEEE;">
-                      
-                        <div class="card-header" style="margin-top: 10px;">
-                          <input name="title" type="text" class="form-control" placeholder="글 제목" aria-label="Username" aria-describedby="basic-addon1">
-                        </div>
-                        <div class="card-body p-4">
-                          <textarea name="content" class="form-control" placeholder="글 내용" rows="5" aria-label="With textarea"></textarea>
-                        </div>
-                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0" style="background-color: #EEEEEE;">
-						<img id="capturedImage" style="width:100px; height:100px;"/>
-						<input type="hidden" id="img_name" name="img_name" value="">
-                        </div>
-                      </div>
-                        <div class="row btnDiv">
-                            <button type="button" onclick="register()" class="btn btn-primary"><i class="bi bi-pencil"></i>글쓰기</button>
-                        </div> 
-                      
-                    </form>
-                  </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</section>	
-  </div>
-</div>			
-
+</div>		
 				<script>
 				
 				var player = null;
@@ -590,72 +550,22 @@ for(int i=0; i<nameArr.length; i++) {
 						  var imageDataUrl = canvas.toDataURL('image/png');
 
 						  console.log(imageDataUrl);
-					        //이미지 src가져오기
-					        $('#capturedImage').attr('src', imageDataUrl);
-					        
-					        
-					        // 캡쳐버튼 모달창 활성화 
-					        document.getElementById("myModal").style.display = "block";
-					        
-							window.onclick = function(event) {
-								  var modal = document.getElementById("myModal");
-								  if (event.target == modal) {
-								    modal.style.display = "none";
-								  }
-								}
-					        
-					}
-					
-					
-
-	
-						function closeModal() {
-						  document.getElementById("myModal").style.display = "none";
-						}
-
-						window.onclick = function(event) {
-						  var modal = document.getElementById("myModal");
-						  if (event.target == modal) {
-						    modal.style.display = "none";
-						  }
-						}
-						
-						
-						function register(){
-							
-						    	var file = base64toFile($('#capturedImage').attr('src'), 'capture.png');  
-
-								var formData=new FormData();
-								formData.append("file", file);
-							    $.ajax({
-								      url: "fileupload.do",
-								      type: "POST",
-								      data: formData,
-								      processData: false,
-								      contentType: false,
-								      success: function(data) {
-								    	 console.log(JSON.stringify(data));
-								        $('#img_name').val(data);
-								        $('#fileform').attr('method', "post");
-								        $('#fileform').attr('action', "writeaddfile.do");
-								        $('#fileform').submit();
-								      },
-								      error : function(){alert("파일 업로드에 실패하였습니다");}
-								    }); // $.ajax
-							}			
-		
-					// base64 이미지 -> File 객체로 변환하는 함수
-						function base64toFile(base_data, filename) {
-						    var arr = base_data.split(','),
-						        mime = arr[0].match(/:(.*?);/)[1],
-						        bstr = atob(arr[1]),
-						        n = bstr.length,
-						        u8arr = new Uint8Array(n);
-						    while(n--){
-						        u8arr[n] = bstr.charCodeAt(n);
+						// 이미지 데이터를 POST 방식으로 전송
+						  $.ajax({
+						    type: 'POST',
+						    url: 'imgResult.jsp',
+						    data: {
+						      imageDataUrl: imageDataUrl
+						    },
+						    success: function(response) {
+						      consolo.log(response);
+						    },
+						    error: function(xhr, status, error) {
+						      alert('이미지 전송에 실패했습니다. 다시 시도해주세요');
 						    }
-						    return new File([u8arr], filename, {type:mime});
-						}
+						  });
+						  
+					}								
 				</script>
 <!--인식한 객체 출력-->
 <div class="container predict-container">
@@ -846,7 +756,7 @@ try {
 				</div>
 				</div>
 <!-- Footer-->
-<footer class="bg-dark py-4 mt-auto" style="width:100%;">
+<footer class="py-4 mt-auto"  style="background-color:#393E46;">
 <div class="container px-5">
     <div class="row align-items-center justify-content-between flex-column flex-sm-row">
         <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; DRAMARKET 2023</div></div>
