@@ -5615,7 +5615,7 @@ textarea.form-control-lg {
   --bs-tooltip-margin: ;
   --bs-tooltip-font-size: 0.875rem;
   --bs-tooltip-color: #222831;
-  --bs-tooltip-bg: rgba(240, 245, 250, 0.8);
+  --bs-tooltip-bg: rgba(255, 211, 105, 0.5);
   --bs-tooltip-border-radius: 0.375rem;
   --bs-tooltip-opacity: 0.9;
   --bs-tooltip-arrow-width: 0.8rem;

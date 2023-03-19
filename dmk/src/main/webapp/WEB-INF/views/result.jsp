@@ -84,7 +84,8 @@
 	src="http://localhost:8081/flask/full/build/js/amalia.js-plugin-timeline.min.js"></script>
 <script type="text/javascript"
 	src="http://localhost:8081/flask/full/build/js/i18n/amalia.js-message-en.js"></script>
-
+	
+	
 <style>
 #captureImageButton {
   position: fixed;
@@ -93,6 +94,8 @@
   z-index: 999;
   background-color : #FFD369;
   color : #FFFFFF;
+  border-radius: 50px;
+  padding: 15px;
 }
 #captureImageButton svg {
   width: 25px;
@@ -107,7 +110,7 @@
         }
         .player-Bigbox{
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-        	margin-top : 20px;
+        	margin-top : 40px;
         	border-radius: 5px;
         		width : 80%;
 	height : auto; 	
@@ -348,7 +351,15 @@ width : 100%;
   right: 15%;
   animation-delay: .3s;
 }
+.tooltip.my-tooltip {
+  background-color: #ffc107;
+  color: #000;
+  border-radius: 0;
+}
 
+.tooltip.my-tooltip .tooltip-arrow::before {
+  border-bottom-color: #ffc107 !important;
+}
  </style>
 
 </head>
@@ -388,10 +399,8 @@ for(int i=0; i<nameArr.length; i++) {
 
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
-	<div
-		style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
-			style="background-color: #393E46;">
+	<div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
+		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid" style="width: 70%;">
 				<a class="navbar-brand" href="Main.do" style="color: #FFD369;">
 				<span>드라마켓</span>
@@ -433,12 +442,16 @@ for(int i=0; i<nameArr.length; i++) {
 		</div>
 						<!-- 캡쳐버튼 로그인 검증  <c:if test="${!empty mvo}">  
 				</c:if>  -->
-<button id="captureImageButton" class="btn">
+				
+<form id="captureForm" action="uploadCapture.do" method="post">		
+<input type="hidden" name="imageDataUrl" value="">		
+<button id="captureImageButton" class="btn" type="submit" title="재생 중인 장면을 추가 분석!"  data-bs-toggle="tooltip" >
 				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
   <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
   <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
 </svg>
 </button>
+</form>
 		<div class="content">
 				<div class="player-Bigbox">
 				<div class="player-box">
@@ -451,7 +464,9 @@ for(int i=0; i<nameArr.length; i++) {
 				</div>
 				<!--영상현재시간출력<div id="currentTimeDisplay"></div>-->
 </div>
-</div>		
+</div>
+			
+
 				<script>
 				
 				var player = null;
@@ -493,11 +508,6 @@ for(int i=0; i<nameArr.length; i++) {
 												} ]
 											}
 										});
-					
-					
-						//캡쳐기능
-						  $('#captureImageButton').click(captureImage);
-
 					});
 					//영상 재생 시간 받기
 					
@@ -535,6 +545,10 @@ for(int i=0; i<nameArr.length; i++) {
 						
 
 						}
+					//캡쳐버튼 클릭
+					document.addEventListener('DOMContentLoaded', function() {
+						  $('#captureImageButton').click(captureImage);
+						});
 					function captureImage() {
 						//비디오 플레이어를 불러오기
 						  var videoElement = $('video', '#player')[0];
@@ -548,24 +562,15 @@ for(int i=0; i<nameArr.length; i++) {
 
 						  //지금 이미지의 주소 잡기
 						  var imageDataUrl = canvas.toDataURL('image/png');
-
-						  console.log(imageDataUrl);
-						// 이미지 데이터를 POST 방식으로 전송
-						  $.ajax({
-						    type: 'POST',
-						    url: 'imgResult.jsp',
-						    data: {
-						      imageDataUrl: imageDataUrl
-						    },
-						    success: function(response) {
-						      consolo.log(response);
-						    },
-						    error: function(xhr, status, error) {
-						      alert('이미지 전송에 실패했습니다. 다시 시도해주세요');
-						    }
-						  });
+						  console.log('캡쳐이미지 : '+ imageDataUrl);
 						  
-					}								
+						  var inputElement = document.querySelector('input[name="imageDataUrl"]');
+						  inputElement.value = imageDataUrl;
+
+						  var formElement = document.querySelector('#captureForm');
+						  formElement.submit();
+					}
+					
 				</script>
 <!--인식한 객체 출력-->
 <div class="container predict-container">
@@ -750,13 +755,20 @@ try {
            $(".search-objImg").hide();
       });
    });
+  
+  
+//캡쳐버튼의 툴팁활성화
+ var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+  });
 </script>
  
 
 				</div>
 				</div>
 <!-- Footer-->
-<footer class="py-4 mt-auto"  style="background-color:#393E46;">
+<footer class="bg-dark py-4 mt-auto" style="width:100%;">
 <div class="container px-5">
     <div class="row align-items-center justify-content-between flex-column flex-sm-row">
         <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; DRAMARKET 2023</div></div>

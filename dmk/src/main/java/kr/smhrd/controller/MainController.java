@@ -28,6 +28,12 @@ public class MainController {
 	@Autowired
 	private Mapper mapper;
 	
+	@RequestMapping("/intro.do") //Main 페이지
+	public String intro() {
+		
+		return "intro";
+	}
+	
 	@RequestMapping("/Main.do") //Main 페이지
 	public String Main() {
 		
@@ -89,5 +95,5 @@ public class MainController {
 		model.addAttribute("fileName", fileName);
 		return "result";
 	}
-
+	
 }

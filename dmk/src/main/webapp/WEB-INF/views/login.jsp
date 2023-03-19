@@ -64,14 +64,61 @@ width : 100%;
 height : 100%;
 
 }
+
 body {
   background-color: #393E46;
 }
+
 footer{
   position: fixed;
   bottom: 0;
   width: 100%;
   }
+  
+  #loginCard{
+  position: fixed;
+  top: 50%; /* 상위 요소(body)의 높이의 50% 지점으로 이동합니다. */
+  left: 50%; /* 상위 요소(body)의 너비의 50% 지점으로 이동합니다. */
+  transform: translate(-50%, -50%); /* div의 너비와 높이의 50%만큼 이동시켜 정중앙에 위치시킵니다. */
+width: 30%;
+height : auto;
+  background-color : #EEEEEE;
+   overflow-y: auto;
+  }
+.cardTitle{
+text-align : center;
+}
+label{
+margin-bottom : 5px;
+}
+.loginBtn {
+  background-color: #FFD369;
+  color: white;
+  margin-top: 20px; 
+  margin-bottom: 20px; 
+}
+#register_btn{
+ background-color: #FFD369;
+  color: white;
+  margin-bottom: 20px; 
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#loginCard a {
+  color: #393E46;
+  padding-left: 100px;
+}
+#loginCard a:hover {
+  color: #FFD369;
+}
+#loginCard a:active {
+  color: #FFD369;
+}
+
 </style>
 </head>
 <body>
@@ -105,34 +152,8 @@ footer{
 			</div>
 		</nav>
 	</div>
-	<!-- Header-->
-	<header class="py-5 loginHeader">
-		<div class="container px-5">
-			<div class="row gx-5 align-items-center justify-content-center">
-				<div class="col-lg-8 col-xl-7 col-xxl-6">
-					<div class="my-5 text-center text-xl-start">
-						<h1 class="display-5 fw-bolder text-white mb-2">드라마 속 상품이</h1>
-						<h1 class="display-5 fw-bolder text-white mb-2">궁금하신가요?</h1>
-						<p class="lead fw-normal text-white-50 mb-4"></p>
-						<p class="lead fw-normal text-white-50 mb-4">영상만 있다면 드라마켓에서 쉽게
-							상품을 찾울 수 있습니다!</p>
-						<p class="lead fw-normal text-white-50 mb-4">드라마켓 AI가 장면 속의
-							상품을 인식하고 검색해줘요!</p>
-
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</header>
-	<div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-               <div class="container mt-5">
-                  <div class="row">
-                     <div class="col-md-6 offset-md-3">
-                        <div class="card">
+                        <div id="loginCard" class="card">
                            <div class="card-body">
-
-
                               <h2 class="cardTitle">로그인</h2>
                               <form id="login-form" action="login.do" method="post">
                                  <div class="form-group">
@@ -143,66 +164,13 @@ footer{
                                     <label for="pwd">비밀번호</label> 
                                     <input type="password" class="form-control" name="pwd" id="loginpwd">
                                  </div>
-                                 <button type="submit" class="btn btn-primary">로그인</button>
+                                 <div class="row">
+                                 <button type="submit" class="btn btn-primary loginBtn">로그인</button>
                                  <div class="form-group">
                                     <a href="#" class="link-unstyled" id="show-signup">회원가입</a>
                                  </div>
-                              </form>
-
-
-<<<<<<< HEAD
-                              <form id="signup-form" style="display: none;" enctype="multipart/form-data">
-                                 <div class="form-group">
-                                    <label for="id">아이디</label> 
-                                    <input type="text" class="form-control" name="id" id="joinid" placeholder='6~16 자리의 영어,숫자' class="patternCheck" pattern="^[A-Za-z0-9_-]{6,16}$" required>
-                                    <button type="button" id="idCheck" class="btn btn-sm" onclick="id_Check()"  style="margin-top: 8px;  box-shadow: none; background-color: #FFD35F; color: white;">중복확인</button>
-                                    
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="pwd">비밀번호</label> 
-                                    <input type="pwd" class="form-control patternCheck" name="pwd" id="joinpwd" pattern="^[A-Za-z\d$@$!%*#?&]{4,16}$" required>
-                                    <label for="pwd">비밀번호 재확인</label> 
-                                    <input type="pwd" class="form-control patternCheck" name="pwdCheck" id="joinpwdCheck" pattern="^[A-Za-z\d$@$!%*#?&]{4,16}$" required>
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="nick">닉네임</label> 
-                                    <input type="nick" class="form-control" name="nick" id="joinnick" placeholder="2~8글자(특수문자,공백불가)" pattern="^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,8}$" required>
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="nick">프로필 사진</label> 
-                                    <input type="file" class="form-control" name="file" id="profile">
-                                    <input type="hidden" class="form-control" name="profile_name" id="profile_name" value="defaultprofile.png">
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="gender">성별</label>
-                                    <div class="row">
-                                       <div class="col">
-                                          <div class="form-check form-check-inline">
-                                             <input class="form-check-input" type="radio"
-                                                name="gender" id="male joingender" value="male"> <label
-                                                class="form-check-label" for="male"> 남자 </label>
-                                          </div>
-                                       </div>
-                                       <div class="col">
-                                          <div class="form-check form-check-inline">
-                                             <input class="form-check-input" type="radio"
-                                                name="gender" id="female joingender" value="female"> <label
-                                                class="form-check-label" for="female"> 여자 </label>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="birth">생년월일</label> 
-                                    <input type="text" class="form-control datepicker" name="birth" id="joinbirth">
-                                 </div>
-                                 <button type="button" id="register_btn" class="btn btn-primary" onclick="memberRegister()" >계정 생성</button>
-                                 <div class="form-group">
-                                    <a href="#" class="link-unstyled" id="show-login">로그인으로
-                                       돌아가기</a>
                                  </div>
                               </form>
-=======
 										<form id="signup-form" style="display: none;" enctype="multipart/form-data">
 											<div class="form-group">
 												<label for="id">아이디</label> 
@@ -225,6 +193,7 @@ footer{
 												<input type="file" class="form-control" name="file" id="profile">
 												<input type="hidden" class="form-control" name="profile_name" id="profile_name" value="defaultprofile.png">
 											</div>
+											
 											<div class="form-group">
 												<label for="gender">성별</label>
 												<div class="row">
@@ -248,21 +217,38 @@ footer{
 												<label for="birth">생년월일</label> 
 												<input type="text" class="form-control datepicker" name="birth" id="joinbirth">
 											</div>
+											<div class="row">
 											<button type="button" id="register_btn" class="btn btn-primary" onclick="memberRegister()" >계정 생성</button>
+											</div>
 											<div class="form-group">
 												<a href="#" class="link-unstyled" id="show-login">로그인으로
 													돌아가기</a>
 											</div>
 										</form>
->>>>>>> branch 'main' of https://github.com/Tuesdayjin/DRAMARKET.git
-
 
                            </div>
                         </div>
-                     </div>
-                  </div>
-               </div>
-
+<!-- Footer-->
+	<footer class="py-4 mt-auto"  style="background-color:#393E46;">
+		<div class="container px-5">
+			<div
+				class="row align-items-center justify-content-between flex-column flex-sm-row">
+				<div class="col-auto">
+					<div class="small m-0 text-white">Copyright &copy; DRAMARKET
+						2023</div>
+				</div>
+				<div class="col-auto">
+					<a class="link-light small" href="#!">Privacy</a> <span
+						class="text-white mx-1">&middot;</span> <a
+						class="link-light small" href="#!">Terms</a> <span
+						class="text-white mx-1">&middot;</span> <a
+						class="link-light small" href="#!">Contact</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	
 
 <script>
    $(document).ready(function() {
@@ -474,30 +460,8 @@ footer{
          
         });
      });
-    
-    
-    
    </script>
-            </div>
-<!-- Footer-->
-	<footer class="py-4 mt-auto"  style="background-color:#393E46;">
-		<div class="container px-5">
-			<div
-				class="row align-items-center justify-content-between flex-column flex-sm-row">
-				<div class="col-auto">
-					<div class="small m-0 text-white">Copyright &copy; DRAMARKET
-						2023</div>
-				</div>
-				<div class="col-auto">
-					<a class="link-light small" href="#!">Privacy</a> <span
-						class="text-white mx-1">&middot;</span> <a
-						class="link-light small" href="#!">Terms</a> <span
-						class="text-white mx-1">&middot;</span> <a
-						class="link-light small" href="#!">Contact</a>
-				</div>
-			</div>
-		</div>
-	</footer>
+	
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

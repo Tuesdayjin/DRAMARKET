@@ -40,6 +40,91 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 <style>
+/*업로드 중의 모달*/
+.modal-body {
+height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-title {
+  position: absolute;
+  top: 10%;
+}
+
+.loader-subtitle {
+  position: absolute;
+  top: 30%;
+}
+.loader-title h4{
+color : #222831;
+}
+.loader-subtitle h5{
+color : #222831;
+}
+
+.loadercontainer {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  border-radius: 50%;
+  height: 96px;
+  width: 96px;
+  animation: rotate_3922 1.2s linear infinite;
+background-color: #FFD369;
+background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
+
+}
+
+.loadercontainer span {
+  position: absolute;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+background-color: #FFD369;
+background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
+
+}
+
+.loadercontainer span:nth-of-type(1) {
+  filter: blur(5px);
+}
+
+.loadercontainer span:nth-of-type(2) {
+  filter: blur(10px);
+}
+
+.loadercontainer span:nth-of-type(3) {
+  filter: blur(25px);
+}
+
+.loadercontainer span:nth-of-type(4) {
+  filter: blur(50px);
+}
+
+.loadercontainer::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background-color: #fff;
+  border: solid 5px #ffffff;
+  border-radius: 50%;
+}
+
+@keyframes rotate_3922 {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -143,7 +228,7 @@
 										</div>
 										<div>
 											<button class="btn btn-lg btn-primary uploadBtn"
-												type="submit">찾아주라</button>
+												type="submit">분석하기</button>
 											</form>
 										</div>
 									</div>
@@ -175,7 +260,7 @@
 										</div>
 										<div>
 											<button class="btn btn-lg btn-primary uploadBtn"
-												type="submit">찾아주라</button>
+												type="submit">분석하기</button>
 											</form>
 										</div>
 									</div>
@@ -195,9 +280,28 @@
 			<div class="row gx-5 justify-content-center"></div>
 		</div>
 	</div>
-
-
-	</main>
+<!-- 로더 모달 -->
+<!-- 모달창 -->
+<div class="modal fade" id="loaderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="loader-title">
+          <h4>드라마켓 AI가 분석중입니다</h4>
+        </div>
+        <div class="loader-subtitle">
+          <h5>&#9203;잠시만 기다려주세요&#9203;</h5>
+        </div>
+        <div class="loadercontainer">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 	<!-- Footer-->
 	<footer class="py-4 mt-auto"  style="background-color:#393E46;">
 		<div class="container px-5">
@@ -265,10 +369,14 @@
 		
 		$(document).ready(function(){
 	          $('form').submit(function(){
+	        	// 파일 업로드를 시작할 때 버튼을 비활성화
 	              $('.btn.btn-lg.btn-primary.uploadBtn').attr('disabled',true).text('업로드 중...');
-	              // 파일 업로드를 시작할 때 버튼을 비활성화합니다.
+	              
+	           // 모달창
+	              $('#loaderModal').modal('show');
 	          });
 	      });
+
 	</script>
 </body>
 </html>
