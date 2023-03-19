@@ -150,6 +150,7 @@ footer{
                               </form>
 
 
+<<<<<<< HEAD
                               <form id="signup-form" style="display: none;" enctype="multipart/form-data">
                                  <div class="form-group">
                                     <label for="id">아이디</label> 
@@ -201,6 +202,59 @@ footer{
                                        돌아가기</a>
                                  </div>
                               </form>
+=======
+										<form id="signup-form" style="display: none;" enctype="multipart/form-data">
+											<div class="form-group">
+												<label for="id">아이디</label> 
+												<input type="text" class="form-control" name="id" id="joinid" placeholder='6~16 자리의 영어,숫자' class="patternCheck" pattern="^[A-Za-z0-9_-]{6,16}$" required>
+												<button type="button" id="idCheck" class="btn btn-sm" onclick="id_Check()"  style="margin-top: 8px;  box-shadow: none; background-color: #FFD35F; color: white;">중복확인</button>
+												
+											</div>
+											<div class="form-group">
+												<label for="pwd">비밀번호</label> 
+												<input type="pwd" class="form-control patternCheck" name="pwd" id="joinpwd" pattern="^[A-Za-z\d$@$!%*#?&]{4,16}$" required>
+												<label for="pwd">비밀번호 재확인</label> 
+												<input type="pwd" class="form-control patternCheck" name="pwdCheck" id="joinpwdCheck" pattern="^[A-Za-z\d$@$!%*#?&]{4,16}$" required>
+											</div>
+											<div class="form-group">
+												<label for="nick">닉네임</label> 
+												<input type="nick" class="form-control" name="nick" id="joinnick" placeholder="2~8글자(특수문자,공백불가)" pattern="^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,8}$" required>
+											</div>
+											<div class="form-group">
+												<label for="nick">프로필 사진</label> 
+												<input type="file" class="form-control" name="file" id="profile">
+												<input type="hidden" class="form-control" name="profile_name" id="profile_name" value="defaultprofile.png">
+											</div>
+											<div class="form-group">
+												<label for="gender">성별</label>
+												<div class="row">
+													<div class="col">
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="radio"
+																name="gender" id="male joingender" value="male"> <label
+																class="form-check-label" for="male"> 남자 </label>
+														</div>
+													</div>
+													<div class="col">
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="radio"
+																name="gender" id="female joingender" value="female"> <label
+																class="form-check-label" for="female"> 여자 </label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="birth">생년월일</label> 
+												<input type="text" class="form-control datepicker" name="birth" id="joinbirth">
+											</div>
+											<button type="button" id="register_btn" class="btn btn-primary" onclick="memberRegister()" >계정 생성</button>
+											<div class="form-group">
+												<a href="#" class="link-unstyled" id="show-login">로그인으로
+													돌아가기</a>
+											</div>
+										</form>
+>>>>>>> branch 'main' of https://github.com/Tuesdayjin/DRAMARKET.git
 
 
                            </div>

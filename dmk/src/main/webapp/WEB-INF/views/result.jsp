@@ -95,9 +95,9 @@
   color : #FFFFFF;
 }
 #captureImageButton svg {
-  width: 30px;
-  height: 30px;
-  stroke-width: 3px; /* 아이콘의 선 굵기를 조절합니다. */
+  width: 25px;
+  height: 25px;
+  stroke-width: 5px; /* 아이콘의 선 굵기를 조절합니다. */
 }
 	        .content {
             display: flex;

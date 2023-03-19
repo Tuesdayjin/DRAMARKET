@@ -22,5 +22,10 @@ public class t_comment {
     // 댓글 작성자. 댓글 작성자
     private String cmt_id;
 
+    // 닉네임. 닉네임
+    private String nick;
+
+    // 프로필 이미지
+    private String profile_name;
 	
 }
