@@ -68,40 +68,46 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+#captureImageButton {
+  position: fixed;
+  bottom: 20px;
+  right: 120px;
+  z-index: 999;
+  background-color : #FFD369;
+  color : #FFFFFF;
+  border-radius: 50px;
+  padding: 15px;
 }
-
-.content {
-  padding: 20px;
+#captureImageButton svg {
+  width: 25px;
+  height: 25px;
+  stroke-width: 5px; /* 아이콘의 선 굵기를 조절합니다. */
 }
-
-.player-Bigbox {
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+	        .content {
+            display: flex;
+            justify-content: center;
+             align-items: center;
+            flex-wrap: wrap;
+        }
+        .player-Bigbox{
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
         	margin-top : 40px;
         	border-radius: 5px;
-  width: 80%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding : 10px;
-  background-color :#EEEEEE;
-}
-
-.player-box {
-  position: relative;
-  overflow: hidden;
-}
-
-.capture {
-  max-width: 100%;
-  max-height: 100%;
-  display: block;
-  margin: 0 auto;
-}
+        		width : 80%;
+	height : auto; 	
+        }
+	.player-box{
+width : 100%;
+	height : auto;
+	background-color : #EEEEEE;
+	border-radius: 5px;
+    padding : 10px;
+	}
+	.player-box img{
+	width : 100%;
+	height : 100%;
+	}
+	
 .predict-container{
 margin-bottom:50px;
 }
@@ -368,6 +374,8 @@ File bagDir = new File(bagPath);
 	</div>
 
 <div class="container">
+		<div class="header">
+		</div>
 		<div class="content">
 				<div class="player-Bigbox">
 				<div class="player-box">
@@ -378,7 +386,7 @@ File bagDir = new File(bagPath);
 </div>
 
 <!--인식한 객체 출력-->
-<div class="container">
+<div class="container predict-container">
 		<div class="content">
 				<div class="predict-Bigbox">
 				<div class="predictTilte-box">
@@ -389,6 +397,7 @@ File bagDir = new File(bagPath);
 
 				</div>
 				<div class="predictObj-box">
+				<div class="predict_content predict-card">
 		<%
 try {
     if (topDir != null) {
@@ -459,8 +468,9 @@ try {
     }
 } catch (Exception e) {
     // 예외 처리 코드
-    // 예외 메시지 출력, 로그 기록 등
-}%>		
+    // 예외 메시지 출력, 로그 기록 등%>
+</div>
+<%}%>		
  </div>
       </div><!-- end predict-Bigbox -->
 <!-- 객체 이미지 검색 -->

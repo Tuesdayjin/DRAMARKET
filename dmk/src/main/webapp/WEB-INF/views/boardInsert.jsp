@@ -36,7 +36,7 @@
  position: absolute;
   z-index: 1;
   top: 0;
-  background: linear-gradient(to bottom, #222831, rgba(34, 40, 49, 0.3);
+  background: linear-gradient(to bottom, #222831, rgba(34, 40, 49, 0.3));
   height: 100%;
   width: 100%;
 }
@@ -56,6 +56,8 @@ header {
   height: auto;
   width: 100%;
       }
+
+
     .card {
         width: 600px; 
     }
@@ -78,8 +80,8 @@ header {
     <button onclick="topFunction()" id="myBtn" class="btn btn-info to-top" title="Go to top">
         TOP
     </button>
-        <div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #393E46;">
+        <div style="background-color: #222831; position: sticky; top: 0; z-index: 9999;">
+            <nav class="navbar navbar-expand-lg">
               <div class="container-fluid" style="width: 70%;">
                   <a class="navbar-brand" href="Main.do" style="color: #FFD369;">
                   <span>드라마켓</span>

@@ -45,12 +45,13 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
 	rel="stylesheet">
+	
 	<style>
-	.grabox{
+.grabox{
  position: absolute;
   z-index: 1;
   top: 0;
-  background: linear-gradient(to bottom, #222831, rgba(34, 40, 49, 0.3);
+  background: linear-gradient(to bottom, #222831, rgba(34, 40, 49, 0.3));
   height: 100%;
   width: 100%;
 }
@@ -58,21 +59,27 @@ header {
   position: relative;
   z-index: 2;
 }
+
+.selectNavBar {
+  position: relative;
+  z-index: 2;
+}
+
       .headerimg {
   max-height: 100%;
   max-width: 100%;
   height: auto;
   width: 100%;
-      }
-	</style>
+      }	
+      
+      </style>
 </head>
 <body>
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
 	<div
-		style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
-			style="background-color: #393E46;">
+		style="background-color: #222831; position: sticky; top: 0; z-index: 9999;">
+		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid" style="width: 70%;">
 				<a class="navbar-brand" href="Main.do" style="color: #FFD369;">
                   <span>드라마켓</span>
@@ -109,7 +116,7 @@ header {
 		</nav>
 	</div>
 	<!-- Header-->
-	<header class="py-5" style="background-color: #393E46; height:350px;">
+<header class="py-5" style="background-color: #393E46; height:350px;">
 <div class="grabox"></div>
 <img class="headerimg" src="${cpath}/resources/img/dmkimg/Drama.png">
     <div class="container px-5">

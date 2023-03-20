@@ -469,7 +469,6 @@ for(int i=0; i<nameArr.length; i++) {
 			
 
 				<script>
-				
 				var player = null;
 					$(function() {
 					     
