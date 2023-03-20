@@ -174,7 +174,7 @@
       muted="muted"
       loop="loop"
     >
-      <source src="개미가.mp4" type="video/mp4" />
+      <source src="http://localhost:8081/front/nomal.mp4" type="video/mp4" />
     </video>
     <div class="pageTransition-box">
       <div class="startTile">
@@ -198,7 +198,7 @@
 
         // transitionend 이벤트가 발생할 때 다른 페이지로 이동
         transitionbox.addEventListener("transitionend", function () {
-          window.location.href = "http://127.0.0.1:5501/Morph/Main.html"; //Main경로 입력
+          window.location.href = "Main.do"; //Main경로 입력
         });
       });
     </script>

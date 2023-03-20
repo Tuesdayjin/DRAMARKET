@@ -40,6 +40,18 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 <style>
+@font-face {
+    font-family: 'PilseungGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/PilseungGothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'nanum';
+    src: url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 </style>
 </head>
 <body>
@@ -52,7 +64,7 @@
 			style="background-color: #393E46;">
 			<div class="container-fluid" style="width: 70%;">
 				<a class="navbar-brand" href="Main.do" style="color: #FFD369;">
-                  <span>드라마켓</span>
+                      <span style="font-family: nanum;">DRAMARKET</span>
 				<img src="${cpath}/resources/img/dmkimg/dmksim.png"width="20" height="24" style="margin-left:3px; margin-top:4px;" class="d-inline-block align-text-top">
                   </a>
 				<div class="d-flex justify-content-end">
