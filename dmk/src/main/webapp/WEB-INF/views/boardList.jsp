@@ -45,7 +45,26 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
 	rel="stylesheet">
-	
+	<style>
+	.grabox{
+ position: absolute;
+  z-index: 1;
+  top: 0;
+  background: linear-gradient(to bottom, #222831, rgba(34, 40, 49, 0.3);
+  height: 100%;
+  width: 100%;
+}
+header {
+  position: relative;
+  z-index: 2;
+}
+      .headerimg {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+      }
+	</style>
 </head>
 <body>
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
@@ -90,23 +109,22 @@
 		</nav>
 	</div>
 	<!-- Header-->
-	<header class="bg-dark py-5" style="background-color: #393E46;">
-		<div class="container px-5">
-			<div class="row gx-5 align-items-center justify-content-center">
-				<div class="col-lg-8 col-xl-7 col-xxl-6">
-					<div class="my-5 text-center text-xl-start">
-						<h1 class="display-5 fw-bolder text-white mb-2">A Bootstrap 5
-							template for modern businesses</h1>
-						<p class="lead fw-normal text-white-50 mb-4">Quickly design
-							and customize responsive mobile-first sites with Bootstrap, the
-							world’s most popular front-end open source toolkit!</p>
+	<header class="py-5" style="background-color: #393E46; height:350px;">
+<div class="grabox"></div>
+<img class="headerimg" src="${cpath}/resources/img/dmkimg/Drama.png">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                <div class="my-5 text-center text-xl-start">
+                    <h1 class="display-5 fw-bolder text-white mb-2"></h1>
+                    <p class="lead fw-normal text-white-50 mb-4"></p>
 
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</header>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</header>
 	<!-- Testimonial section-->
 	<div class="py-5">
 		<div class="container px-5 my-5">

@@ -11714,8 +11714,8 @@ video {
   margin-bottom:20px;
 }
 .to-top svg{
-  width: 30px; /* SVG의 가로 크기 */
-  height: 30px; /* SVG의 세로 크기 */
+  width: 27px; /* SVG의 가로 크기 */
+  height: 27px; /* SVG의 세로 크기 */
   fill: #FFD369; /* SVG 내부 색상 변경 */
 }
 /*star to main*/

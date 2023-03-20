@@ -40,6 +40,35 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 <style>
+
+.titleborderbox{
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 20px;
+padding-right: 20px;
+border : solid 1px;
+ border-color :rgba(255,255,255,0.5);
+display:inline-block;
+}
+.introTitle p{
+margin-top : 15px;
+color : #FFFFFF;
+font-size: 20px;
+}
+.shopping{
+font-size : 50px;
+font-weight : 700;
+color : #FFD369;
+}
+.inthe{
+font-size : 40px;
+color : #FFD369;
+}
+.scene{
+font-size : 50px;
+font-weight : 700;
+color : #FFD369;
+}
       video {
        position: absolute;
         top: 0;
@@ -57,8 +86,7 @@
   height: 100%;
   background-color: rgba(57, 62, 70, 0.5);
   z-index: 10;
-}
-      
+}      
 /*업로드 중의 모달*/
 .modal-body {
 height: 300px;
@@ -190,7 +218,15 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
 	<!-- Header-->
 	<header class="py-5 dmkHeader" style=" height: 100vh;">
 <div class="headervideo-box">
-<div class="grabox" style="background: linear-gradient(to bottom, #393E46, rgba(57, 62, 70, 0)); height: 300px; width: 100%;"></div>
+<div class="grabox" style="background: linear-gradient(to bottom, #393E46, rgba(57, 62, 70, 0)); height: 300px; width: 100%; text-align : center; display: inline-block;">
+<div class="introTitle" style="margin:18%;">
+<div class="titleborderbox">
+<span class="shopping">Shopping </span><span class="inthe">in the </span>
+<span class="scene">Scene</span>
+</div>
+<p>영상 속 그 제품, 스쳐가지 마세요</p>
+</div>
+</div>
 <button class="scrollbtn" onclick="scrollToContent()">
     <div class="scroll"></div>
 </button>
@@ -202,20 +238,7 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
   loop="loop">
   <source src="${cpath}/resources/img/dmkimg/mainheader.mp4" type="video/mp4" />
 </video></div>
-		<div class="container px-5">
-			<div class="row gx-5 align-items-center justify-content-center">
-				<div class="col-lg-8 col-xl-7 col-xxl-6">
-					<div class="my-5 text-center text-xl-start">
-						<h1 class="display-5 fw-bolder text-white mb-2">A Bootstrap 5
-							template for modern businesses</h1>
-						<p class="lead fw-normal text-white-50 mb-4">Quickly design
-							and customize responsive mobile-first sites with Bootstrap, the
-							world’s most popular front-end open source toolkit!</p>
-					</div>
-				</div>
 
-			</div>
-		</div>
 		<div id="mainContent"></div>
 	</header>
 	<div>
