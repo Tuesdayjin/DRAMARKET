@@ -141,7 +141,7 @@ margin-bottom : 5px;
 					<div class="collapse navbar-collapse" id="navbarColor02">
 
 						<ul class="navbar-nav me-auto">
-							<li class="nav-item"><a class="nav-link " href="Main.do">상품검색
+							<li class="nav-item"><a class="nav-link " href="Main.do">영상분석
 									<span class="visually-hidden">(current)</span>
 							</a></li>
 							<li class="nav-item"><a class="nav-link" href="boardList.do">게시판</a>

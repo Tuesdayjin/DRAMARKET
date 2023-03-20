@@ -399,6 +399,7 @@ for(int i=0; i<nameArr.length; i++) {
 
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
+		
 	<div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid" style="width: 70%;">
@@ -416,7 +417,7 @@ for(int i=0; i<nameArr.length; i++) {
 					<div class="collapse navbar-collapse" id="navbarColor02">
 
 						<ul class="navbar-nav me-auto">
-							<li class="nav-item"><a class="nav-link " href="Main.do">상품검색
+							<li class="nav-item"><a class="nav-link " href="Main.do">영상분석
 									<span class="visually-hidden">(current)</span>
 							</a></li>
 
@@ -443,7 +444,7 @@ for(int i=0; i<nameArr.length; i++) {
 						<!-- 캡쳐버튼 로그인 검증  <c:if test="${!empty mvo}">  
 				</c:if>  -->
 				
-<form id="captureForm" enctype="multipart/form-data">		
+<form id="captureForm" action="imgPredict.do" method="post" enctype="multipart/form-data">		
 <input type="hidden" name="captureFile" id="captureFile" value="">		
 <button id="captureImageButton" class="btn" type="button" title="재생 중인 장면을 추가 분석!"  data-bs-toggle="tooltip" >
 				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
@@ -563,10 +564,14 @@ for(int i=0; i<nameArr.length; i++) {
 						  //지금 이미지의 주소 잡기
 						  var imageDataUrl = canvas.toDataURL('image/png');
 						  console.log('캡쳐이미지 : '+ imageDataUrl);
-						  var file = base64toFile(imageDataUrl,"capture.png");
-
+						  var file = base64toFile(imageDataUrl,'jangho.png');
+						  
+						  
+						  
+						  
+						  
 						  var formData=new FormData();
-						  formData.append("file",file,"capture.png" );
+						  formData.append("file",file );
 						    $.ajax({
 							      url: "captureUpload.do",
 							      type: "POST",
@@ -577,12 +582,15 @@ for(int i=0; i<nameArr.length; i++) {
 							    	 console.log(JSON.stringify(data));
 							    	//$('#imgdiv').append('<img src="http://localhost:8081/boardimg/'+ data +'" id="Sample">');
 							        $('#captureFile').val(data);
-							        $('#captureFile').attr("action","asdf.do");
-							        $('#captureFile').attr("method","post");
-							        $('#captureFile').submit();
+							        $('#captureForm').submit();
 							      },
 							      error : function(){alert("파일 업로드에 실패하였습니다");}
 							    });
+						  
+						  
+						  
+						  
+						  
 					}
 	      
 	               // base64 이미지 -> File 객체로 변환하는 함수
@@ -779,7 +787,7 @@ try {
   });
   
   $(function() {
-      $(".content").click(function() {
+      $("img.content").click(function() {
            $(".search-objImg").hide();
       });
    });
@@ -790,6 +798,36 @@ try {
   var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl);
   });
+  
+  
+	//to top button
+	document.addEventListener("DOMContentLoaded", function() {
+		// DOM이 완전히 로드된 후에 스크립트가 실행
+		let mybutton = document.getElementById("myBtn");
+
+		window.onscroll = function() {
+			scrollFunction()
+		};
+
+		function scrollFunction() {
+			if (document.body.scrollTop > 20
+				|| document.documentElement.scrollTop > 20) {
+				mybutton.style.display = "block";
+				mybutton.style.backgroundColor = "#FFD369";
+			} else {
+				mybutton.style.display = "none";
+			}
+		}
+
+
+	});
+
+	
+	function topFunction() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	}
+
 </script>
  
 

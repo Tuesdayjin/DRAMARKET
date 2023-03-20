@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=\, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dramarket</title>
 
 <!-- Bootstrap 및 Bootswatch 스타일시트 파일 -->
@@ -45,11 +45,30 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
 	rel="stylesheet">
+	<style>
+	.grabox{
+ position: absolute;
+  z-index: 1;
+  top: 0;
+  background: linear-gradient(to bottom, #222831, rgba(34, 40, 49, 0.3);
+  height: 100%;
+  width: 100%;
+}
+header {
+  position: relative;
+  z-index: 2;
+}
+      .headerimg {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+      }
+	</style>
 </head>
 <body>
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
-	
 	<div
 		style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
@@ -69,10 +88,10 @@
 					<div class="collapse navbar-collapse" id="navbarColor02">
 
 						<ul class="navbar-nav me-auto">
-							<li class="nav-item"><a class="nav-link " href="Main.do">상품검색
+							<li class="nav-item"><a class="nav-link " href="Main.do">영상분석
 									<span class="visually-hidden">(current)</span>
 							</a></li>
-
+								</li>
 							<c:if test="${!empty mvo}">
 								<li class="nav-item"><a class="nav-link" href="#">마이페이지</a>
 								</li>
@@ -90,23 +109,22 @@
 		</nav>
 	</div>
 	<!-- Header-->
-	<header class="bg-dark py-5" style="background-color: #393E46;">
-		<div class="container px-5">
-			<div class="row gx-5 align-items-center justify-content-center">
-				<div class="col-lg-8 col-xl-7 col-xxl-6">
-					<div class="my-5 text-center text-xl-start">
-						<h1 class="display-5 fw-bolder text-white mb-2">A Bootstrap 5
-							template for modern businesses</h1>
-						<p class="lead fw-normal text-white-50 mb-4">Quickly design
-							and customize responsive mobile-first sites with Bootstrap, the
-							world’s most popular front-end open source toolkit!</p>
+	<header class="py-5" style="background-color: #393E46; height:350px;">
+<div class="grabox"></div>
+<img class="headerimg" src="${cpath}/resources/img/dmkimg/Drama.png">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                <div class="my-5 text-center text-xl-start">
+                    <h1 class="display-5 fw-bolder text-white mb-2"></h1>
+                    <p class="lead fw-normal text-white-50 mb-4"></p>
 
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</header>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</header>
 	<!-- Testimonial section-->
 	<div class="py-5">
 		<div class="container px-5 my-5">
@@ -191,7 +209,10 @@ writeBtn.addEventListener('click', () => {
   window.location.href = url;
 });
 
+
+
 </script>
+
 		</div>
 		<!-- Blog preview section-->
 		<section class="py-5"></section>
@@ -224,5 +245,36 @@ writeBtn.addEventListener('click', () => {
 		<!--Masonry.js-->
 		<script
 			src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+			
+<script>
+//to top button
+document.addEventListener("DOMContentLoaded", function() {
+	// DOM이 완전히 로드된 후에 스크립트가 실행
+	let mybutton = document.getElementById("myBtn");
+
+	window.onscroll = function() {
+		scrollFunction()
+	};
+
+	function scrollFunction() {
+		if (document.body.scrollTop > 20
+			|| document.documentElement.scrollTop > 20) {
+			mybutton.style.display = "block";
+			mybutton.style.backgroundColor = "#FFD369";
+		} else {
+			mybutton.style.display = "none";
+		}
+	}
+
+
+});
+
+
+function topFunction() {
+	document.body.scrollTop = 0;
+	document.documentElement.scrollTop = 0;
+}
+
+</script>			
 </body>
 </html>

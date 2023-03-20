@@ -3,15 +3,15 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-    <c:set var="cpath" value="${pageContext.request.contextPath}"/>
-        
+    <c:set var="cpath" value="${pageContext.request.contextPath}"/>     
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dramarket</title>
+    <link rel="stylesheet" href="${cpath}/resources/css/style.css">
 <!-- Bootstrap 및 Bootswatch 스타일시트 파일 -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.6.0/morph/bootstrap.min.css" integrity="sha384-8QLqx+yb7DgYaFvzV7Ku8Hq3eIYXPHfgvKfZKH4NoJ+dsSdRfR5aIWlFJTG8xV7+" crossorigin="anonymous">
 <!-- Bootstrap 및 Bootswatch 자바스크립트 파일 -->
@@ -19,8 +19,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <!--bootstrap-->
-    <link rel="stylesheet" href="${cpath}/resources/css/style.css">
-    <script type="text/javascript" src="${cpath}/resources/js/dmk.js"></script>
     <script src="js/morph/bootstrap.min.js"></script>
 
 <!--google font-->
@@ -33,7 +31,30 @@
  <!-- Bootstrap Icons library -->
  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 <style>
+.grabox{
+ position: absolute;
+  z-index: 1;
+  top: 0;
+  background: linear-gradient(to bottom, #222831, rgba(34, 40, 49, 0.3);
+  height: 100%;
+  width: 100%;
+}
+header {
+  position: relative;
+  z-index: 2;
+}
 
+.selectNavBar {
+  position: relative;
+  z-index: 2;
+}
+
+      .headerimg {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+      }
     .card {
         width: 550px; 
     }
@@ -46,9 +67,10 @@
 
 </head>
 <body>
-    <button onclick="topFunction()" id="myBtn" class="btn btn-info to-top" title="Go to top">
-        TOP
-    </button>
+	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
+		title="Go to top">TOP</button>
+		
+		
         <div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #393E46;">
               <div class="container-fluid" style="width: 70%;">
@@ -64,7 +86,7 @@
                       
                       <ul class="navbar-nav me-auto">
                           <li class="nav-item">
-                              <a class="nav-link " href="Main.do">상품검색
+                              <a class="nav-link " href="Main.do">영상분석
                                   <span class="visually-hidden">(current)</span>
                               </a>
                           </li>
@@ -91,13 +113,15 @@
             </nav>
           </div>
 <!-- Header-->
-<header class="bg-dark py-5" style="background-color: #393E46;">
+<header class="py-5" style="background-color: #393E46; height:350px;">
+<div class="grabox"></div>
+<img class="headerimg" src="${cpath}/resources/img/dmkimg/Drama.png">
     <div class="container px-5">
         <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-center text-xl-start">
-                    <h1 class="display-5 fw-bolder text-white mb-2">A Bootstrap 5 template for modern businesses</h1>
-                    <p class="lead fw-normal text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
+                    <h1 class="display-5 fw-bolder text-white mb-2"></h1>
+                    <p class="lead fw-normal text-white-50 mb-4"></p>
 
                 </div>
             </div>
@@ -350,6 +374,35 @@ function replyDelete() {
         }
 	});
 	};
+
+	//to top button
+	document.addEventListener("DOMContentLoaded", function() {
+		// DOM이 완전히 로드된 후에 스크립트가 실행
+		let mybutton = document.getElementById("myBtn");
+
+		window.onscroll = function() {
+			scrollFunction()
+		};
+
+		function scrollFunction() {
+			if (document.body.scrollTop > 20
+				|| document.documentElement.scrollTop > 20) {
+				mybutton.style.display = "block";
+				mybutton.style.backgroundColor = "#FFD369";
+			} else {
+				mybutton.style.display = "none";
+			}
+		}
+
+
+	});
+
+	
+	function topFunction() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	}
+
 </script>
 
 

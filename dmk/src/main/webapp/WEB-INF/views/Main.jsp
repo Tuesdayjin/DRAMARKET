@@ -40,24 +40,31 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
    rel="stylesheet">
 <style>
-      video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 0;
-      }
-  .headervideo-box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(128, 128, 128, 0.5); /* 투명한 회색 배경 */
+.grabox{
+ position: absolute;
   z-index: 1;
+  top: 0;
+  background: linear-gradient(to bottom, #222831, rgba(34, 40, 49, 0.3));
+  height: 100%;
+  width: 100%;
 }
+header {
+  position: relative;
+  z-index: 2;
+}
+
+.selectNavBar {
+  position: relative;
+  z-index: 2;
+}
+
+      .headerimg {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+      }
+
       
 /*업로드 중의 모달*/
 .modal-body {
@@ -147,10 +154,12 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
 </style>
 </head>
 <body>
+
    <button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
       title="Go to top">TOP</button>
 
-   <div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
+
+   <div style="background-color: #222831; position: sticky; top: 0; z-index: 9999;">
       <nav class="navbar navbar-expand-lg">
          <div class="container-fluid" style="width: 70%;">
             <a class="navbar-brand" href="Main.do" style="color: #FFD369;">
@@ -165,6 +174,7 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
                   <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarColor02">
+
 
                   <ul class="navbar-nav me-auto">
                      <li class="nav-item"><span class="visually-hidden">(current)</span>
@@ -188,33 +198,22 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
       </nav>
    </div>
    <!-- Header-->
-   <header class="py-5 dmkHeader" style=" height: 100vh;">
-<div class="headervideo-box">
-<video
-  playsinline="playsinline"
-  autoplay="autoplay"
-  muted="muted"
-  loop="loop">
-  <source src="${cpath}/resources/img/dmkimg/mainheader.mp4" type="video/mp4" />
-</video></div>
-      <div class="container px-5">
-         <div class="row gx-5 align-items-center justify-content-center">
+<header class="py-5" style="background-color: #393E46; height:350px;">
+<div class="grabox"></div>
+<img class="headerimg" src="${cpath}/resources/img/dmkimg/Drama.png">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
-               <div class="my-5 text-center text-xl-start">
-                  <h1 class="display-5 fw-bolder text-white mb-2">A Bootstrap 5
-                     template for modern businesses</h1>
-                  <p class="lead fw-normal text-white-50 mb-4">Quickly design
-                     and customize responsive mobile-first sites with Bootstrap, the
-                     world’s most popular front-end open source toolkit!</p>
-               </div>
-            </div>
+                <div class="my-5 text-center text-xl-start">
+                    <h1 class="display-5 fw-bolder text-white mb-2"></h1>
+                    <p class="lead fw-normal text-white-50 mb-4"></p>
 
-         </div>
-      <button class="scrollbtn" onclick="scrollToContent()">
-    <div class="scroll"> </div>
-</button>
-      </div>
-   </header>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</header>
    <div>
       <ul class="nav justify-content-center selectNavBar">
          <li class="nav-item selectNavTab"><a class="nav-link selectNav"
@@ -245,6 +244,7 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
                                  <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                     height="16" fill="currentColor" class="bi bi-youtube"
                                     viewBox="0 0 16 16">
+
                                             <path
                                        d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z" />
                                           </svg>
@@ -407,6 +407,7 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
              });
          });
 
+
       
       function scrollToContent() {
            window.scrollBy(0, window.innerHeight);
@@ -438,5 +439,6 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
       });
    
    </script>
+
 </body>
 </html>

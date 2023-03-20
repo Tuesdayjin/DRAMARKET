@@ -2,6 +2,7 @@ package kr.smhrd.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -35,7 +35,7 @@ public class MainController {
 	@Autowired
 	private Mapper mapper;
 	
-	@RequestMapping("/intro.do") //Main 페이지
+	@RequestMapping("/intro.do") //시작 페이지
 	public String intro() {
 		
 		return "intro";
@@ -97,7 +97,6 @@ public class MainController {
 		return "redirect:http://localhost:5000/predict";
 	}
 
-
 	@RequestMapping("/captureUpload.do")
 	public String captureUpload(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response)
 			throws ServletException, IOException {
@@ -111,7 +110,7 @@ public class MainController {
 
 		Iterator<String> it= multipartRequest.getFileNames();
 		List<String> fileList = new ArrayList<String>();
-		String uniqueName="";
+		String UploadName="";
 		while (it.hasNext()) { // 마지막 파라메터가 없으면 false 반복 종료
 			String paramFileName = it.next();
 			
@@ -127,10 +126,11 @@ public class MainController {
 			System.out.println(uuid.toString());
 			String[] uuids = uuid.toString().split("-");
 			
-			uniqueName = uuids[0];
+			String uniqueName = uuids[0];
 			
 	        //파일 저장(UploadPath, UploadName)
-	        File saveFile = new File(uploadFolder+"\\"+uniqueName + ".png");  // 적용 후
+			UploadName = uniqueName + ".jpg";
+	        File saveFile = new File(uploadFolder+"\\"+UploadName);  // 적용 후
 	        
 			try {
 				mFile.transferTo(saveFile);
@@ -141,25 +141,26 @@ public class MainController {
 			}
 			
 		}
-		System.out.println(uniqueName);
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().print(uniqueName);
 		
+	    System.out.println(UploadName);
+	      response.setContentType("text/html;charset=utf-8");
+	      response.getWriter().print(UploadName);
+	      
 		return null;
 
-		
 	}
 	
-	@RequestMapping("/asdf.do") //Main 페이지
-	public String asdf(@RequestParam("captureFile") String filename) {
-		System.out.println("파일 이름은 : "+filename);
+	@RequestMapping("/imgPredict.do") //Main 페이지
+	public String asdf(@RequestParam("captureFile") String fileName, RedirectAttributes rttr) {
+		System.out.println("test:"+fileName);
+		rttr.addAttribute("fileName", fileName);
 		
-		
-		return "Main";
+		return "redirect:http://localhost:5000/predict";
 	}
 	
 	@RequestMapping("/result.do")
 	public String viewFile(@RequestParam("fileName") String fileName, Model model) {
+		System.out.println(fileName);
 		model.addAttribute("fileName", fileName);
 		return "result";
 	}
