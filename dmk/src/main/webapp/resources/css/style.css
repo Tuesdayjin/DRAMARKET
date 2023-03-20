@@ -3793,7 +3793,7 @@ textarea.form-control-lg {
 .navbar {
   --bs-navbar-padding-x: 0;
   --bs-navbar-padding-y: 0.5rem;
-  --bs-navbar-color: #222831;
+  --bs-navbar-color:#FFFFFF;
   --bs-navbar-hover-color: #FFD369;
   --bs-navbar-disabled-color: #FFD369;
   --bs-navbar-active-color: #FFD369;
@@ -5615,7 +5615,7 @@ textarea.form-control-lg {
   --bs-tooltip-margin: ;
   --bs-tooltip-font-size: 0.875rem;
   --bs-tooltip-color: #222831;
-  --bs-tooltip-bg: rgba(240, 245, 250, 0.8);
+  --bs-tooltip-bg: rgba(255, 211, 105, 0.5);
   --bs-tooltip-border-radius: 0.375rem;
   --bs-tooltip-opacity: 0.9;
   --bs-tooltip-arrow-width: 0.8rem;
@@ -11797,6 +11797,22 @@ video {
 }
 .player{
 	border-radius : 5;
+}
+
+.dmkHeader{
+  position: relative; /* 부모 요소를 relative로 설정 */
+  width: 100%; /* header를 100%의 너비로 설정 */
+  height: 500px; /* header의 높이를 200px로 설정 */
+  padding: 20px; /* 예시로 20px의 padding을 설정 */
+  background-color: #393E46;
+}
+header img{
+  position: absolute; /* 자식 요소를 absolute로 설정 */
+  top: 0; /* top을 0으로 설정 */
+  left: 0; /* left를 0으로 설정 */
+  width: 100%; /* 이미지의 너비를 100%로 설정 */
+  height: 100%; /* 이미지의 높이를 100%로 설정 */
+  object-fit: cover; /* 이미지가 자식 요소의 너비와 높이를 가득 채울 수 있도록 설정 */
 }
 
 

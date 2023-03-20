@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -12,7 +11,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dramarket</title>
 <link rel="stylesheet" href="${cpath}/resources/css/style.css">
-<script type="text/javascript" src="${cpath}/resources/js/dmk.js"></script>
 <!-- Bootstrap 및 Bootswatch 스타일시트 파일 -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.6.0/morph/bootstrap.min.css"
@@ -168,14 +166,12 @@
   </head>
   <body>
     <video
-      class="bg-viedo"
-      playsinline="playsinline"
-      autoplay="autoplay"
-      muted="muted"
-      loop="loop"
-    >
-      <source src="http://localhost:8081/front/nomal.mp4" type="video/mp4" />
-    </video>
+  playsinline="playsinline"
+  autoplay="autoplay"
+  muted="muted"
+  loop="loop">
+  <source src="${cpath}/resources/img/dmkimg/dmk_intro_video.mp4" type="video/mp4" />
+</video>
     <div class="pageTransition-box">
       <div class="startTile">
         <h1>DRAMARKET</h1>

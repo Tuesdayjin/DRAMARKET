@@ -189,71 +189,9 @@
 
     </div>
 </section>
-</main>
-
-
-
-
-<<<<<<< HEAD
-<script type="text/javascript">
-
-function insertreply() {
-	var cmt =  $("#cmt").val();
-	var form = $("#reply_form").serialize()
-
-	if(cmt.length == 0){
-       	 Swal.fire({
-             icon: '',
-             title: '',
-             text: '💛댓글을 입력해주세요💛',
-             confirmButtonColor: '#FFD35F'
-         });
-            return;
-    }else{
-    	   $.ajax({
-               url : "commentInsert.do",
-               type : "POST",
-               contentType : 'application/x-www-form-urlencoded; charset=UTF-8', 
-                             //application/json , JSON.stringify , 컨트롤러에 매개변수 앞에 @RequestBody 3가지가 하나의 세트             
-               data :form,
-               success : function(){
-				   console.log('댓글 등록 완료');   
-                   $('#cmt').val('');
-                   getList();
-               },
-               error : function(err){
-                   console.log("댓글 입력 실패")
-               }
-               
-           });//ajax
-    }
-	
-}// 댓글 insert
-
-
-function getList(){
-    $.ajax({
-        
-        url : "commentSelect.do",
-        type : "GET",
-        dataType : "json",
-        success :function(obj){
-        	
-        }
-	
-}
-        
-  
-</script>
-
-=======
->>>>>>> branch 'main' of https://github.com/Tuesdayjin/DRAMARKET.git
-
-
-
 
 <!-- Footer-->
-<footer class="bg-dark py-4 mt-auto">
+<footer class="py-4 mt-auto"  style="background-color:#393E46;">
 <div class="container px-5">
     <div class="row align-items-center justify-content-between flex-column flex-sm-row">
         <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; DRAMARKET 2023</div></div>
