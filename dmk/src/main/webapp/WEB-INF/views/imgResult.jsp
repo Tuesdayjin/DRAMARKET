@@ -294,6 +294,16 @@ width : 100%;
 
 </head>
 <body>
+<%
+String topPath = "C:\\dmkServer\\yolov5\\runs\\detect\\" + request.getAttribute("fileName") + "\\crops\\top";
+String bottomPath = "C:\\dmkServer\\yolov5\\runs\\detect\\" + request.getAttribute("fileName") + "\\crops\\bottom";
+String dressPath = "C:\\dmkServer\\yolov5\\runs\\detect\\" + request.getAttribute("fileName") + "\\crops\\dress";
+String bagPath = "C:\\dmkServer\\yolov5\\runs\\detect\\" + request.getAttribute("fileName") + "\\crops\\bag";
+File topDir = new File(topPath);
+File bottomDir = new File(bottomPath);
+File dressDir = new File(dressPath);
+File bagDir = new File(bagPath);
+%>
 <button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
 	<div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
@@ -337,10 +347,83 @@ width : 100%;
 <div class="container">
 		<div class="content">
 				<div class="capture-Bigbox">
-				<img src="${imageDataUrl}">
+				<img src="http://localhost:8081/flask/upload/${fileName}.jpg">
 				</div>
+				
 
 </div>
+<%
+try {
+    if (topDir != null) {
+        for(int i=0; i<topDir.list().length; i++) {
+            // 이미지 출력 코드%>
+            <div class="objImg">
+                  <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/crops/top/<%=topDir.list()[i]%>'/></a>
+           </div> 
+        <%}
+    } else {
+        // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
+        // 또는 예외 처리를 위한 예외 발생
+        throw new Exception("topDir[i] 객체가 null입니다.");
+    }
+} catch (Exception e) {
+    // 예외 처리 코드
+    // 예외 메시지 출력, 로그 기록 등
+}
+
+try {
+    if (bottomDir != null) {
+        for(int i=0; i<bottomDir.list().length; i++) {
+            // 이미지 출력 코드%>
+            <div class="objImg">
+                  <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/crops/bottom/<%=bottomDir.list()[i]%>'/></a>
+           </div> 
+        <%}
+    } else {
+        // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
+        // 또는 예외 처리를 위한 예외 발생
+        throw new Exception("bottomDir[i] 객체가 null입니다.");
+    }
+} catch (Exception e) {
+    // 예외 처리 코드
+    // 예외 메시지 출력, 로그 기록 등
+}
+
+try {
+    if (dressDir != null) {
+        for(int i=0; i<dressDir.list().length; i++) {
+            // 이미지 출력 코드%>
+            <div class="objImg">
+                  <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/crops/dress/<%=dressDir.list()[i]%>'/></a>
+           </div> 
+        <%}
+    } else {
+        // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
+        // 또는 예외 처리를 위한 예외 발생
+        throw new Exception("dressDir[i] 객체가 null입니다.");
+    }
+} catch (Exception e) {
+    // 예외 처리 코드
+    // 예외 메시지 출력, 로그 기록 등
+}
+
+try {
+    if (bagDir != null) {
+        for(int i=0; i<bagDir.list().length; i++) {
+            // 이미지 출력 코드%>
+            <div class="objImg">
+                 <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/crops/bag/<%=bagDir.list()[i]%>'/></a>
+           </div> 
+        <%}
+    } else {
+        // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
+        // 또는 예외 처리를 위한 예외 발생
+        throw new Exception("bagDir[i] 객체가 null입니다.");
+    }
+} catch (Exception e) {
+    // 예외 처리 코드
+    // 예외 메시지 출력, 로그 기록 등
+}%>
 </div>
 
 

@@ -2,6 +2,7 @@ package kr.smhrd.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -128,7 +129,8 @@ public class MainController {
 			String uniqueName = uuids[0];
 			
 	        //파일 저장(UploadPath, UploadName)
-	        File saveFile = new File(uploadFolder+"\\"+uniqueName + ".png");  // 적용 후
+			UploadName = uniqueName + ".jpg";
+	        File saveFile = new File(uploadFolder+"\\"+UploadName);  // 적용 후
 	        
 			try {
 				mFile.transferTo(saveFile);
@@ -139,25 +141,26 @@ public class MainController {
 			}
 			
 		}
-		System.out.println(UploadName);
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().print(UploadName);
 		
+	    System.out.println(UploadName);
+	      response.setContentType("text/html;charset=utf-8");
+	      response.getWriter().print(UploadName);
+	      
 		return null;
 
-		
 	}
 	
-	@RequestMapping("/asdf.do") //Main 페이지
-	public String asdf(@RequestParam("captureFile") String filename) {
-		System.out.println(filename);
+	@RequestMapping("/imgPredict.do") //Main 페이지
+	public String asdf(@RequestParam("captureFile") String fileName, RedirectAttributes rttr) {
+		System.out.println("test:"+fileName);
+		rttr.addAttribute("fileName", fileName);
 		
-		
-		return "Main";
+		return "redirect:http://localhost:5000/predict";
 	}
 	
 	@RequestMapping("/result.do")
 	public String viewFile(@RequestParam("fileName") String fileName, Model model) {
+		System.out.println(fileName);
 		model.addAttribute("fileName", fileName);
 		return "result";
 	}
