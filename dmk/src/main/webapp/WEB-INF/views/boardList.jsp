@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=\, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dramarket</title>
 
 <!-- Bootstrap 및 Bootswatch 스타일시트 파일 -->
@@ -45,11 +45,11 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
 	rel="stylesheet">
+	
 </head>
 <body>
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
-	
 	<div
 		style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
@@ -69,10 +69,10 @@
 					<div class="collapse navbar-collapse" id="navbarColor02">
 
 						<ul class="navbar-nav me-auto">
-							<li class="nav-item"><a class="nav-link " href="Main.do">상품검색
+							<li class="nav-item"><a class="nav-link " href="Main.do">영상분석
 									<span class="visually-hidden">(current)</span>
 							</a></li>
-
+								</li>
 							<c:if test="${!empty mvo}">
 								<li class="nav-item"><a class="nav-link" href="#">마이페이지</a>
 								</li>
@@ -190,7 +190,10 @@ writeBtn.addEventListener('click', () => {
   window.location.href = url;
 });
 
+
+
 </script>
+
 		</div>
 		<!-- Blog preview section-->
 		<section class="py-5"></section>
@@ -223,5 +226,36 @@ writeBtn.addEventListener('click', () => {
 		<!--Masonry.js-->
 		<script
 			src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+			
+<script>
+//to top button
+document.addEventListener("DOMContentLoaded", function() {
+	// DOM이 완전히 로드된 후에 스크립트가 실행
+	let mybutton = document.getElementById("myBtn");
+
+	window.onscroll = function() {
+		scrollFunction()
+	};
+
+	function scrollFunction() {
+		if (document.body.scrollTop > 20
+			|| document.documentElement.scrollTop > 20) {
+			mybutton.style.display = "block";
+			mybutton.style.backgroundColor = "#FFD369";
+		} else {
+			mybutton.style.display = "none";
+		}
+	}
+
+
+});
+
+
+function topFunction() {
+	document.body.scrollTop = 0;
+	document.documentElement.scrollTop = 0;
+}
+
+</script>			
 </body>
 </html>

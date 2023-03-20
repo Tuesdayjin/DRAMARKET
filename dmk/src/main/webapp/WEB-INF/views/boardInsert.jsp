@@ -69,7 +69,7 @@
                       
                       <ul class="navbar-nav me-auto">
                           <li class="nav-item">
-                              <a class="nav-link " href="Main.do">상품검색
+                              <a class="nav-link " href="Main.do">영상분석
                                   <span class="visually-hidden">(current)</span>
                               </a>
                           </li>
@@ -199,6 +199,36 @@ function register(){
 		$('#fileform').submit();
 	}
 }// 글 등록 끝
+
+
+//to top button
+document.addEventListener("DOMContentLoaded", function() {
+	// DOM이 완전히 로드된 후에 스크립트가 실행
+	let mybutton = document.getElementById("myBtn");
+
+	window.onscroll = function() {
+		scrollFunction()
+	};
+
+	function scrollFunction() {
+		if (document.body.scrollTop > 20
+			|| document.documentElement.scrollTop > 20) {
+			mybutton.style.display = "block";
+			mybutton.style.backgroundColor = "#FFD369";
+		} else {
+			mybutton.style.display = "none";
+		}
+	}
+
+
+});
+
+
+function topFunction() {
+	document.body.scrollTop = 0;
+	document.documentElement.scrollTop = 0;
+}
+
 </script>
 
 </body>

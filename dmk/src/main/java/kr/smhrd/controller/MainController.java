@@ -28,7 +28,7 @@ public class MainController {
 	@Autowired
 	private Mapper mapper;
 	
-	@RequestMapping("/intro.do") //Main 페이지
+	@RequestMapping("/intro.do") //시작 페이지
 	public String intro() {
 		
 		return "intro";

@@ -17,6 +17,7 @@ public class CaptureImgController {
 	public String uploadCapture(@RequestParam("imageDataUrl") String imageDataUrl, Model model) {
 		 
 		model.addAttribute("imageDataUrl", imageDataUrl); //result.jsp에서 이미지 주소 받아오기
+		System.out.println(imageDataUrl);
 		    return "imgResult";//이미지분석jsp에서 출력
 	}
 	

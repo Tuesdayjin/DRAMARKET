@@ -399,6 +399,7 @@ for(int i=0; i<nameArr.length; i++) {
 
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
+		
 	<div style="background-color: #393E46; position: sticky; top: 0; z-index: 9999;">
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid" style="width: 70%;">
@@ -416,7 +417,7 @@ for(int i=0; i<nameArr.length; i++) {
 					<div class="collapse navbar-collapse" id="navbarColor02">
 
 						<ul class="navbar-nav me-auto">
-							<li class="nav-item"><a class="nav-link " href="Main.do">상품검색
+							<li class="nav-item"><a class="nav-link " href="Main.do">영상분석
 									<span class="visually-hidden">(current)</span>
 							</a></li>
 
@@ -762,6 +763,36 @@ try {
   var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl);
   });
+  
+  
+	//to top button
+	document.addEventListener("DOMContentLoaded", function() {
+		// DOM이 완전히 로드된 후에 스크립트가 실행
+		let mybutton = document.getElementById("myBtn");
+
+		window.onscroll = function() {
+			scrollFunction()
+		};
+
+		function scrollFunction() {
+			if (document.body.scrollTop > 20
+				|| document.documentElement.scrollTop > 20) {
+				mybutton.style.display = "block";
+				mybutton.style.backgroundColor = "#FFD369";
+			} else {
+				mybutton.style.display = "none";
+			}
+		}
+
+
+	});
+
+	
+	function topFunction() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	}
+
 </script>
  
 

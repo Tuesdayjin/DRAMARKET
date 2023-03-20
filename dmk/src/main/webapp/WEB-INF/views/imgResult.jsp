@@ -93,7 +93,7 @@
 }
 
 .content {
-  max-width: 80%; /* 최대 너비 지정 */
+  max-width: 100%; /* 최대 너비 지정 */
   margin: 0 auto; /* 가운데 정렬 */
 }
 
@@ -101,18 +101,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   background-color : #EEEEEE;
   padding : 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
         	margin-top : 40px;
         	border-radius: 5px;
+   width: 800px;
+  height: 450px;
 }
-
 .capture-Bigbox img {
-  max-width: 100%; /* 최대 너비 지정 */
-  max-height: 100%; /* 최대 높이 지정 */
-  object-fit: contain; /* 비율에 맞게 축소하여 보이도록 설정 */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 	
@@ -313,7 +313,7 @@ width : 100%;
 					<div class="collapse navbar-collapse" id="navbarColor02">
 
 						<ul class="navbar-nav me-auto">
-							<li class="nav-item"><a class="nav-link " href="Main.do">상품검색
+							<li class="nav-item"><a class="nav-link " href="Main.do">영상분석
 									<span class="visually-hidden">(current)</span>
 							</a></li>
 
@@ -359,5 +359,34 @@ width : 100%;
     </div>
 </div>
 </footer>
+<script>
+//to top button
+document.addEventListener("DOMContentLoaded", function() {
+	// DOM이 완전히 로드된 후에 스크립트가 실행
+	let mybutton = document.getElementById("myBtn");
+
+	window.onscroll = function() {
+		scrollFunction()
+	};
+
+	function scrollFunction() {
+		if (document.body.scrollTop > 20
+			|| document.documentElement.scrollTop > 20) {
+			mybutton.style.display = "block";
+			mybutton.style.backgroundColor = "#FFD369";
+		} else {
+			mybutton.style.display = "none";
+		}
+	}
+
+
+});
+
+
+function topFunction() {
+	document.body.scrollTop = 0;
+	document.documentElement.scrollTop = 0;
+}
+</script>
 </body>
 </html>

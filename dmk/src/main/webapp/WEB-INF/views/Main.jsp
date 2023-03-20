@@ -40,6 +40,25 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 <style>
+      video {
+       position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+  .headervideo-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(57, 62, 70, 0.5);
+  z-index: 10;
+}
+      
 /*업로드 중의 모달*/
 .modal-body {
 height: 300px;
@@ -128,7 +147,6 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
 </style>
 </head>
 <body>
-	<div class="pageTransition-box"></div>
 	<button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
 		title="Go to top">TOP</button>
 
@@ -169,23 +187,21 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
 			</div>
 		</nav>
 	</div>
-	<!-- Header-->
-	<header class="py-5 dmkHeader">
-		<div class="container px-5">
-			<div class="row gx-5 align-items-center justify-content-center">
-				<div class="col-lg-8 col-xl-7 col-xxl-6">
-					<div class="my-5 text-center text-xl-start">
-						<h1 class="display-5 fw-bolder text-white mb-2">A Bootstrap 5
-							template for modern businesses</h1>
-						<p class="lead fw-normal text-white-50 mb-4">Quickly design
-							and customize responsive mobile-first sites with Bootstrap, the
-							world’s most popular front-end open source toolkit!</p>
-					</div>
-				</div>
+<!-- Header-->
+<header class="bg-dark py-5" style="background-color: #393E46;">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                <div class="my-5 text-center text-xl-start">
+                    <h1 class="display-5 fw-bolder text-white mb-2">A Bootstrap 5 template for modern businesses</h1>
+                    <p class="lead fw-normal text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
 
-			</div>
-		</div>
-	</header>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</header>
 	<div>
 		<ul class="nav justify-content-center selectNavBar">
 			<li class="nav-item selectNavTab"><a class="nav-link selectNav"
@@ -196,6 +212,7 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
 				data-target="#uploadFile" href="#">Upload Video</a>
 		</ul>
 	</div>
+	
 	<div class="py-5">
 		<div class="container px-5 my-5">
 			<div class="row gx-5 justify-content-center">
@@ -203,8 +220,9 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
 					<div class="text-center tab-content">
 						<div id="howto">
 							<div class="fs-4 mb-4">"드라마켓 사용 설명"</div>
-							<div class="d-flex align-items-center justify-content-center">
-							</div>
+							<div class="howtoarea" style="background-color: #FFFFFF;">설명1</div>
+							<div class="howtoarea" style="background-color: #EEEEEE;">설명2</div>
+							<div class="howtoarea" style="background-color: #FFFFFF;">설명3</div>
 						</div>
 						<div id="uploadLink">
 							<div class="fs-4 mb-4">"영상의 링크가 있나요?"</div>
@@ -377,6 +395,34 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
 	          });
 	      });
 
+		
+		//to top button
+		document.addEventListener("DOMContentLoaded", function() {
+			// DOM이 완전히 로드된 후에 스크립트가 실행
+			let mybutton = document.getElementById("myBtn");
+
+			window.onscroll = function() {
+				scrollFunction()
+			};
+
+			function scrollFunction() {
+				if (document.body.scrollTop > 20
+					|| document.documentElement.scrollTop > 20) {
+					mybutton.style.display = "block";
+					mybutton.style.backgroundColor = "#FFD369";
+				} else {
+					mybutton.style.display = "none";
+				}
+			}
+
+
+		});
+	
+		
+		function topFunction() {
+			document.body.scrollTop = 0;
+			document.documentElement.scrollTop = 0;
+		}
 	</script>
 </body>
 </html>
