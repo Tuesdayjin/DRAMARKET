@@ -397,8 +397,8 @@ File bagDir = new File(bagPath);
 
 				</div>
 				<div class="predictObj-box">
-				<div class="predict_content predict-card">
-		<%
+<div class="predict_content predict-card">
+<%
 try {
     if (topDir != null) {
         for(int i=0; i<topDir.list().length; i++) {
@@ -470,17 +470,23 @@ try {
     // 예외 처리 코드
     // 예외 메시지 출력, 로그 기록 등%>
 </div>
-<%}%>		
- </div>
-      </div><!-- end predict-Bigbox -->
+<%}%>      
+</div>
+</div>
+
+</div><!--end content-->
+</div><!--end predict-container-->
+
+
+      
+
 <!-- 객체 이미지 검색 -->
+<div class="container predict-container">
+		<div class="content">
 <form method="post" id = "search_form">
 	<input type="hidden" id="search_img" name="img_path" value="">
 	<input type="submit" id="search_btn" style="display:none;">
 </form>
-
-
-
 <div class="predict-Bigbox">
     <div class="predictTilte-box">
       <div class="predict-title">
@@ -502,11 +508,14 @@ try {
 
 
   </div>
-      </div> </div> 
+       </div> <!-- end search-card -->
 </div>
      </div>
 </div><!--end content-->
 </div><!--end predict-container-->
+
+
+
  <script type="text/javascript">
  $(function() {
      $(".objImg img").click(function() {
@@ -538,7 +547,7 @@ try {
              success : function(data) {
                  console.log(data)                  
                  var html = "";
-                 for (var i = 0; i < 4; i++) {  
+                 for (var i = 0; i < 10; i++) {  
                      html += '<div class="search-objImg"><a href="' + data['link'][i] + '" target="_blank"><img src="' + data['image'][i] + '"></a></div>';
                  }
                  $(".search-title").show();

@@ -152,7 +152,12 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
 }
 
 </style>
-</head>
+화화
+<form id="captureForm" action="imgPredict.do" method="post" enctype="multipart/form-data">		
+<input type="hidden" name="captureFile" id="captureFile" value="">		
+<button id="captureImageButton" class="btn" type="button" title="재생 중인 장면을 추가 분석!"  data-bs-toggle="tooltip" >
+</button>
+</form></head>
 <body>
 
    <button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
