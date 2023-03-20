@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -96,6 +97,7 @@ public class MainController {
 		return "redirect:http://localhost:5000/predict";
 	}
 
+
 	@RequestMapping("/captureUpload.do")
 	public String captureUpload(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response)
 			throws ServletException, IOException {
@@ -109,7 +111,7 @@ public class MainController {
 
 		Iterator<String> it= multipartRequest.getFileNames();
 		List<String> fileList = new ArrayList<String>();
-		String UploadName="";
+		String uniqueName="";
 		while (it.hasNext()) { // 마지막 파라메터가 없으면 false 반복 종료
 			String paramFileName = it.next();
 			
@@ -125,7 +127,7 @@ public class MainController {
 			System.out.println(uuid.toString());
 			String[] uuids = uuid.toString().split("-");
 			
-			String uniqueName = uuids[0];
+			uniqueName = uuids[0];
 			
 	        //파일 저장(UploadPath, UploadName)
 	        File saveFile = new File(uploadFolder+"\\"+uniqueName + ".png");  // 적용 후
@@ -139,9 +141,9 @@ public class MainController {
 			}
 			
 		}
-		System.out.println(UploadName);
+		System.out.println(uniqueName);
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().print(UploadName);
+		response.getWriter().print(uniqueName);
 		
 		return null;
 
@@ -150,7 +152,7 @@ public class MainController {
 	
 	@RequestMapping("/asdf.do") //Main 페이지
 	public String asdf(@RequestParam("captureFile") String filename) {
-		System.out.println(filename);
+		System.out.println("파일 이름은 : "+filename);
 		
 		
 		return "Main";
