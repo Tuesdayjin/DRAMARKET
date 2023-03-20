@@ -97,47 +97,64 @@ public class MainController {
 	}
 
 	@RequestMapping("/captureUpload.do")
-	public String captureUpload(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+	public String captureUpload(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response)
 			throws ServletException, IOException {
-
 		// 파일 저장 디렉토리 설정
 		String uploadFolder = "C:\\dmkServer\\upload";
+		//String path = multipartRequest.getServletContext().getRealPath("")+File.separator+"img"; // 쌤 경로
+	    // 날짜별로 디렉토리 생성, uploadPath 설정
+	    File uploadPath = new File(uploadFolder);
+	    if(!uploadPath.exists()) uploadPath.mkdirs();
+		
 
-		Iterator<String> it = multipartRequest.getFileNames();
+		Iterator<String> it= multipartRequest.getFileNames();
 		List<String> fileList = new ArrayList<String>();
-		String UploadName = "";
+		String UploadName="";
 		while (it.hasNext()) { // 마지막 파라메터가 없으면 false 반복 종료
 			String paramFileName = it.next();
-
-			// 파일을 다루는 클래스 (파라메터로 받아온 파일의 이름, 타입, 크기 등의 정보 )
+			
+			//파일을 다루는 클래스 (파라메터로 받아온 파일의 이름, 타입, 크기 등의 정보 )
 			MultipartFile mFile = multipartRequest.getFile(paramFileName);
-			String fileRealName = mFile.getOriginalFilename();// 실제 파일 이름
-			System.out.println(fileRealName); // 넘어오는 값들 확인
-
-			// 확장자 추출
-			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
-
-			// 업로드 이름(UploadName) 지정
+			String fileRealName = mFile.getOriginalFilename();//실제 파일 이름
+			System.out.println(fileRealName); //넘어오는 값들 확인 
+			fileList.add(fileRealName);
+			
+			
+			//업로드 이름(UploadName) 지정
 			UUID uuid = UUID.randomUUID();
 			System.out.println(uuid.toString());
 			String[] uuids = uuid.toString().split("-");
-			UploadName = uuids[0];
-
-			// 파일 저장
-			File saveFile = new File(uploadFolder + "\\" + UploadName + fileExtension);
-
+			
+			String uniqueName = uuids[0];
+			
+	        //파일 저장(UploadPath, UploadName)
+	        File saveFile = new File(uploadFolder+"\\"+uniqueName + ".png");  // 적용 후
+	        
 			try {
 				mFile.transferTo(saveFile);
-				System.out.println("저장 이름은 : " + UploadName);
-				System.out.println("저장 경로는 : " + saveFile.getPath());
-
+				System.out.println("저장완료. 저장 경로는 : "+saveFile.getPath() );
+				
 			} catch (Exception error) {
-				System.out.println("저장 실패");
+				System.out.println(error.getMessage());
 			}
+			
 		}
+		System.out.println(UploadName);
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().print(UploadName);
+		
 		return null;
+
+		
 	}
 	
+	@RequestMapping("/asdf.do") //Main 페이지
+	public String asdf(@RequestParam("captureFile") String filename) {
+		System.out.println(filename);
+		
+		
+		return "Main";
+	}
 	
 	@RequestMapping("/result.do")
 	public String viewFile(@RequestParam("fileName") String fileName, Model model) {
