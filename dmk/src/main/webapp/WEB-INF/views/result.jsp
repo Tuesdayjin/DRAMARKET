@@ -221,39 +221,7 @@ display: block;
       border-radius: 10px;
       box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
     }
-    
-    
-    
-      .modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-}
 
-.modal-content {
-background-color: rgba(238, 238, 238,0.6);
- box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
-  margin: 15% auto;
-  padding: 20px;
-  width: 80%;
-}
-
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
 .predict-row{
 width : 100%;
 }
@@ -469,7 +437,6 @@ for(int i=0; i<nameArr.length; i++) {
 			
 
 				<script>
-				
 				var player = null;
 					$(function() {
 					     
@@ -549,8 +516,10 @@ for(int i=0; i<nameArr.length; i++) {
 					//캡쳐버튼 클릭
 					document.addEventListener('DOMContentLoaded', function() {
 						  $('#captureImageButton').click(captureImage);
+						
 						});
-					function captureImage() {
+					function captureImage() {						
+						
 						//비디오 플레이어를 불러오기
 						  var videoElement = $('video', '#player')[0];
 						  var canvas = document.createElement('canvas');
@@ -565,13 +534,12 @@ for(int i=0; i<nameArr.length; i++) {
 						  var imageDataUrl = canvas.toDataURL('image/png');
 						  console.log('캡쳐이미지 : '+ imageDataUrl);
 						  var file = base64toFile(imageDataUrl,'jangho.png');
-						  
-						  
-						  
-						  
-						  
+
 						  var formData=new FormData();
 						  formData.append("file",file );
+						  
+
+						  
 						    $.ajax({
 							      url: "captureUpload.do",
 							      type: "POST",
@@ -583,13 +551,10 @@ for(int i=0; i<nameArr.length; i++) {
 							    	//$('#imgdiv').append('<img src="http://localhost:8081/boardimg/'+ data +'" id="Sample">');
 							        $('#captureFile').val(data);
 							        $('#captureForm').submit();
+							     
 							      },
 							      error : function(){alert("파일 업로드에 실패하였습니다");}
 							    });
-						  
-						  
-						  
-						  
 						  
 					}
 	      
@@ -605,8 +570,7 @@ for(int i=0; i<nameArr.length; i++) {
 	                      }
 	                      return new File([u8arr], filename, {type:mime});
 	                  }
-					
-					
+
 				</script>
 <!--인식한 객체 출력-->
 <div class="container predict-container">
@@ -729,7 +693,7 @@ try {
 
 
   </div>
-       </div> 
+       </div> <!-- end search-card -->
 </div>
      </div>
   </div>
@@ -766,7 +730,7 @@ try {
              success : function(data) {
                  console.log(data)                  
                  var html = "";
-                 for (var i = 0; i < 4; i++) {  
+                 for (var i = 0; i < 10; i++) {  
                      html += '<div class="search-objImg"><a href="' + data['link'][i] + '" target="_blank"><img src="' + data['image'][i] + '"></a></div>';
                  }
                  $(".search-title").show();
@@ -833,6 +797,30 @@ try {
 
 				</div>
 				</div>
+				
+				
+				<!-- 로더 모달 -->
+<!-- 모달창 -->
+<div class="modal fade" id="loaderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="loader-title">
+          <h4>드라마켓 AI가 분석중입니다</h4>
+        </div>
+        <div class="loader-subtitle">
+          <h5>&#9203;잠시만 기다려주세요&#9203;</h5>
+        </div>
+        <div class="loadercontainer">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Footer-->
 <footer class="bg-dark py-4 mt-auto" style="width:100%;">
 <div class="container px-5">
