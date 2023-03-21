@@ -46,6 +46,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mysql.cj.util.Util;
 
+import kr.smhrd.entity.Criteria;
+import kr.smhrd.entity.PageMaker;
 import kr.smhrd.entity.t_board;
 import kr.smhrd.entity.t_comment;
 import kr.smhrd.entity.t_member;
@@ -59,15 +61,17 @@ public class BoardController { //DAO 대신 mapper 호출
 	private Mapper mapper;
 	
 	@RequestMapping("/boardList.do") //게시판 페이지
-	public String boardList(Model model) {
+	public String boardList(Criteria cri, Model model) {
 		
-		List<t_board> list = mapper.selecT_board();
+		List<t_board> list = mapper.boardList(cri);
 		model.addAttribute("list",list);
-		
+		PageMaker pm = new PageMaker();
+		pm.setCri(cri);
+		pm.setTotalCount(mapper.totalCount());
+		model.addAttribute("pm", pm);
 		
 		return "boardList";
 	}
-	
 	
 	@GetMapping("/boardInsert.do") //글쓰기 페이지 불러오기 
 	public String boardInsert() {

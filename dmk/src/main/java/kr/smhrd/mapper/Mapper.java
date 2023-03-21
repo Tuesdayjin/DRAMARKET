@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.smhrd.entity.Criteria;
 import kr.smhrd.entity.t_board;
 import kr.smhrd.entity.t_comment;
 import kr.smhrd.entity.t_member;
@@ -63,6 +64,10 @@ public interface Mapper {
 	@Delete("delete from t_comment where cmt_num=#{cmt_num}")
 	public int cmtDelete(long cmt_num);
 	
-
+	// infinite scroll test
+	public List<t_board> boardList(Criteria cri);
+	
+	@Select("select count(*) from t_board")
+	public int totalCount();
 	
 }

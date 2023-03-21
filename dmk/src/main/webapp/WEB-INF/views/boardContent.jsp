@@ -146,7 +146,8 @@ header {
                         <div class="card-footer p-4 pt-0 bg-transpa0rent border-top-0" style="background-color: #EEEEEE;">
                             <div class="d-flex align-items-end justify-content-between">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle me-3" src="http://localhost:8081/profile/profile_${board_vo.profile_name}" alt="..." />
+                                    <img class="rounded-circle me-3" src="http://localhost:8081/profile/profile_${board_vo.profile_name}" alt="..."
+                                    style="width:45px; height:45px;" />
                                     <div class="small">
                                         <div class="fw-bold">${board_vo.nick}</div>
                                         <div class="text-muted"><fmt:formatDate value="${board_vo.indate}" pattern="yyyy-MM-dd HH시 mm분"/></div>

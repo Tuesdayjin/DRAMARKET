@@ -591,13 +591,13 @@ for(int i=0; i<nameArr.length; i++) {
 				<div class="predictObj-box">
 				<%for(int i=0; i<nameArr.length; i++) {%>
 <!-- <div class="predict_content<%=i%> predict-card" style="display:none;"> -->
-<div class="predict_content<%=i%> predict-card slide slide_wrap" style="display:none;">
+<div class="predict_content<%=i%> predict-card" style="display:none;">
 <%
 try {
     if (topDir[i] != null) {
         for(int j=0; j<topDir[i].list().length; j++) {
             // 이미지 출력 코드%>
-            <div class="objImg slide_item">
+            <div class="objImg">
                   <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/top/<%=topDir[i].list()[j]%>'/></a>
            </div> 
         <%}
@@ -615,7 +615,7 @@ try {
     if (bottomDir[i] != null) {
         for(int j=0; j<bottomDir[i].list().length; j++) {
             // 이미지 출력 코드%>
-            <div class="objImg slide_item">
+            <div class="objImg">
                   <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bottom/<%=bottomDir[i].list()[j]%>'/></a>
            </div> 
         <%}
@@ -633,7 +633,7 @@ try {
     if (dressDir[i] != null) {
         for(int j=0; j<dressDir[i].list().length; j++) {
             // 이미지 출력 코드%>
-            <div class="objImg slide_item">
+            <div class="objImg">
                   <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/dress/<%=dressDir[i].list()[j]%>'/></a>
            </div> 
         <%}
@@ -651,7 +651,7 @@ try {
     if (bagDir[i] != null) {
         for(int j=0; j<bagDir[i].list().length; j++) {
             // 이미지 출력 코드%>
-            <div class="objImg slide_item">
+            <div class="objImg">
                  <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bag/<%=bagDir[i].list()[j]%>'/></a>
            </div> 
         <%}
@@ -850,5 +850,9 @@ try {
     </div>
 </div>
 </footer>
+
+<!-- Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBud7Rdu7Bf4zVdcp4Xh3Pm4LI+J2SvD0oda3x3tvLAuta3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 </body>
 </html>
