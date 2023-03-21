@@ -150,20 +150,11 @@ background-image: linear-gradient(#FFD369, #FEB57F, #E48E8E);
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
-
 </style>
-화화
-<form id="captureForm" action="imgPredict.do" method="post" enctype="multipart/form-data">		
-<input type="hidden" name="captureFile" id="captureFile" value="">		
-<button id="captureImageButton" class="btn" type="button" title="재생 중인 장면을 추가 분석!"  data-bs-toggle="tooltip" >
-</button>
-</form></head>
+</head>
 <body>
-
    <button onclick="topFunction()" id="myBtn" class="btn btn-info to-top"
       title="Go to top">TOP</button>
-
-
    <div style="background-color: #222831; position: sticky; top: 0; z-index: 9999;">
       <nav class="navbar navbar-expand-lg">
          <div class="container-fluid" style="width: 70%;">

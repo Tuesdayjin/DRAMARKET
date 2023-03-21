@@ -84,8 +84,10 @@
 	src="http://localhost:8081/flask/full/build/js/amalia.js-plugin-timeline.min.js"></script>
 <script type="text/javascript"
 	src="http://localhost:8081/flask/full/build/js/i18n/amalia.js-message-en.js"></script>
-	
-	
+
+<!-- swiper -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <style>
 #captureImageButton {
   position: fixed;
@@ -183,43 +185,45 @@ width : 100%;
 	   margin-top : 20px;
 	   width : 100%;
 display: flex;
-  overflow-x: auto;
-  border-radius= 10;
+  border-radius: 10;
+  overflow : hidden;
     }
 
 .search-objImg{
 display: inline-block;
-vertical-align: top; /* 이미지를 수직으로 맞춤 */
+vertical-align: top;
 margin-left:40px;
       	margin-bottom:40px;  
       flex: 0 0 auto;
       padding: 20px;
       width: 200px;
-      height: auto;
+      height: 200px;
 }
 .search-objImg img{
 display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
       border-radius: 10px;
       box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
+      object-fit: cover;
+      
 }
-
-        .objImg {
-      	margin-left:40px;
+        .objImg{
+margin-left:40px;
       	margin-bottom:40px;  
       flex: 0 0 auto;
       padding: 20px;
       width: 200px;
-      height: auto;
+      height: 200px;
     }
   
     .objImg img {
-      display: block;
+display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
       border-radius: 10px;
       box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
+       object-fit: cover;
     }
 
 .predict-row{
@@ -388,7 +392,8 @@ for(int i=0; i<nameArr.length; i++) {
 							<li class="nav-item"><a class="nav-link " href="Main.do">영상분석
 									<span class="visually-hidden">(current)</span>
 							</a></li>
-
+<li class="nav-item"><a class="nav-link" href="boardList.do">게시판</a>
+                     </li>
 							<c:if test="${!empty mvo}">
 								<li class="nav-item"><a class="nav-link" href="#">마이페이지</a>
 								</li>
@@ -585,13 +590,14 @@ for(int i=0; i<nameArr.length; i++) {
 				</div>
 				<div class="predictObj-box">
 				<%for(int i=0; i<nameArr.length; i++) {%>
-<div class="predict_content<%=i%> predict-card" style="display:none;">
+<!-- <div class="predict_content<%=i%> predict-card" style="display:none;"> -->
+<div class="predict_content<%=i%> predict-card slide slide_wrap" style="display:none;">
 <%
 try {
     if (topDir[i] != null) {
         for(int j=0; j<topDir[i].list().length; j++) {
             // 이미지 출력 코드%>
-            <div class="objImg">
+            <div class="objImg slide_item">
                   <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/top/<%=topDir[i].list()[j]%>'/></a>
            </div> 
         <%}
@@ -609,7 +615,7 @@ try {
     if (bottomDir[i] != null) {
         for(int j=0; j<bottomDir[i].list().length; j++) {
             // 이미지 출력 코드%>
-            <div class="objImg">
+            <div class="objImg slide_item">
                   <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bottom/<%=bottomDir[i].list()[j]%>'/></a>
            </div> 
         <%}
@@ -627,7 +633,7 @@ try {
     if (dressDir[i] != null) {
         for(int j=0; j<dressDir[i].list().length; j++) {
             // 이미지 출력 코드%>
-            <div class="objImg">
+            <div class="objImg slide_item">
                   <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/dress/<%=dressDir[i].list()[j]%>'/></a>
            </div> 
         <%}
@@ -645,7 +651,7 @@ try {
     if (bagDir[i] != null) {
         for(int j=0; j<bagDir[i].list().length; j++) {
             // 이미지 출력 코드%>
-            <div class="objImg">
+            <div class="objImg slide_item">
                  <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/<%=nameArr[i].split("\\.")[0]%>/crops/bag/<%=bagDir[i].list()[j]%>'/></a>
            </div> 
         <%}
@@ -663,10 +669,10 @@ try {
 <input type="hidden" class="end_time<%=i%>" value="<%=timeArr[i+1]%>">
 </div>
 <%}%>
+
          </div>
       </div><!-- end predict-Bigbox -->
-      
-
+ 
 <!-- 객체 이미지 검색 -->
 <form method="post" id = "search_form">
 	<input type="hidden" id="search_img" name="img_path" value="">
@@ -681,7 +687,8 @@ try {
     </div>
     <div class="predictObg-box">
 <div class="search-card">
-  <div id="search">
+  <!--<div id="search"> -->
+    <div id="search">
   <div class="wrapper"   style="display:none;">
     <div class="circle"></div>
     <div class="circle"></div>
@@ -700,11 +707,15 @@ try {
 </div><!--end content-->
 </div><!--end predict-container-->
  <script type="text/javascript">
+ var isSlickInitialized = false;
+ 
  $(function() {
      $(".objImg img").click(function() {
       var imgpath = $(this).attr('src');
       imgpath = 'C:/dmkServer/' + imgpath.split('flask/')[1];
       $("#search_img").val(imgpath);
+      
+  
       // 검색 버튼 클릭 이벤트 강제로 실행
       $("#search_btn").trigger('click');
       // 로딩 화면 보이기
@@ -730,12 +741,13 @@ try {
              success : function(data) {
                  console.log(data)                  
                  var html = "";
-                 for (var i = 0; i < 10; i++) {  
+                 for (var i = 0; i < 6; i++) {  
                      html += '<div class="search-objImg"><a href="' + data['link'][i] + '" target="_blank"><img src="' + data['image'][i] + '"></a></div>';
                  }
                  $(".search-title").show();
                  $(".search-subTitle").show();
                  $('#search').html(html);
+                
              },
              error : function(e) {
                  console.log("ERROR : ", e);
@@ -751,7 +763,7 @@ try {
   });
   
   $(function() {
-      $("img.content").click(function() {
+      $(".objImg").click(function() {
            $(".search-objImg").hide();
       });
    });
@@ -792,13 +804,15 @@ try {
 		document.documentElement.scrollTop = 0;
 	}
 
+	
+
+
 </script>
+
  
 
 				</div>
-				</div>
-				
-				
+				</div>	
 				<!-- 로더 모달 -->
 <!-- 모달창 -->
 <div class="modal fade" id="loaderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -32,8 +32,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <!-- Bootstrap Icons library -->
  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
  <title>Dramarket</title>
@@ -66,23 +64,13 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<!--슬릭 슬라이더-->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <style>
-#captureImageButton {
-  position: fixed;
-  bottom: 20px;
-  right: 120px;
-  z-index: 999;
-  background-color : #FFD369;
-  color : #FFFFFF;
-  border-radius: 50px;
-  padding: 15px;
-}
-#captureImageButton svg {
-  width: 25px;
-  height: 25px;
-  stroke-width: 5px; /* 아이콘의 선 굵기를 조절합니다. */
-}
+
 	        .content {
             display: flex;
             justify-content: center;
@@ -142,77 +130,48 @@ width : 100%;
 	   margin-top : 20px;
 	   width : 100%;
 display: flex;
-  overflow-x: auto;
+  /*overflow-x: auto;*/
   border-radius= 10;
     }
 
 .search-objImg{
-display: inline-block;
-vertical-align: top; /* 이미지를 수직으로 맞춤 */
-margin-left:40px;
-      	margin-bottom:40px;  
-      flex: 0 0 auto;
+flex: 0 0 auto;
       padding: 20px;
       width: 200px;
-      height: auto;
+      height: 200px;
+       display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .search-objImg img{
 display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
       border-radius: 10px;
       box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
+        object-fit: cover;
 }
 
         .objImg {
-      	margin-left:40px;
-      	margin-bottom:40px;  
       flex: 0 0 auto;
       padding: 20px;
       width: 200px;
-      height: auto;
+      height: 200px;
+       display: flex;
+  justify-content: center;
+  align-items: center;
+
     }
   
     .objImg img {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
       border-radius: 10px;
       box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
+        object-fit: cover;
     }
-    
-    
-    
-      .modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-}
 
-.modal-content {
-background-color: rgba(238, 238, 238,0.6);
- box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.4);
-  margin: 15% auto;
-  padding: 20px;
-  width: 80%;
-}
-
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
 .predict-row{
 width : 100%;
 }
@@ -310,15 +269,7 @@ width : 100%;
   right: 15%;
   animation-delay: .3s;
 }
-.tooltip.my-tooltip {
-  background-color: #ffc107;
-  color: #000;
-  border-radius: 0;
-}
 
-.tooltip.my-tooltip .tooltip-arrow::before {
-  border-bottom-color: #ffc107 !important;
-}
  </style>
 
 </head>
@@ -355,7 +306,8 @@ File bagDir = new File(bagPath);
 							<li class="nav-item"><a class="nav-link " href="Main.do">영상분석
 									<span class="visually-hidden">(current)</span>
 							</a></li>
-
+<li class="nav-item"><a class="nav-link" href="boardList.do">게시판</a>
+                     </li>
 							<c:if test="${!empty mvo}">
 								<li class="nav-item"><a class="nav-link" href="#">마이페이지</a>
 								</li>
@@ -397,7 +349,8 @@ File bagDir = new File(bagPath);
 
 				</div>
 				<div class="predictObj-box">
-<div class="predict_content predict-card">
+				
+<div id="predict-slick" class="predict_content predict-card">
 <%
 try {
     if (topDir != null) {
@@ -405,7 +358,7 @@ try {
             // 이미지 출력 코드%>
             <div class="objImg">
                   <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/crops/top/<%=topDir.list()[i]%>'/></a>
-           </div> 
+           </div>
         <%}
     } else {
         // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
@@ -423,7 +376,7 @@ try {
             // 이미지 출력 코드%>
             <div class="objImg">
                   <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/crops/bottom/<%=bottomDir.list()[i]%>'/></a>
-           </div> 
+           </div>
         <%}
     } else {
         // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
@@ -439,9 +392,9 @@ try {
     if (dressDir != null) {
         for(int i=0; i<dressDir.list().length; i++) {
             // 이미지 출력 코드%>
-            <div class="objImg">
+           <div class="objImg">
                   <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/crops/dress/<%=dressDir.list()[i]%>'/></a>
-           </div> 
+           </div>
         <%}
     } else {
         // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
@@ -459,7 +412,7 @@ try {
             // 이미지 출력 코드%>
             <div class="objImg">
                  <a href="javascript:void(0)"><img src='http://localhost:8081/flask/yolov5/runs/detect/${fileName}/crops/bag/<%=bagDir.list()[i]%>'/></a>
-           </div> 
+           </div>
         <%}
     } else {
         // topDir[i] 객체가 null인 경우, 빈 이미지를 출력
@@ -469,14 +422,54 @@ try {
 } catch (Exception e) {
     // 예외 처리 코드
     // 예외 메시지 출력, 로그 기록 등%>
-</div>
+</div><!-- end slick -->
 <%}%>      
 </div>
 </div>
-
 </div><!--end content-->
 </div><!--end predict-container-->
-
+<script>
+//슬릭
+$(document).ready(function(){
+	$('#predict-slick').slick({
+		  dots: true, //페이지 네비게이션
+		  arrows:true, // next, prev 이동 버튼
+		  autoplay:true, // 자동 넘김 여부
+		  infinite: true, //반복설정
+		  speed: 300, //슬라이드 속도
+		  autoplaySpeed : 10000,   // 자동 넘김시 슬라이드 시간
+		  pauseOnHover : true,// 마우스 hover시 슬라이드 멈춤
+		  vertical : false,  // 세로 방향 슬라이드 옵션
+		  slidesToShow: 4, //보여질 슬라이드 수
+		  slidesToScroll: 3, //넘겨질 슬라이드 수
+		  responsive: [ // -> 반응형 옵션
+		    {
+		      breakpoint: 1024, // 반응형 ~ 1024
+		      settings: {
+		        slidesToShow: 3,
+		        slidesToScroll: 3,
+		        infinite: true,
+		        dots: true
+		      }
+		    },
+		    {
+		      breakpoint: 600,// 반응형 ~ 600
+		      settings: {
+		        slidesToShow: 2,
+		        slidesToScroll: 2
+		      }
+		    },
+		    {
+		      breakpoint: 480,// 반응형 ~ 480
+		      settings: {
+		        slidesToShow: 1,
+		        slidesToScroll: 1
+		      }
+		    }
+		  ]
+		});
+});
+</script>
 
       
 
@@ -496,7 +489,7 @@ try {
     </div>
     <div class="predictObg-box">
 <div class="search-card">
-  <div id="search">
+  <div id="search" class="search-slick">
   <div class="wrapper"   style="display:none;">
     <div class="circle"></div>
     <div class="circle"></div>
@@ -513,15 +506,21 @@ try {
      </div>
 </div><!--end content-->
 </div><!--end predict-container-->
-
-
-
  <script type="text/javascript">
+ var isSlickInitialized = false;
+ 
  $(function() {
      $(".objImg img").click(function() {
       var imgpath = $(this).attr('src');
       imgpath = 'C:/dmkServer/' + imgpath.split('flask/')[1];
       $("#search_img").val(imgpath);
+      
+      // slick 해제
+      if (isSlickInitialized) {
+        $('.search-slick').slick('unslick');
+        isSlickInitialized = false;
+      }
+      
       // 검색 버튼 클릭 이벤트 강제로 실행
       $("#search_btn").trigger('click');
       // 로딩 화면 보이기
@@ -529,7 +528,7 @@ try {
      });   
  });
 
-  $(function() {
+  $(function() {	  
      $("#search_btn").on("click", function(event) {
          event.preventDefault();
          var form = $('#search_form')[0];
@@ -547,12 +546,60 @@ try {
              success : function(data) {
                  console.log(data)                  
                  var html = "";
-                 for (var i = 0; i < 10; i++) {  
+                 for (var i = 0; i < 6; i++) {  
                      html += '<div class="search-objImg"><a href="' + data['link'][i] + '" target="_blank"><img src="' + data['image'][i] + '"></a></div>';
                  }
                  $(".search-title").show();
                  $(".search-subTitle").show();
                  $('#search').html(html);
+                 
+                 // slick 해제
+                 if ($('.search-slick').hasClass('slick-initialized')) {
+                   $('.search-slick').slick('unslick');
+                 }
+                 
+              // slick 초기화
+                 if (!isSlickInitialized) {
+                 $('.search-slick').slick({
+           		  dots: true, //페이지 네비게이션
+           		  arrows:true, // next, prev 이동 버튼
+           		  autoplay:true, // 자동 넘김 여부
+           		  infinite: true, //반복설정
+           		  speed: 300, //슬라이드 속도
+           		  autoplaySpeed : 10000,   // 자동 넘김시 슬라이드 시간
+           		  pauseOnHover : true,// 마우스 hover시 슬라이드 멈춤
+           		  vertical : false,  // 세로 방향 슬라이드 옵션
+           		  slidesToShow: 4, //보여질 슬라이드 수
+           		  slidesToScroll: 3, //넘겨질 슬라이드 수
+           		  responsive: [ // -> 반응형 옵션
+           		    {
+           		      breakpoint: 1024, // 반응형 ~ 1024
+           		      settings: {
+           		        slidesToShow: 3,
+           		        slidesToScroll: 3,
+           		        infinite: true,
+           		        dots: true
+           		      }
+           		    },
+           		    {
+           		      breakpoint: 600,// 반응형 ~ 600
+           		      settings: {
+           		        slidesToShow: 2,
+           		        slidesToScroll: 2
+           		      }
+           		    },
+           		    {
+           		      breakpoint: 480,// 반응형 ~ 480
+           		      settings: {
+           		        slidesToShow: 1,
+           		        slidesToScroll: 1
+           		      }
+           		    }
+           		  ]
+           		});
+                 isSlickInitialized = true;
+                 }  
+                 
              },
              error : function(e) {
                  console.log("ERROR : ", e);
@@ -568,19 +615,13 @@ try {
   });
   
   $(function() {
-      $("img.content").click(function() {
+      $(".objImg").click(function() {
            $(".search-objImg").hide();
       });
    });
   
   
-//캡쳐버튼의 툴팁활성화
- var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl);
-  });
-  
-  
+
 	//to top button
 	document.addEventListener("DOMContentLoaded", function() {
 		// DOM이 완전히 로드된 후에 스크립트가 실행
@@ -629,5 +670,8 @@ try {
     </div>
 </div>
 </footer>
+<script>
+
+</script>
 </body>
 </html>
