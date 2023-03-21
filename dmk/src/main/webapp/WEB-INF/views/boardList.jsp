@@ -152,7 +152,7 @@ header {
 					</div>
 				</div>
 
-				<div class="row" data-masonry='{"percentPosition" : true}'>
+				<div id=scrollContainer class="row" data-masonry='{"percentPosition" : true}'>
 					<c:forEach var="board_vo" items="${list}">
 						<div class="col-lg-4 col-md-6 col-6">
 							<div class="card shadow border-0"
@@ -281,7 +281,36 @@ function topFunction() {
 	document.body.scrollTop = 0;
 	document.documentElement.scrollTop = 0;
 }
+</script>
+<script>
+var loading = false;
+var page = 2; // 초기 페이지 값
 
+$(window).scroll(function() {
+    var bottomOffset = $(document).height() - $(window).height() - $(window).scrollTop();
+
+    if (bottomOffset <= 0 && !loading) {
+        loading = true;
+        $.ajax({
+            url: 'boardList.do',
+            type: 'GET',
+            dataType: 'html',
+            data: {
+                page: page // 현재 페이지 전달
+            },
+            success: function(data) {
+            	  var $newItems = $(data).find('#scrollContainer > div');
+            	  $('#scrollContainer').append($newItems).masonry('appended', $newItems);
+            	  loading = false;
+            	  if ($newItems.length === 0) {
+            	    $(window).off('scroll');
+            	  } else {
+            	    page++;
+            	  }
+            	}
+        });
+    }
+});
 </script>			
 </body>
 </html>
